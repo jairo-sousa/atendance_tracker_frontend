@@ -8,10 +8,12 @@ import { FieldsetContainer } from "@/components/structure/FieldsetContainer";
 import { LabeledField } from "@/components/structure/LabeledField";
 import { LoginInput } from "@/components/structure/LoginInput";
 import { BandButton } from "@/components/structure/BandButton";
+
 import { useState } from "react";
-import axios from "axios";
+import { WorkdayService } from "@/services/WorkdayService";
 
 export function PunchInKioske() {
+    const workdayService = new WorkdayService();
     const [cpf, setCpf] = useState("");
 
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,34 +21,9 @@ export function PunchInKioske() {
     };
 
     const handleRegister = async () => {
-        try {
-            if (!cpf) throw new Error("Cpf é obrigatório!");
-
-            const validEmployee = await axios.get(
-                `http://localhost:3100/employee/${cpf}`
-            );
-
-            if (validEmployee) {
-                const body = {
-                    employee_cpf: cpf,
-                };
-
-                const response = await axios.post(
-                    `http://localhost:3100/workday/check-in`,
-                    body
-                );
-
-                console.log("Check-in realizado com sucesso!", response.data);
-            }
-        } catch (err: any) {
-            console.log(
-                err.response?.data?.message ||
-                    err.message ||
-                    "Erro desconhecido"
-            );
-        } finally {
+        workdayService.workdayRegister(cpf, () => {
             setCpf("");
-        }
+        });
     };
 
     return (
