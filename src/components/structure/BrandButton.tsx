@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import { Button } from "@chakra-ui/react";
 
-interface BandButtonProps {
+interface BrandButtonProps {
     children?: ReactNode;
     onClick: () => void;
     disabled: boolean;
 }
 
-export function BandButton({ children, onClick, disabled }: BandButtonProps) {
+export function BrandButton({ children, onClick, disabled }: BrandButtonProps) {
     return (
         <Button
             onClick={onClick}

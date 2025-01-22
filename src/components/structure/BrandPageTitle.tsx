@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { Text } from "@chakra-ui/react";
 
-interface BandPageTitleProps {
+interface BrandPageTitleProps {
     children?: ReactNode;
 }
 
-export function BandPageTitle({ children }: BandPageTitleProps) {
+export function BrandPageTitle({ children }: BrandPageTitleProps) {
     return (
         <Text
             as={"h1"}

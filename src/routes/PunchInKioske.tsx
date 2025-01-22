@@ -1,13 +1,13 @@
-import { BandGratientPanel } from "@/components/structure/BandGratientPanel";
+import { BrandGratientPanel } from "@/components/structure/BrandGratientPanel";
 import { PrimaryDialogPanel } from "@/components/structure/PrimaryDialogPanel";
-import { BandPageTitle } from "@/components/structure/BandPageTitle";
+import { BrandPageTitle } from "@/components/structure/BrandPageTitle";
 import { DialogSubtitle } from "@/components/structure/DialogSubtitle";
 
 import { FieldsetRoot } from "@/components/structure/FieldsetRoot";
 import { FieldsetContainer } from "@/components/structure/FieldsetContainer";
 import { LabeledField } from "@/components/structure/LabeledField";
 import { LoginInput } from "@/components/structure/LoginInput";
-import { BandButton } from "@/components/structure/BandButton";
+import { BrandButton } from "@/components/structure/BrandButton";
 
 import { useState } from "react";
 import { WorkdayService } from "@/services/WorkdayService";
@@ -32,9 +32,9 @@ export function PunchInKioske() {
     };
 
     return (
-        <BandGratientPanel>
+        <BrandGratientPanel>
             <PrimaryDialogPanel>
-                <BandPageTitle>REGISTRO DE PONTO</BandPageTitle>
+                <BrandPageTitle>REGISTRO DE PONTO</BrandPageTitle>
 
                 <DialogSubtitle>
                     Digite seu cpf para efetuar um registro
@@ -51,14 +51,14 @@ export function PunchInKioske() {
                         </LabeledField>
                     </FieldsetContainer>
 
-                    <BandButton
+                    <BrandButton
                         disabled={blockRegister}
                         onClick={handleRegister}
                     >
                         REGISTRAR
-                    </BandButton>
+                    </BrandButton>
                 </FieldsetRoot>
             </PrimaryDialogPanel>
-        </BandGratientPanel>
+        </BrandGratientPanel>
     );
 }

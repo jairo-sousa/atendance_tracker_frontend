@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { Flex } from "@chakra-ui/react";
 
-interface BandGratientPanelProps {
+interface BrandGratientPanelProps {
     children?: ReactNode;
 }
 
-export function BandGratientPanel({ children }: BandGratientPanelProps) {
+export function BrandGratientPanel({ children }: BrandGratientPanelProps) {
     return (
         <Flex
             w={"100%"}
