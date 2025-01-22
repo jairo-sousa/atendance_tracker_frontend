@@ -14,4 +14,13 @@ export class WorkdayUsecase {
 
         return result || null;
     }
+
+    async findByDateAndEmployeeId(
+        cpf: string,
+        date: string
+    ): Promise<AxiosResponse | null> {
+        const result = await this.workdayApi.findByDateAndEmployeeId(cpf, date);
+
+        return result || null;
+    }
 }
