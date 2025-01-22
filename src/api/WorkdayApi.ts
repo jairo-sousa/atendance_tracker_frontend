@@ -13,14 +13,23 @@ export class WorkdayApi implements WorkdayApiInterface {
         return result || null;
     }
 
-    async checkpoint(cpf: string): Promise<AxiosResponse | null> {
+    async checkpoint(
+        cpf: string,
+        checkpointPath: string
+    ): Promise<AxiosResponse | null> {
         const body = { employee_cpf: cpf };
 
-        const checkpointPaths = ["lunch-start", "lunch-end", "check-out"];
-
-        const result = await axios.patch(`${API_URL}/workday/check-in`, body);
-
-        return result || null;
+        try {
+            const result = await axios.patch(
+                `${API_URL}/workday/${checkpointPath}`,
+                body
+            );
+            console.log(body);
+            return result || null;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     }
 
     async findByDateAndEmployeeId(
@@ -31,7 +40,6 @@ export class WorkdayApi implements WorkdayApiInterface {
         const SUFIX = `${employee_id}?date=${date}`;
 
         const result = await axios.get(`${API_URL}/${ROUTE}/${SUFIX}`);
-        console.log(result);
         return result || null;
     }
 }

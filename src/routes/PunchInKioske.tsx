@@ -14,15 +14,20 @@ import { WorkdayService } from "@/services/WorkdayService";
 
 export function PunchInKioske() {
     const workdayService = new WorkdayService();
+
     const [cpf, setCpf] = useState("");
+    const [blockRegister, setBlockRegister] = useState(false);
 
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCpf(e.target.value);
     };
 
     const handleRegister = async () => {
-        workdayService.workdayRegister(cpf, () => {
-            setCpf("");
+        const cpfToSend = cpf;
+        setBlockRegister(true);
+        setCpf("");
+        workdayService.checkpoint(cpfToSend, () => {
+            setBlockRegister(false);
         });
     };
 
@@ -46,7 +51,12 @@ export function PunchInKioske() {
                         </LabeledField>
                     </FieldsetContainer>
 
-                    <BandButton onClick={handleRegister}>REGISTRAR</BandButton>
+                    <BandButton
+                        disabled={blockRegister}
+                        onClick={handleRegister}
+                    >
+                        REGISTRAR
+                    </BandButton>
                 </FieldsetRoot>
             </PrimaryDialogPanel>
         </BandGratientPanel>

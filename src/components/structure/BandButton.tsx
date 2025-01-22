@@ -4,12 +4,14 @@ import { Button } from "@chakra-ui/react";
 interface BandButtonProps {
     children?: ReactNode;
     onClick: () => void;
+    disabled: boolean;
 }
 
-export function BandButton({ children, onClick }: BandButtonProps) {
+export function BandButton({ children, onClick, disabled }: BandButtonProps) {
     return (
         <Button
             onClick={onClick}
+            disabled={disabled}
             type="submit"
             borderRadius={"0.4rem"}
             p={"2rem"}

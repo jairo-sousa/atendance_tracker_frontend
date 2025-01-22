@@ -6,4 +6,8 @@ export interface WorkdayApiInterface {
         employee_id: string,
         date: string
     ): Promise<AxiosResponse | null>;
+    checkpoint(
+        cpf: string,
+        checkpointPath: string
+    ): Promise<AxiosResponse | null>;
 }
