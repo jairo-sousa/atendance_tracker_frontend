@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Text } from "@chakra-ui/react";
+import { BaseBrandTitle } from "./BaseBrandTitle";
 
 interface BrandPageTitleProps {
     children?: ReactNode;
@@ -7,13 +7,8 @@ interface BrandPageTitleProps {
 
 export function BrandPageTitle({ children }: BrandPageTitleProps) {
     return (
-        <Text
-            as={"h1"}
-            pl={"1.2rem"}
-            fontSize={"3.2rem"}
-            borderLeft={"0.6rem solid #f8d442"}
-        >
+        <BaseBrandTitle fontSize="3.2rem" borderThickness="0.6rem">
             {children}
-        </Text>
+        </BaseBrandTitle>
     );
 }

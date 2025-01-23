@@ -12,6 +12,7 @@ const newStyles = {
         "--content-primary": "#000",
         "--content-secondary": "#6C6C6C",
         "--content-tertiary": "#CDCDCD",
+        "--content-quaternary": "#ACACAC",
         "--content-brand": "#FEAF00",
         "--content-brand-contrast": "var(--background-primary)",
         "--content-success": "#40C026",

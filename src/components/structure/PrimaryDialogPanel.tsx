@@ -15,6 +15,7 @@ export function PrimaryDialogPanel({ children }: PrimaryDialogPanelProps) {
             h={"fit-content"}
             gap={"3rem"}
             p={"4.4rem 3rem"}
+            margin={"auto"}
             borderRadius={"2rem"}
             backgroundColor={"var(--background-primary)"}
             boxShadow={"2px 5px 10px rgba(0, 0, 0, 0.1)"}

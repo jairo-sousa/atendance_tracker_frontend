@@ -11,6 +11,7 @@ import { BrandButton } from "@/components/structure/BrandButton";
 
 import { useState } from "react";
 import { WorkdayService } from "@/services/WorkdayService";
+import { WorkdaySummary } from "@/components/WorkdaySummary";
 
 export function PunchInKioske() {
     const workdayService = new WorkdayService();
@@ -59,6 +60,8 @@ export function PunchInKioske() {
                     </BrandButton>
                 </FieldsetRoot>
             </PrimaryDialogPanel>
+
+            <WorkdaySummary />
         </BrandGratientPanel>
     );
 }
