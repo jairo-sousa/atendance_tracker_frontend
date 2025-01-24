@@ -5,6 +5,7 @@ interface BaseBrandTitleProps {
     children?: ReactNode;
     fontSize?: string;
     borderThickness?: string;
+    marginTop?: string;
     customStyle?: React.CSSProperties;
 }
 
@@ -13,6 +14,7 @@ export function BaseBrandTitle({
     fontSize,
     borderThickness,
     customStyle,
+    marginTop,
 }: BaseBrandTitleProps) {
     return (
         <Text
@@ -20,6 +22,7 @@ export function BaseBrandTitle({
             pl={"1.2rem"}
             fontSize={fontSize || "2rem"}
             borderLeft={`${borderThickness || "0.4rem"} solid #f8d442`}
+            mt={marginTop}
             style={customStyle}
         >
             {children}
