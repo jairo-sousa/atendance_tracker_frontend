@@ -1,5 +1,44 @@
 import { system } from "@chakra-ui/react/preset";
 
+export const globalColors = {
+    // CONTENT
+    contentPrimary: "#000",
+    contentSecondary: "#6C6C6C",
+    contentTertiary: "#CDCDCD",
+    contentQuaternary: "#ACACAC",
+    contentBrand: "#FEAF00",
+    contentBrandContrast: "#000",
+    contentSuccess: "#40C026",
+    contentError: "#FF0000",
+
+    // BACKGROUND
+    backgroundPrimary: "#fff",
+    backgroundSecondary: "#F8F8F8",
+    backgroundTertiary: "#F2EAE1",
+    backgroundBrand: "#FEAF00",
+
+    // BORDER
+    borderPrimary: "#FEAF00",
+    borderSecondary: "#E5E5E5",
+};
+
+const {
+    contentPrimary,
+    contentSecondary,
+    contentTertiary,
+    contentQuaternary,
+    contentBrand,
+    contentBrandContrast,
+    contentSuccess,
+    contentError,
+    backgroundPrimary,
+    backgroundSecondary,
+    backgroundTertiary,
+    backgroundBrand,
+    borderPrimary,
+    borderSecondary,
+} = globalColors;
+
 const newStyles = {
     ":root": {
         fontSize: "62.5%",
@@ -9,24 +48,24 @@ const newStyles = {
         MozOsxFontSmoothing: "grayscale",
 
         // CONTENT
-        "--content-primary": "#000",
-        "--content-secondary": "#6C6C6C",
-        "--content-tertiary": "#CDCDCD",
-        "--content-quaternary": "#ACACAC",
-        "--content-brand": "#FEAF00",
-        "--content-brand-contrast": "var(--background-primary)",
-        "--content-success": "#40C026",
-        "--content-error": "#FF0000",
+        "--content-primary": contentPrimary,
+        "--content-secondary": contentSecondary,
+        "--content-tertiary": contentTertiary,
+        "--content-quaternary": contentQuaternary,
+        "--content-brand": contentBrand,
+        "--content-brand-contrast": contentBrandContrast,
+        "--content-success": contentSuccess,
+        "--content-error": contentError,
 
         // BACKGROUND
-        "--background-primary": "#fff",
-        "--background-secondary": "#F8F8F8",
-        "--background-tertiary": "#F2EAE1",
-        "--background-brand": "var(--content-brand)",
+        "--background-primary": backgroundPrimary,
+        "--background-secondary": backgroundSecondary,
+        "--background-tertiary": backgroundTertiary,
+        "--background-brand": backgroundBrand,
 
         // BORDER
-        "--border-primary": "var(--content-brand)",
-        "--border-secondary": "#E5E5E5",
+        "--border-primary": borderPrimary,
+        "--border-secondary": borderSecondary,
     },
 
     "*": {
@@ -38,8 +77,8 @@ const newStyles = {
     body: {
         width: "100%",
         height: "100vh",
-        backgroundColor: "var(--background-primary)",
-        color: "var(--content-primary)",
+        backgroundColor: backgroundPrimary,
+        color: contentPrimary,
 
         fontFamily: "Montserrat",
         fontSize: "1.6rem",
@@ -60,16 +99,13 @@ const newStyles = {
     },
 
     "::placeholder": {
-        color: "var(--content-tertiary)",
+        color: contentTertiary,
         opacity: 1,
     },
 
     "::-ms-input-placeholder": {
-        color: "var(--content-tertiary)",
+        color: contentTertiary,
         opacity: 1,
-    },
-    "input::placeholder": {
-        color: "red",
     },
 };
 
