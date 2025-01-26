@@ -9,24 +9,36 @@ interface WarningBoardInterface {
 }
 
 export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
-    const absentSummaryData = daySummaryData.filter((data) => !data.Presence);
+    const absentByLateData = daySummaryData.filter((data) => data.absentByLate);
+    const absentSummaryData = daySummaryData.filter(
+        ({ presence, absentByLate }) => !presence && !absentByLate
+    );
 
-    if (!absentSummaryData.length) return null;
+    if (!absentSummaryData.length && !absentByLateData.length) return null;
 
     const { contentError } = globalColors;
 
-    const warningMessage = (minutes: number) =>
-        `: Atrasou ${minutes} minutos! Você não será pago pelo dia de hoje e
+    const warningMessage = (minutes: number) => {
+        return `: Atrasou ${minutes} minutos! Você não será pago pelo dia de hoje e
         receberá uma multa. Chegue mais cedo na próxima.`;
+    };
 
     return (
         <>
-            {absentSummaryData.map(({ name, minutesLate }, index) => (
-                <PrimaryRow key={`${name} - ${index}`}>
+            {absentByLateData.map(({ name, cpf, minutesLate }, index) => (
+                <PrimaryRow key={`${name ? name : cpf} - ${index}`}>
                     <SecondaryText>
-                        <Span color={contentError}>{name}</Span>
+                        <Span color={contentError}>{name ? name : cpf}</Span>
 
                         {`${warningMessage(minutesLate)}`}
+                    </SecondaryText>
+                </PrimaryRow>
+            ))}
+            {absentSummaryData.map(({ name, cpf }, index) => (
+                <PrimaryRow key={`${name ? name : cpf} - ${index}`}>
+                    <SecondaryText>
+                        <Span color={contentError}>{name ? name : cpf}</Span>
+                        {": Levou falta por ausência"}
                     </SecondaryText>
                 </PrimaryRow>
             ))}

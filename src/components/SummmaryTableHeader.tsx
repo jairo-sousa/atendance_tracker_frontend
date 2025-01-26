@@ -3,7 +3,7 @@ import { QuaternaryHeaderCell } from "./structure/QuaternaryHeaderCell";
 
 export function SummmaryTableHeader() {
     const customStyle = {
-        minWidth: "19.3rem",
+        minWidth: "21rem",
     };
 
     return (

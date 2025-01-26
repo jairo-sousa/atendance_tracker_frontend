@@ -4,12 +4,14 @@ import { PrimaryRow } from "./structure/PrimaryRow";
 import { globalColors } from "@/theme/theme";
 
 export interface DaySummaryData {
-    name: string;
+    name?: string;
+    cpf?: string;
     lastRecord: string;
     status: string;
     nextRecord: string;
     presence: boolean;
     minutesLate: number;
+    absentByLate?: boolean;
 }
 
 interface SummaryTableBodyinterface {
@@ -19,7 +21,7 @@ interface SummaryTableBodyinterface {
 export function SummaryTableBody({
     daySummaryData,
 }: SummaryTableBodyinterface) {
-    const customStyleLastRecord = { minWidth: "19.3rem" };
+    const customStyleLastRecord = { minWidth: "21rem" };
 
     const { contentSuccess, contentError } = globalColors;
     const colorSuccess = contentSuccess;
@@ -32,7 +34,7 @@ export function SummaryTableBody({
                     key={`${data.name} - ${index}`}
                     transparent={index % 2 != 0}
                 >
-                    <BaseCell>{data.name}</BaseCell>
+                    <BaseCell>{data.name ? data.name : data.cpf}</BaseCell>
 
                     <BaseCell customStyle={customStyleLastRecord}>
                         <Span color={data.presence ? colorSuccess : colorError}>

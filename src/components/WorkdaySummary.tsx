@@ -9,9 +9,9 @@ import { WarningBoard } from "./WarningBoard";
 
 import { useEffect, useState } from "react";
 
-const staticDaySummaryData = [
+const staticDaySummaryData: DaySummaryData[] = [
     {
-        name: "Mateus",
+        cpf: "Mateus",
         lastRecord: "07:57",
         status: "ENTRADA",
         nextRecord: "11:00 - ALMOÇO INÍCIO",
@@ -49,6 +49,15 @@ const staticDaySummaryData = [
         nextRecord: "11:00 - ALMOÇO INÍCIO",
         presence: false,
         minutesLate: 32,
+        absentByLate: true,
+    },
+    {
+        name: "Tiago",
+        lastRecord: "18:00",
+        status: "FALTA POR AUSÊNCIA",
+        nextRecord: "18:00 - SAÍDA",
+        presence: false,
+        minutesLate: 0,
     },
 ];
 
