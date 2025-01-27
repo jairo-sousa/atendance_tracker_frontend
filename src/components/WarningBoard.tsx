@@ -9,7 +9,9 @@ interface WarningBoardInterface {
 }
 
 export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
-    const absentByLateData = daySummaryData.filter((data) => data.absentByLate);
+    const absentByLateData = daySummaryData.filter(
+        ({ presence, absentByLate }) => !presence && absentByLate
+    );
     const absentSummaryData = daySummaryData.filter(
         ({ presence, absentByLate }) => !presence && !absentByLate
     );
