@@ -2,16 +2,18 @@ import { BrandSectionTitle } from "./structure/BrandSectionTitle";
 import { SecondaryDivisor } from "./structure/SecondaryDivisor";
 import { BaseStack } from "./structure/BaseStack";
 import { SecondarySidePanel } from "./structure/SecondarySidePanel";
-import { SummmaryTableHeader } from "./SummmaryTableHeader";
+import { DayReport } from "./DayReport";
 
 import { DaySummaryData, SummaryTableBody } from "./SummaryTableBody";
 import { WarningBoard } from "./WarningBoard";
 
 import { useEffect, useState } from "react";
+import { SummmaryTableHeader } from "./SummmaryTableHeader";
+import { ReportTableHeader } from "./reportTableHeader";
 
-const staticDaySummaryData: DaySummaryData[] = [
+export const staticDaySummaryData: DaySummaryData[] = [
     {
-        cpf: "Mateus",
+        name: "Mateus",
         lastRecord: "07:57",
         status: "ENTRADA",
         nextRecord: "11:00 - ALMOÇO INÍCIO",
@@ -68,6 +70,10 @@ export function WorkdaySummary() {
         setDaySummaryData(staticDaySummaryData);
     }, []);
 
+    const checkedOutEmployees = daySummaryData.find(
+        (data) => data.nextRecord.split(" - ")[1] === "SAÍDA"
+    );
+
     return (
         daySummaryData.length && (
             <SecondarySidePanel>
@@ -86,6 +92,19 @@ export function WorkdaySummary() {
 
                     <WarningBoard daySummaryData={daySummaryData} />
                 </BaseStack>
+
+                {checkedOutEmployees && (
+                    <>
+                        <BrandSectionTitle marginTop="5rem">
+                            Relatório do dia
+                        </BrandSectionTitle>
+                        <BaseStack gap="1rem">
+                            <SecondaryDivisor />
+                            <ReportTableHeader />
+                            <DayReport />
+                        </BaseStack>
+                    </>
+                )}
             </SecondarySidePanel>
         )
     );

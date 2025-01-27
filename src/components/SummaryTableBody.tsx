@@ -13,6 +13,17 @@ export interface DaySummaryData {
     minutesLate: number;
     absentByLate?: boolean;
 }
+export interface DayReportData {
+    name?: string;
+    cpf?: string;
+    date: string;
+    status: string;
+    lateMinutes: number;
+    overtimeMinutes: number;
+    timeWorked: string;
+    dayValue: string;
+    overtimePrice: number;
+}
 
 interface SummaryTableBodyinterface {
     daySummaryData: DaySummaryData[];
@@ -31,7 +42,7 @@ export function SummaryTableBody({
         <>
             {daySummaryData.map((data, index) => (
                 <PrimaryRow
-                    key={`${data.name} - ${index}`}
+                    key={`${data.name ? data.name : data.cpf} - ${index}`}
                     transparent={index % 2 != 0}
                 >
                     <BaseCell>{data.name ? data.name : data.cpf}</BaseCell>

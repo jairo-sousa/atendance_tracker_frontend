@@ -12,7 +12,7 @@ export function SecondarySidePanel({ children }: SecondarySidePanelProps) {
             justify={"start"}
             align={"start"}
             gap={"2rem"}
-            w={"72rem"}
+            w={"73rem"}
             h={"100%"}
             p={"3rem 5.6rem 0 5rem"}
             backgroundColor={"var(--background-secondary)"}
