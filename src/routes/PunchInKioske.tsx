@@ -10,11 +10,11 @@ import { LoginInput } from "@/components/structure/LoginInput";
 import { BrandButton } from "@/components/structure/BrandButton";
 
 import { useState } from "react";
-import { WorkdayService } from "@/services/WorkdayService";
+import { ApiService } from "@/services/ApiService";
 import { WorkdaySummary } from "@/components/WorkdaySummary";
 
 export function PunchInKioske() {
-    const workdayService = new WorkdayService();
+    const apiService = new ApiService();
 
     const [cpf, setCpf] = useState("");
     const [blockRegister, setBlockRegister] = useState(false);
@@ -27,7 +27,7 @@ export function PunchInKioske() {
         const cpfToSend = cpf;
         setBlockRegister(true);
         setCpf("");
-        workdayService.checkpoint(cpfToSend, () => {
+        apiService.checkpoint(cpfToSend, () => {
             setBlockRegister(false);
         });
     };

@@ -5,30 +5,14 @@ import axios, { AxiosResponse } from "axios";
 const { API_URL } = globalEnv;
 
 export class WorkdayApi implements WorkdayApiInterface {
-    async checkIn(cpf: string): Promise<AxiosResponse | null> {
-        const body = { employee_cpf: cpf };
-
-        const result = await axios.post(`${API_URL}/workday/check-in`, body);
-
-        return result || null;
-    }
-
-    async checkpoint(
-        cpf: string,
-        checkpointPath: string
-    ): Promise<AxiosResponse | null> {
-        const body = { employee_cpf: cpf };
-
+    async checkpoint(cpf: string): Promise<AxiosResponse | null> {
         try {
-            const result = await axios.patch(
-                `${API_URL}/workday/${checkpointPath}`,
-                body
+            const result = await axios.post(
+                `${API_URL}/workday/checkpoint/${cpf}`
             );
-            console.log(body);
             return result || null;
         } catch (error) {
-            console.log(error);
-            return null;
+            throw new Error(`${error}`);
         }
     }
 
