@@ -10,102 +10,60 @@ import { WarningBoard } from "./WarningBoard";
 import { useEffect, useState } from "react";
 import { SummmaryTableHeader } from "./SummmaryTableHeader";
 import { ReportTableHeader } from "./reportTableHeader";
-
-export const staticDaySummaryData: DaySummaryData[] = [
-    {
-        name: "Mateus",
-        lastRecord: "07:57",
-        status: "ENTRADA",
-        nextRecord: "11:00 - ALMOÇO INÍCIO",
-        presence: true,
-        minutesLate: 0,
-    },
-    {
-        name: "Regina",
-        lastRecord: "07:57",
-        status: "ENTRADA",
-        nextRecord: "11:00 - ALMOÇO INÍCIO",
-        presence: true,
-        minutesLate: 0,
-    },
-    {
-        name: "Lucas",
-        lastRecord: "11:00",
-        status: "ALMOÇO INÍCIO",
-        nextRecord: "13:00 - ALMOÇO FIM",
-        presence: true,
-        minutesLate: 0,
-    },
-    {
-        name: "Isaac",
-        lastRecord: "11:01",
-        status: "ALMOÇO INÍCIO",
-        nextRecord: "13:01 - ALMOÇO FIM",
-        presence: true,
-        minutesLate: 0,
-    },
-    {
-        name: "Eduardo",
-        lastRecord: "08:32",
-        status: "FALTA POR ATRASO",
-        nextRecord: "11:00 - ALMOÇO INÍCIO",
-        presence: false,
-        minutesLate: 32,
-        absentByLate: true,
-    },
-    {
-        name: "Tiago",
-        lastRecord: "18:00",
-        status: "FALTA POR AUSÊNCIA",
-        nextRecord: "18:00 - SAÍDA",
-        presence: false,
-        minutesLate: 0,
-    },
-];
+import { ApiService } from "@/services/ApiService";
 
 export function WorkdaySummary() {
+    const apiService = new ApiService();
     const [daySummaryData, setDaySummaryData] = useState<DaySummaryData[]>([]);
 
     useEffect(() => {
-        setDaySummaryData(staticDaySummaryData);
+        const getTodaySummary = async () => {
+            const daySummary: DaySummaryData[] =
+                await apiService.getTodaySummary();
+
+            setDaySummaryData(daySummary);
+        };
+
+        getTodaySummary();
     }, []);
 
-    const checkedOutEmployees = daySummaryData.find(
-        (data) => data.nextRecord.split(" - ")[1] === "SAÍDA"
-    );
+    if (!daySummaryData.length) return;
+
+    const checkedOutEmployees = daySummaryData.find((data) => {
+        console.log(data.nextRecord);
+        return data.nextRecord.split(" - ")[1] === "DIA ENCERRADO";
+    });
 
     return (
-        daySummaryData.length && (
-            <SecondarySidePanel>
-                <BrandSectionTitle>REGISTROS DE HOJE</BrandSectionTitle>
-                <BaseStack>
-                    <SecondaryDivisor />
+        <SecondarySidePanel>
+            <BrandSectionTitle>REGISTROS DE HOJE</BrandSectionTitle>
+            <BaseStack>
+                <SecondaryDivisor />
 
-                    <SummmaryTableHeader />
+                <SummmaryTableHeader />
 
-                    <SummaryTableBody daySummaryData={daySummaryData} />
-                </BaseStack>
+                <SummaryTableBody daySummaryData={daySummaryData} />
+            </BaseStack>
 
-                <BrandSectionTitle marginTop="5rem">Avisos</BrandSectionTitle>
-                <BaseStack gap="1rem">
-                    <SecondaryDivisor />
+            <BrandSectionTitle marginTop="5rem">Avisos</BrandSectionTitle>
+            <BaseStack gap="1rem">
+                <SecondaryDivisor />
 
-                    <WarningBoard daySummaryData={daySummaryData} />
-                </BaseStack>
+                <WarningBoard daySummaryData={daySummaryData} />
+            </BaseStack>
 
-                {checkedOutEmployees && (
-                    <>
-                        <BrandSectionTitle marginTop="5rem">
-                            Relatório do dia
-                        </BrandSectionTitle>
-                        <BaseStack gap="1rem">
-                            <SecondaryDivisor />
-                            <ReportTableHeader />
-                            <DayReport />
-                        </BaseStack>
-                    </>
-                )}
-            </SecondarySidePanel>
-        )
+            {checkedOutEmployees && (
+                <>
+                    <BrandSectionTitle marginTop="5rem">
+                        Relatório do dia
+                    </BrandSectionTitle>
+                    <BaseStack gap="1rem">
+                        <SecondaryDivisor />
+                        <ReportTableHeader />
+                        <DayReport />
+                    </BaseStack>
+                </>
+            )}
+        </SecondarySidePanel>
     );
 }

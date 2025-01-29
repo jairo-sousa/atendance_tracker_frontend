@@ -18,6 +18,7 @@ export function PunchInKioske() {
 
     const [cpf, setCpf] = useState("");
     const [blockRegister, setBlockRegister] = useState(false);
+    const [refreshWorkdaySummary, setRefreshWorkdaySummary] = useState(0);
 
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCpf(e.target.value);
@@ -29,6 +30,7 @@ export function PunchInKioske() {
         setCpf("");
         apiService.checkpoint(cpfToSend, () => {
             setBlockRegister(false);
+            setRefreshWorkdaySummary((prev) => (prev === 0 ? 1 : 0));
         });
     };
 
@@ -61,7 +63,7 @@ export function PunchInKioske() {
                 </FieldsetRoot>
             </PrimaryDialogPanel>
 
-            <WorkdaySummary />
+            <WorkdaySummary key={refreshWorkdaySummary} />
         </BrandGratientPanel>
     );
 }

@@ -14,4 +14,10 @@ export class ReportUsecase {
 
         return result;
     }
+
+    async getTodaySummary(): Promise<AxiosResponse> {
+        const result = await this.reportApi.getTodaySummary();
+
+        return result;
+    }
 }

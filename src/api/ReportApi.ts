@@ -13,4 +13,16 @@ export class ReportApi implements ReportApiInterface {
 
         return result || null;
     }
+
+    async getTodaySummary(): Promise<AxiosResponse> {
+        try {
+            const ROUTE = "report/today-summary";
+
+            const result = await axios.get(`${API_URL}/${ROUTE}`);
+
+            return result;
+        } catch (error) {
+            throw new Error(`${error}`);
+        }
+    }
 }
