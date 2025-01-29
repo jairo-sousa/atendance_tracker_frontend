@@ -20,4 +20,10 @@ export class ReportUsecase {
 
         return result;
     }
+
+    async getDayReport(): Promise<AxiosResponse> {
+        const result = await this.reportApi.getTodayReport();
+
+        return result;
+    }
 }

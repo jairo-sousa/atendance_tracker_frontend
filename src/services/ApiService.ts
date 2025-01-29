@@ -1,4 +1,4 @@
-import { DaySummaryData } from "@/components/SummaryTableBody";
+import { DayReportData, DaySummaryData } from "@/components/SummaryTableBody";
 import { ReportUsecase } from "@/usecases/reportUsecase";
 import { WorkdayUsecase } from "@/usecases/workdayUsecase";
 import { AxiosResponse } from "axios";
@@ -36,6 +36,16 @@ export class ApiService {
     async getTodaySummary(): Promise<DaySummaryData[]> {
         try {
             const result = await this.reportUsecase.getTodaySummary();
+
+            return result.data;
+        } catch (err: any) {
+            throw new Error(err);
+        }
+    }
+
+    async getTodayReport(): Promise<DayReportData[]> {
+        try {
+            const result = await this.reportUsecase.getDayReport();
 
             return result.data;
         } catch (err: any) {

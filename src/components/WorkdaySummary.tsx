@@ -30,7 +30,6 @@ export function WorkdaySummary() {
     if (!daySummaryData.length) return;
 
     const checkedOutEmployees = daySummaryData.find((data) => {
-        console.log(data.nextRecord);
         return data.nextRecord.split(" - ")[1] === "DIA ENCERRADO";
     });
 
