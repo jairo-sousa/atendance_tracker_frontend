@@ -12,6 +12,7 @@ import { BrandButton } from "@/components/structure/BrandButton";
 import { useState } from "react";
 import { ApiService } from "@/services/ApiService";
 import { WorkdaySummary } from "@/components/WorkdaySummary";
+import { Toaster } from "@/components/ui/toaster";
 
 export function PunchInKioske() {
     const apiService = new ApiService();
@@ -28,14 +29,17 @@ export function PunchInKioske() {
         const cpfToSend = cpf;
         setBlockRegister(true);
         setCpf("");
-        apiService.checkpoint(cpfToSend, () => {
+
+        apiService.checkpoint(cpfToSend, (sucess: boolean) => {
             setBlockRegister(false);
-            setRefreshWorkdaySummary((prev) => (prev === 0 ? 1 : 0));
+            if (sucess)
+                setRefreshWorkdaySummary((prev) => (prev === 0 ? 1 : 0));
         });
     };
 
     return (
         <BrandGratientPanel>
+            <Toaster />
             <PrimaryDialogPanel>
                 <BrandPageTitle>REGISTRO DE PONTO</BrandPageTitle>
 

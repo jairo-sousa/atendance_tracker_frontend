@@ -2,6 +2,9 @@ import { DayReportData, DaySummaryData } from "@/components/SummaryTableBody";
 import { ReportUsecase } from "@/usecases/reportUsecase";
 import { WorkdayUsecase } from "@/usecases/workdayUsecase";
 import { AxiosResponse } from "axios";
+import { ToastService } from "./ToastService";
+
+const { showToast, dismissToast } = ToastService;
 
 export class ApiService {
     private workdayUsecase;
@@ -16,20 +19,33 @@ export class ApiService {
         cpf: string,
         callBack: Function
     ): Promise<AxiosResponse | null> {
+        let success = false;
         try {
-            if (!cpf) throw new Error("Cpf é obrigatório!");
+            if (!cpf) {
+                throw new Error("Cpf é obrigatório!");
+            }
+
+            showToast("Efetuando Registro", "Por favor aguarde", "loading");
 
             const result = await this.workdayUsecase.checkpoint(cpf);
 
-            console.log(result ? result.data : "falha");
+            dismissToast();
+
+            if (result?.data != null) {
+                success = true;
+                showToast("Registrado com sucesso", "Tudo certo", "success");
+            } else {
+                showToast("Falha ao registrar", "Tente novamente!", "error");
+            }
 
             return result || null;
         } catch (err: any) {
-            console.log(err);
+            dismissToast();
+
+            showToast("Falha ao registrar ", `${err}`, "error");
             return null;
         } finally {
-            callBack();
-            return null;
+            callBack(success);
         }
     }
 

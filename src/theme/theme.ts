@@ -47,6 +47,12 @@ const newStyles = {
         WebkitFontSmoothing: "antialiased",
         MozOsxFontSmoothing: "grayscale",
 
+        // HAS TO BE A BETTER WAY
+        "--chakra-sizes-sm": "36.4rem !important",
+        "--chakra-font-sizes-sm": "1.4rem !important",
+        "--chakra-spacing-1": "1rem important",
+        "--chakra-spacing-5": "1.4rem important",
+
         // CONTENT
         "--content-primary": contentPrimary,
         "--content-secondary": contentSecondary,
@@ -92,6 +98,10 @@ const newStyles = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+    },
+
+    ".css-1nhm9ic": {
+        fontSize: "1.6rem !important",
     },
 
     a: {
