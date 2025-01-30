@@ -33,6 +33,7 @@ export function SummaryTableBody({
     daySummaryData,
 }: SummaryTableBodyinterface) {
     const customStyleLastRecord = { minWidth: "21rem" };
+    const customStyleNextRecord = { minWidth: "18rem" };
 
     const { contentSuccess, contentError } = globalColors;
     const colorSuccess = contentSuccess;
@@ -57,7 +58,9 @@ export function SummaryTableBody({
                         </Span>
                     </BaseCell>
 
-                    <BaseCell>{data.nextRecord}</BaseCell>
+                    <BaseCell customStyle={customStyleNextRecord}>
+                        {data.nextRecord}
+                    </BaseCell>
                 </PrimaryRow>
             ))}
         </>
