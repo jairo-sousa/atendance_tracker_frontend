@@ -8,22 +8,40 @@ interface WarningBoardInterface {
     daySummaryData: DaySummaryData[];
 }
 
+const lateMessage = (minutes: number) => {
+    return `: Atrasou ${minutes} minutos! Você não será pago pelo dia de hoje e
+    receberá uma multa. Chegue mais cedo na próxima.`;
+};
+
+const lessWorkMessage = () => {
+    return `: Horas trabalhadas inferiores ao esperado. Você não será pago pelo dia de hoje e
+    receberá uma multa.`;
+};
+const absenceMessage = () => {
+    return ": Levou falta por ausência";
+};
+
 export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
     const absentByLateData = daySummaryData.filter(
-        ({ presence, absentByLate }) => !presence && absentByLate
+        ({ presence, absentByLate, minutesLate }) =>
+            !presence && absentByLate && minutesLate > 30
+    );
+    const absentByLessWorkData = daySummaryData.filter(
+        ({ presence, absentByLate, minutesLate }) =>
+            !presence && absentByLate && minutesLate < 30
     );
     const absentSummaryData = daySummaryData.filter(
         ({ presence, absentByLate }) => !presence && !absentByLate
     );
 
-    if (!absentSummaryData.length && !absentByLateData.length) return null;
+    if (
+        !absentSummaryData.length &&
+        !absentByLessWorkData.length &&
+        !absentByLateData.length
+    )
+        return null;
 
     const { contentError } = globalColors;
-
-    const warningMessage = (minutes: number) => {
-        return `: Atrasou ${minutes} minutos! Você não será pago pelo dia de hoje e
-        receberá uma multa. Chegue mais cedo na próxima.`;
-    };
 
     return (
         <>
@@ -32,7 +50,17 @@ export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
                     <SecondaryText>
                         <Span color={contentError}>{name ? name : cpf}</Span>
 
-                        {`${warningMessage(minutesLate)}`}
+                        {lateMessage(minutesLate)}
+                    </SecondaryText>
+                </PrimaryRow>
+            ))}
+
+            {absentByLessWorkData.map(({ name, cpf }, index) => (
+                <PrimaryRow key={`${name ? name : cpf} - ${index}`}>
+                    <SecondaryText>
+                        <Span color={contentError}>{name ? name : cpf}</Span>
+
+                        {lessWorkMessage()}
                     </SecondaryText>
                 </PrimaryRow>
             ))}
@@ -40,7 +68,7 @@ export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
                 <PrimaryRow key={`${name ? name : cpf} - ${index}`}>
                     <SecondaryText>
                         <Span color={contentError}>{name ? name : cpf}</Span>
-                        {": Levou falta por ausência"}
+                        {absenceMessage()}
                     </SecondaryText>
                 </PrimaryRow>
             ))}
