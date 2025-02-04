@@ -46,7 +46,9 @@ export function SummaryTableBody({
                     key={`${data.name ? data.name : data.cpf} - ${index}`}
                     transparent={index % 2 != 0}
                 >
-                    <BaseCell>{data.name ? data.name : data.cpf}</BaseCell>
+                    <BaseCell>
+                        {data.name ? data.name.split(" ")[0] : data.cpf}
+                    </BaseCell>
 
                     <BaseCell customStyle={customStyleLastRecord}>
                         <Span color={data.presence ? colorSuccess : colorError}>

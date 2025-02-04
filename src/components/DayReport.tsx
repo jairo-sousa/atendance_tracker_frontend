@@ -26,7 +26,9 @@ export function DayReport() {
         <>
             {dayReportData.map((data) => (
                 <PrimaryRow key={data.name}>
-                    <BaseCell>{data.name ? data.name : data.cpf}</BaseCell>
+                    <BaseCell>
+                        {data.name ? data.name.split(" ")[0] : data.cpf}
+                    </BaseCell>
                     <BaseCell>{data.lateMinutes}</BaseCell>
                     <BaseCell>{data.overtimeMinutes}</BaseCell>
                     <BaseCell>{data.timeWorked}</BaseCell>

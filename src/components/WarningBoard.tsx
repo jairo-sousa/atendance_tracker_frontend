@@ -48,7 +48,9 @@ export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
             {absentByLateData.map(({ name, cpf, minutesLate }, index) => (
                 <PrimaryRow key={`${name ? name : cpf} - ${index}`}>
                     <SecondaryText>
-                        <Span color={contentError}>{name ? name : cpf}</Span>
+                        <Span color={contentError}>
+                            {name ? name.split(" ")[0] : cpf}
+                        </Span>
 
                         {lateMessage(minutesLate)}
                     </SecondaryText>
@@ -58,7 +60,9 @@ export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
             {absentByLessWorkData.map(({ name, cpf }, index) => (
                 <PrimaryRow key={`${name ? name : cpf} - ${index}`}>
                     <SecondaryText>
-                        <Span color={contentError}>{name ? name : cpf}</Span>
+                        <Span color={contentError}>
+                            {name ? name.split(" ")[0] : cpf}
+                        </Span>
 
                         {lessWorkMessage()}
                     </SecondaryText>
@@ -67,7 +71,9 @@ export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
             {absentSummaryData.map(({ name, cpf }, index) => (
                 <PrimaryRow key={`${name ? name : cpf} - ${index}`}>
                     <SecondaryText>
-                        <Span color={contentError}>{name ? name : cpf}</Span>
+                        <Span color={contentError}>
+                            {name ? name.split(" ")[0] : cpf}
+                        </Span>
                         {absenceMessage()}
                     </SecondaryText>
                 </PrimaryRow>
