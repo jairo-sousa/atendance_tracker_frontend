@@ -4,7 +4,8 @@ import { createRoot } from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
 import system from "./theme/theme";
 
-import { PunchInKioske } from "./routes/PunchInKioske";
+import { RouterProvider } from "react-router";
+import { router } from "./router";
 
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("root")!;
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     root.render(
         <StrictMode>
             <ChakraProvider value={system}>
-                <PunchInKioske />
+                <RouterProvider router={router} />
             </ChakraProvider>
         </StrictMode>
     );
