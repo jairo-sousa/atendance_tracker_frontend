@@ -1,3 +1,4 @@
+import { CheckInRedirectMessage } from "@/components/CheckInRedirectMessage";
 import { BrandButton } from "@/components/structure/BrandButton";
 import { BrandGratientPanel } from "@/components/structure/BrandGratientPanel";
 import { BrandPageTitle } from "@/components/structure/BrandPageTitle";
@@ -72,6 +73,8 @@ export function Login() {
                         FAZER LOGIN
                     </BrandButton>
                 </FieldsetRoot>
+
+                <CheckInRedirectMessage />
             </PrimaryDialogPanel>
         </BrandGratientPanel>
     );
