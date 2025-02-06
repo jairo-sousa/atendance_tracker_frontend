@@ -9,12 +9,15 @@ import { LabeledField } from "@/components/structure/LabeledField";
 import { LoginInput } from "@/components/structure/LoginInput";
 import { PrimaryDialogPanel } from "@/components/structure/PrimaryDialogPanel";
 import { Toaster } from "@/components/ui/toaster";
+import { ApiService } from "@/services/ApiService";
 
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
 
 export function Login() {
+    const apiService = new ApiService();
+
     const [hasSessionToken, setHasSessionToken] = useState<boolean>();
 
     const [blockLogin, setBlockLogin] = useState(false);
@@ -28,15 +31,23 @@ export function Login() {
         setPassword(e.target.value);
     };
 
-    const handleLogin = () => {
-        console.log(login, " ", password);
+    const handleLogin = async () => {
+        setBlockLogin(true);
+
+        const result = await apiService.login(login, password, () => {
+            setBlockLogin(false);
+        });
+
+        if (result?.data.session_token != null) {
+            Cookies.set("sessionToken", result.data.session_token);
+        }
     };
 
     useEffect(() => {
         setHasSessionToken(
             Cookies.get("sessionToken")?.startsWith("Bearer ") == true
         );
-    }, []);
+    }, [blockLogin]);
 
     if (hasSessionToken == true) return <Navigate to="/" />;
 

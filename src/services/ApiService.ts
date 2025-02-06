@@ -3,16 +3,58 @@ import { ReportUsecase } from "@/usecases/reportUsecase";
 import { WorkdayUsecase } from "@/usecases/workdayUsecase";
 import { AxiosResponse } from "axios";
 import { ToastService } from "./ToastService";
+import { AdministratorUsecase } from "@/usecases/administratorUsecase";
 
 const { showToast, dismissToast } = ToastService;
 
 export class ApiService {
     private workdayUsecase;
     private reportUsecase;
+    private administratorUsecase;
 
     constructor() {
         this.workdayUsecase = new WorkdayUsecase();
         this.reportUsecase = new ReportUsecase();
+        this.administratorUsecase = new AdministratorUsecase();
+    }
+
+    async login(
+        login: string,
+        password: string,
+        callBack: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!login || !password) {
+                throw new Error("Preencha todos os campos!");
+            }
+
+            showToast("Efetuando login", "Por favor aguarde", "loading");
+
+            const result = await this.administratorUsecase.login(
+                login,
+                password
+            );
+
+            dismissToast();
+
+            const session_token = result?.data.session_token;
+
+            if (result && session_token != null) {
+                result.data.session_token = `Bearer ${session_token}`;
+                showToast("Login bem sucedido!", "Tudo certo", "success");
+            } else {
+                showToast("Falha durante login", "Tente novamente!", "error");
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha durante login", `${err}`, "error");
+            return null;
+        } finally {
+            callBack();
+        }
     }
 
     async checkpoint(
