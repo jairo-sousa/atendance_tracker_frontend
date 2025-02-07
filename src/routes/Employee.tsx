@@ -4,11 +4,11 @@ import Cookies from "js-cookie";
 import { PrivateRoute } from "./PrivateRoute";
 import { BaseSectionPanel } from "@/components/structure/BaseSectionPanel";
 
-export function Home() {
+export function Emplloyee() {
     return (
         <PrivateRoute>
             <BaseSectionPanel>
-                <Text as={"h1"}>INÍCIO</Text>
+                <Text as={"h1"}>FUNCIONÁRIOS</Text>
 
                 <Text>Página em desenvolvimento</Text>
 

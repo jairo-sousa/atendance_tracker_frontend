@@ -4,11 +4,11 @@ import Cookies from "js-cookie";
 import { PrivateRoute } from "./PrivateRoute";
 import { BaseSectionPanel } from "@/components/structure/BaseSectionPanel";
 
-export function Home() {
+export function Workday() {
     return (
         <PrivateRoute>
             <BaseSectionPanel>
-                <Text as={"h1"}>INÍCIO</Text>
+                <Text as={"h1"}>DIAS ÚTEIS</Text>
 
                 <Text>Página em desenvolvimento</Text>
 
