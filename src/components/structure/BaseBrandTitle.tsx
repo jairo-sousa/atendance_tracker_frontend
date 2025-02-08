@@ -19,6 +19,7 @@ export function BaseBrandTitle({
     return (
         <Text
             as={"h1"}
+            width={"fit-content"}
             pl={"1.2rem"}
             fontSize={fontSize || "2rem"}
             borderLeft={`${borderThickness || "0.4rem"} solid #f8d442`}
