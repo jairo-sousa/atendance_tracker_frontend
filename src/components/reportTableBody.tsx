@@ -1,6 +1,6 @@
 import { PrimaryRow } from "./structure/PrimaryRow";
 import { QuaternaryHeaderCell } from "./structure/QuaternaryHeaderCell";
-import { DayReportData } from "./SummaryTableBody";
+import { DayReportData } from "@/fragments/workDaySummary/SummaryTableBody";
 
 export interface ReportTableHeaderInterface {
     dayReportData: DayReportData[];

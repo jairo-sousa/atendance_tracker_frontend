@@ -1,8 +1,8 @@
-import { PrimaryRow } from "./structure/PrimaryRow";
-import { BaseCell } from "./structure/BaseCell";
+import { PrimaryRow } from "../../components/structure/PrimaryRow";
+import { BaseCell } from "../../components/structure/BaseCell";
 import { useState, useEffect } from "react";
-import { DayReportData } from "./SummaryTableBody";
 import { ApiService } from "@/services/ApiService";
+import { DayReportData } from "@/fragments/workDaySummary/SummaryTableBody";
 
 export function DayReport() {
     const apiService = new ApiService();

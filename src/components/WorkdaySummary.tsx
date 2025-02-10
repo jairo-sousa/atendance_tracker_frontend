@@ -2,15 +2,18 @@ import { BrandSectionTitle } from "./structure/BrandSectionTitle";
 import { SecondaryDivisor } from "./structure/SecondaryDivisor";
 import { BaseStack } from "./structure/BaseStack";
 import { SecondarySidePanel } from "./structure/SecondarySidePanel";
-import { DayReport } from "./DayReport";
+import { DayReport } from "../fragments/workDaySummary/DayReport";
 
-import { DaySummaryData, SummaryTableBody } from "./SummaryTableBody";
 import { WarningBoard } from "./WarningBoard";
 
 import { useEffect, useState } from "react";
-import { SummmaryTableHeader } from "./SummmaryTableHeader";
 import { ReportTableHeader } from "./reportTableHeader";
 import { ApiService } from "@/services/ApiService";
+import { SummmaryTableHeader } from "@/fragments/workDaySummary/SummmaryTableHeader";
+import {
+    DaySummaryData,
+    SummaryTableBody,
+} from "@/fragments/workDaySummary/SummaryTableBody";
 
 export function WorkdaySummary() {
     const apiService = new ApiService();

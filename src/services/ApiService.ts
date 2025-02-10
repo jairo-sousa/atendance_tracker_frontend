@@ -1,4 +1,7 @@
-import { DayReportData, DaySummaryData } from "@/components/SummaryTableBody";
+import {
+    DayReportData,
+    DaySummaryData,
+} from "@/fragments/workDaySummary/SummaryTableBody";
 import { AxiosResponse } from "axios";
 import { ToastService } from "./ToastService";
 import { WorkdayApiInterface } from "@/interfaces/WorkdayInterface";
