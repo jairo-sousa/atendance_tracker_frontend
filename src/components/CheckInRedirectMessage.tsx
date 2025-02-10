@@ -1,4 +1,4 @@
-import { Box, Link } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import { DialogSubtitle } from "./structure/DialogSubtitle";
 import { globalColors } from "@/theme/theme";
 
