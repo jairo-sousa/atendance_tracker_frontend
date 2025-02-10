@@ -1,21 +1,24 @@
 import { DayReportData, DaySummaryData } from "@/components/SummaryTableBody";
-import { ReportUsecase } from "@/usecases/reportUsecase";
-import { WorkdayUsecase } from "@/usecases/workdayUsecase";
 import { AxiosResponse } from "axios";
 import { ToastService } from "./ToastService";
-import { AdministratorUsecase } from "@/usecases/administratorUsecase";
+import { WorkdayApiInterface } from "@/interfaces/WorkdayInterface";
+import { WorkdayApi } from "@/api/WorkdayApi";
+import { ReportApi } from "@/api/ReportApi";
+import { AdministratorApi } from "@/api/AdministratorApi";
+import { ReportApiInterface } from "@/interfaces/ReportInterface";
+import { AdministratorApiInterface } from "@/interfaces/AdministratorInterface";
 
 const { showToast, dismissToast } = ToastService;
 
 export class ApiService {
-    private workdayUsecase;
-    private reportUsecase;
-    private administratorUsecase;
+    private workdayApi: WorkdayApiInterface;
+    private reportApi: ReportApiInterface;
+    private administratorApi: AdministratorApiInterface;
 
     constructor() {
-        this.workdayUsecase = new WorkdayUsecase();
-        this.reportUsecase = new ReportUsecase();
-        this.administratorUsecase = new AdministratorUsecase();
+        this.workdayApi = new WorkdayApi();
+        this.reportApi = new ReportApi();
+        this.administratorApi = new AdministratorApi();
     }
 
     async login(
@@ -30,10 +33,7 @@ export class ApiService {
 
             showToast("Efetuando login", "Por favor aguarde", "loading");
 
-            const result = await this.administratorUsecase.login(
-                login,
-                password
-            );
+            const result = await this.administratorApi.login(login, password);
 
             dismissToast();
 
@@ -67,7 +67,7 @@ export class ApiService {
             }
 
             showToast("Efetuando Logout", "Por favor aguarde", "loading");
-            const result = await this.administratorUsecase.logout(sessionToken);
+            const result = await this.administratorApi.logout(sessionToken);
 
             dismissToast();
 
@@ -102,7 +102,7 @@ export class ApiService {
 
             showToast("Efetuando Registro", "Por favor aguarde", "loading");
 
-            const result = await this.workdayUsecase.checkpoint(cpf);
+            const result = await this.workdayApi.checkpoint(cpf);
 
             dismissToast();
 
@@ -126,7 +126,7 @@ export class ApiService {
 
     async getTodaySummary(): Promise<DaySummaryData[]> {
         try {
-            const result = await this.reportUsecase.getTodaySummary();
+            const result = await this.reportApi.getTodaySummary();
 
             return result.data;
         } catch (err: any) {
@@ -136,7 +136,7 @@ export class ApiService {
 
     async getTodayReport(): Promise<DayReportData[]> {
         try {
-            const result = await this.reportUsecase.getDayReport();
+            const result = await this.reportApi.getTodayReport();
 
             return result.data;
         } catch (err: any) {
