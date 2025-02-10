@@ -1,4 +1,4 @@
-import { BrandSectionTitle } from "./structure/BrandSectionTitle";
+import { BrandSectionTitle } from "../fragments/text/BrandSectionTitle";
 import { SecondaryDivisor } from "./structure/SecondaryDivisor";
 import { BaseStack } from "./structure/BaseStack";
 import { SecondarySidePanel } from "./structure/SecondarySidePanel";

@@ -1,8 +1,8 @@
 import { CheckInRedirectMessage } from "@/components/CheckInRedirectMessage";
 import { BrandButton } from "@/components/structure/BrandButton";
 import { BrandGratientPanel } from "@/components/structure/BrandGratientPanel";
-import { BrandPageTitle } from "@/components/structure/BrandPageTitle";
-import { DialogSubtitle } from "@/components/structure/DialogSubtitle";
+import { BrandPageTitle } from "@/fragments/text/BrandPageTitle";
+import { DialogSubtitle } from "@/fragments/text/DialogSubtitle";
 import { FieldsetContainer } from "@/components/structure/FieldsetContainer";
 import { FieldsetRoot } from "@/components/structure/FieldsetRoot";
 import { LabeledField } from "@/components/structure/LabeledField";

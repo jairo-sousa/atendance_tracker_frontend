@@ -1,7 +1,7 @@
 import { Span } from "@chakra-ui/react";
 import { PrimaryRow } from "./structure/PrimaryRow";
 import { DaySummaryData } from "@/fragments/workDaySummary/SummaryTableBody";
-import { SecondaryText } from "./structure/SecondaryText";
+import { SecondaryText } from "../fragments/text/SecondaryText";
 import { globalColors } from "@/theme/theme";
 
 interface WarningBoardInterface {

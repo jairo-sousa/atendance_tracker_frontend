@@ -1,4 +1,4 @@
-import { BrandSectionTitle } from "./structure/BrandSectionTitle";
+import { BrandSectionTitle } from "../fragments/text/BrandSectionTitle";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { TertiarySidebarPanel } from "./structure/TertiarySidebarPanel";

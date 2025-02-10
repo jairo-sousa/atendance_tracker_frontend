@@ -1,7 +1,7 @@
 import { BrandGratientPanel } from "@/components/structure/BrandGratientPanel";
 import { PrimaryDialogPanel } from "@/components/structure/PrimaryDialogPanel";
-import { BrandPageTitle } from "@/components/structure/BrandPageTitle";
-import { DialogSubtitle } from "@/components/structure/DialogSubtitle";
+import { BrandPageTitle } from "@/fragments/text/BrandPageTitle";
+import { DialogSubtitle } from "@/fragments/text/DialogSubtitle";
 
 import { FieldsetRoot } from "@/components/structure/FieldsetRoot";
 import { FieldsetContainer } from "@/components/structure/FieldsetContainer";
