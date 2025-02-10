@@ -19,4 +19,20 @@ export class AdministratorApi implements AdministratorApiInterface {
 
         return response || null;
     }
+
+    async logout(session_token: string): Promise<AxiosResponse | null> {
+        const ROUTE = "administrator/logout";
+
+        const response = await axios.post(
+            `${API_URL}/${ROUTE}`,
+            {},
+            {
+                headers: {
+                    authorization: session_token,
+                },
+            }
+        );
+
+        return response || null;
+    }
 }

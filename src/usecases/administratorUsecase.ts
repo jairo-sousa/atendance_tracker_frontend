@@ -17,4 +17,10 @@ export class AdministratorUsecase {
 
         return result;
     }
+
+    async logout(session_token: string): Promise<AxiosResponse | null> {
+        const result = await this.administrator.logout(session_token);
+
+        return result;
+    }
 }

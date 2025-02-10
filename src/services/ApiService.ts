@@ -57,6 +57,39 @@ export class ApiService {
         }
     }
 
+    async logout(
+        sessionToken: string,
+        callBack?: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!sessionToken) {
+                throw new Error("Erro inesperado!");
+            }
+
+            showToast("Efetuando Logout", "Por favor aguarde", "loading");
+            const result = await this.administratorUsecase.logout(sessionToken);
+
+            dismissToast();
+
+            const session_token = result?.data.session_token;
+
+            if (result && session_token == null) {
+                showToast("Logout bem sucedido!", "Tudo certo", "success");
+            } else {
+                showToast("Falha durante Logout", sessionToken, "error");
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha durante Logout", `${err}`, "error");
+            return null;
+        } finally {
+            callBack && callBack();
+        }
+    }
+
     async checkpoint(
         cpf: string,
         callBack: Function

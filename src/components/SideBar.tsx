@@ -6,6 +6,7 @@ import { SidebarHeader } from "@/fragments/sidebar/SidebarHeader";
 import { LinksContainer } from "@/fragments/sidebar/LinksContainer";
 import { LogoutButton } from "@/fragments/sidebar/LogoutButton";
 import { SidebarLinkList } from "@/fragments/sidebar/SidebarLinkList";
+import { Toaster } from "./ui/toaster";
 
 export function SideBar() {
     const [hasSessionToken, setHasSessionToken] = useState<boolean>();
@@ -20,6 +21,7 @@ export function SideBar() {
 
     return (
         <TertiarySidebarPanel>
+            <Toaster />
             <BrandSectionTitle>REGISTRO DE PONTO</BrandSectionTitle>
 
             <SidebarHeader />
