@@ -14,7 +14,7 @@ export function SecondarySidePanel({ children }: SecondarySidePanelProps) {
             gap={"2rem"}
             w={"73rem"}
             h={"100%"}
-            p={"3rem 5.6rem 0 5rem"}
+            p={"3rem 5.6rem 3rem 5rem"}
             backgroundColor={"var(--background-secondary)"}
             overflowY={"scroll"}
             scrollbarWidth={"none"}
