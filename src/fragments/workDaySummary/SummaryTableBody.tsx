@@ -1,7 +1,7 @@
 import { Span } from "@chakra-ui/react";
 import { globalColors } from "@/theme/theme";
-import { PrimaryRow } from "@/components/structure/PrimaryRow";
-import { BaseCell } from "@/components/structure/BaseCell";
+import { PrimaryRow } from "@/fragments/table/PrimaryRow";
+import { BaseCell } from "@/fragments/table/BaseCell";
 
 export interface DaySummaryData {
     name?: string;

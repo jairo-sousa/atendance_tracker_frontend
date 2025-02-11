@@ -1,5 +1,5 @@
-import { PrimaryRow } from "../../components/structure/PrimaryRow";
-import { BaseCell } from "../../components/structure/BaseCell";
+import { PrimaryRow } from "../table/PrimaryRow";
+import { BaseCell } from "../table/BaseCell";
 import { useState, useEffect } from "react";
 import { ApiService } from "@/services/ApiService";
 import { DayReportData } from "@/fragments/workDaySummary/SummaryTableBody";

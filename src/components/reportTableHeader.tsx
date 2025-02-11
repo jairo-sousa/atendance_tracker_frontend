@@ -1,5 +1,5 @@
-import { PrimaryRow } from "./structure/PrimaryRow";
-import { QuaternaryHeaderCell } from "./structure/QuaternaryHeaderCell";
+import { PrimaryRow } from "../fragments/table/PrimaryRow";
+import { QuaternaryHeaderCell } from "../fragments/table/QuaternaryHeaderCell";
 
 export function ReportTableHeader() {
     const overtmeStyle = {

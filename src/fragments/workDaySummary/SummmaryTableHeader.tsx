@@ -1,5 +1,5 @@
-import { PrimaryRow } from "@/components/structure/PrimaryRow";
-import { QuaternaryHeaderCell } from "@/components/structure/QuaternaryHeaderCell";
+import { PrimaryRow } from "@/fragments/table/PrimaryRow";
+import { QuaternaryHeaderCell } from "@/fragments/table/QuaternaryHeaderCell";
 
 export function SummmaryTableHeader() {
     const customStyleLastRecord = {
