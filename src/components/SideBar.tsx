@@ -1,7 +1,7 @@
 import { BrandSectionTitle } from "../fragments/text/BrandSectionTitle";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { TertiarySidebarPanel } from "./structure/TertiarySidebarPanel";
+import { TertiarySidebarPanel } from "../fragments/layout/TertiarySidebarPanel";
 import { SidebarHeader } from "@/fragments/sidebar/SidebarHeader";
 import { LinksContainer } from "@/fragments/sidebar/LinksContainer";
 import { LogoutButton } from "@/fragments/sidebar/LogoutButton";

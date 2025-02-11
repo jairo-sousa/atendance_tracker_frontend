@@ -1,5 +1,5 @@
-import { BrandGratientPanel } from "@/components/structure/BrandGratientPanel";
-import { PrimaryDialogPanel } from "@/components/structure/PrimaryDialogPanel";
+import { BrandGratientPanel } from "@/fragments/layout/BrandGratientPanel";
+import { PrimaryDialogPanel } from "@/fragments/layout/PrimaryDialogPanel";
 import { BrandPageTitle } from "@/fragments/text/BrandPageTitle";
 import { DialogSubtitle } from "@/fragments/text/DialogSubtitle";
 

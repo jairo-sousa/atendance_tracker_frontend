@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 
 import Cookies from "js-cookie";
-import { BaseSectionPanel } from "@/components/structure/BaseSectionPanel";
+import { BaseSectionPanel } from "@/fragments/layout/BaseSectionPanel";
 import { PrivateRoute } from "./PrivateRoute";
 
 export function Payroll() {

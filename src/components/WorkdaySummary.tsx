@@ -1,7 +1,7 @@
 import { BrandSectionTitle } from "../fragments/text/BrandSectionTitle";
-import { SecondaryDivisor } from "./structure/SecondaryDivisor";
-import { BaseStack } from "./structure/BaseStack";
-import { SecondarySidePanel } from "./structure/SecondarySidePanel";
+import { SecondaryDivisor } from "../fragments/layout/SecondaryDivisor";
+import { BaseStack } from "../fragments/layout/BaseStack";
+import { SecondarySidePanel } from "../fragments/layout/SecondarySidePanel";
 import { DayReport } from "../fragments/workDaySummary/DayReport";
 
 import { WarningBoard } from "./WarningBoard";

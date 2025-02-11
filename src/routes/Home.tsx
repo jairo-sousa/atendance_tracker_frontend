@@ -2,7 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 
 import Cookies from "js-cookie";
 import { PrivateRoute } from "./PrivateRoute";
-import { BaseSectionPanel } from "@/components/structure/BaseSectionPanel";
+import { BaseSectionPanel } from "@/fragments/layout/BaseSectionPanel";
 
 export function Home() {
     return (
