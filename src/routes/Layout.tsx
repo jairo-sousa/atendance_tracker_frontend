@@ -1,11 +1,14 @@
 import { SideBar } from "@/components/sidebar/SideBar";
+import { Flex } from "@chakra-ui/react";
 import { Outlet } from "react-router";
 
 const Layout = () => {
     return (
         <>
-            <SideBar />
-            <Outlet />
+            <Flex w={"100%"} h={"100vh"}>
+                <SideBar />
+                <Outlet />
+            </Flex>
         </>
     );
 };

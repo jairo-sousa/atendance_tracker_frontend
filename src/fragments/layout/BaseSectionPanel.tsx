@@ -15,7 +15,7 @@ export function BaseSectionPanel({ children }: BaseSectionPanelInterface) {
             w={"100%"}
             h={"100%"}
             justifyContent={"start"}
-            align={"center"}
+            align={"start"}
             backgroundColor={backgroundSecondary}
         >
             {children}
