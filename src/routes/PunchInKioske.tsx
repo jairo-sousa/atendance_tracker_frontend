@@ -3,11 +3,11 @@ import { PrimaryDialogPanel } from "@/fragments/layout/PrimaryDialogPanel";
 import { BrandPageTitle } from "@/fragments/text/BrandPageTitle";
 import { DialogSubtitle } from "@/fragments/text/DialogSubtitle";
 
-import { FieldsetRoot } from "@/components/structure/FieldsetRoot";
-import { FieldsetContainer } from "@/components/structure/FieldsetContainer";
-import { LabeledField } from "@/components/structure/LabeledField";
-import { LoginInput } from "@/components/structure/LoginInput";
-import { BrandButton } from "@/components/structure/BrandButton";
+import { FieldsetRoot } from "@/fragments/form/FieldsetRoot";
+import { FieldsetContainer } from "@/fragments/form/FieldsetContainer";
+import { LabeledField } from "@/fragments/form/LabeledField";
+import { LoginInput } from "@/fragments/form/LoginInput";
+import { BrandButton } from "@/fragments/form/BrandButton";
 
 import { useState } from "react";
 import { ApiService } from "@/services/ApiService";

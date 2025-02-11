@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/react";
 import { SidebarLinkIcon } from "./SidebarLinkIcon";
-import { PrimaryBaseButton } from "@/components/structure/PrimaryBaseButton";
+import { PrimaryBaseButton } from "@/fragments/form/PrimaryBaseButton";
 
 import Cookies from "js-cookie";
 import { ApiService } from "@/services/ApiService";

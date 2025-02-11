@@ -1,12 +1,12 @@
 import { CheckInRedirectMessage } from "@/components/CheckInRedirectMessage";
-import { BrandButton } from "@/components/structure/BrandButton";
+import { BrandButton } from "@/fragments/form/BrandButton";
 import { BrandGratientPanel } from "@/fragments/layout/BrandGratientPanel";
 import { BrandPageTitle } from "@/fragments/text/BrandPageTitle";
 import { DialogSubtitle } from "@/fragments/text/DialogSubtitle";
-import { FieldsetContainer } from "@/components/structure/FieldsetContainer";
-import { FieldsetRoot } from "@/components/structure/FieldsetRoot";
-import { LabeledField } from "@/components/structure/LabeledField";
-import { LoginInput } from "@/components/structure/LoginInput";
+import { FieldsetContainer } from "@/fragments/form/FieldsetContainer";
+import { FieldsetRoot } from "@/fragments/form/FieldsetRoot";
+import { LabeledField } from "@/fragments/form/LabeledField";
+import { LoginInput } from "@/fragments/form/LoginInput";
 import { PrimaryDialogPanel } from "@/fragments/layout/PrimaryDialogPanel";
 import { Toaster } from "@/components/ui/toaster";
 import { ApiService } from "@/services/ApiService";

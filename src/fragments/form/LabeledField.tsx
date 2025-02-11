@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Field } from "../ui/field";
+import { Field } from "../../components/ui/field";
 
 interface LabeledFieldProps {
     children?: ReactNode;
