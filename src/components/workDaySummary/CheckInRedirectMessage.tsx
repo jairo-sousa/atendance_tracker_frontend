@@ -1,5 +1,5 @@
 import { Link } from "@chakra-ui/react";
-import { DialogSubtitle } from "../fragments/text/DialogSubtitle";
+import { DialogSubtitle } from "../../fragments/text/DialogSubtitle";
 import { globalColors } from "@/theme/theme";
 
 const { contentBrand } = globalColors;

@@ -11,7 +11,7 @@ import { BrandButton } from "@/fragments/form/BrandButton";
 
 import { useState } from "react";
 import { ApiService } from "@/services/ApiService";
-import { WorkdaySummary } from "@/components/WorkdaySummary";
+import { WorkdaySummary } from "@/components/workDaySummary/WorkdaySummary";
 import { Toaster } from "@/components/ui/toaster";
 
 export function PunchInKioske() {

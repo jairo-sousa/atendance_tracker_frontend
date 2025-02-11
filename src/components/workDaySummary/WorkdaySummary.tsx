@@ -1,19 +1,19 @@
-import { BrandSectionTitle } from "../fragments/text/BrandSectionTitle";
-import { SecondaryDivisor } from "../fragments/layout/SecondaryDivisor";
-import { BaseStack } from "../fragments/layout/BaseStack";
-import { SecondarySidePanel } from "../fragments/layout/SecondarySidePanel";
-import { DayReport } from "../fragments/workDaySummary/DayReport";
+import { BrandSectionTitle } from "../../fragments/text/BrandSectionTitle";
+import { SecondaryDivisor } from "../../fragments/layout/SecondaryDivisor";
+import { BaseStack } from "../../fragments/layout/BaseStack";
+import { SecondarySidePanel } from "../../fragments/layout/SecondarySidePanel";
+import { DayReport } from "./DayReport";
 
 import { WarningBoard } from "./WarningBoard";
 
 import { useEffect, useState } from "react";
 import { ReportTableHeader } from "./reportTableHeader";
 import { ApiService } from "@/services/ApiService";
-import { SummmaryTableHeader } from "@/fragments/workDaySummary/SummmaryTableHeader";
+import { SummmaryTableHeader } from "@/components/workDaySummary/SummmaryTableHeader";
 import {
     DaySummaryData,
     SummaryTableBody,
-} from "@/fragments/workDaySummary/SummaryTableBody";
+} from "@/components/workDaySummary/SummaryTableBody";
 
 export function WorkdaySummary() {
     const apiService = new ApiService();

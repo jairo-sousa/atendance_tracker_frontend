@@ -1,5 +1,5 @@
-import { PrimaryRow } from "../fragments/table/PrimaryRow";
-import { QuaternaryHeaderCell } from "../fragments/table/QuaternaryHeaderCell";
+import { PrimaryRow } from "../../fragments/table/PrimaryRow";
+import { QuaternaryHeaderCell } from "../../fragments/table/QuaternaryHeaderCell";
 
 export function reportTableHeader() {
     return (

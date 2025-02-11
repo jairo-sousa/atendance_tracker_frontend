@@ -1,4 +1,4 @@
-import { CheckInRedirectMessage } from "@/components/CheckInRedirectMessage";
+import { CheckInRedirectMessage } from "@/components/workDaySummary/CheckInRedirectMessage";
 import { BrandButton } from "@/fragments/form/BrandButton";
 import { BrandGratientPanel } from "@/fragments/layout/BrandGratientPanel";
 import { BrandPageTitle } from "@/fragments/text/BrandPageTitle";
