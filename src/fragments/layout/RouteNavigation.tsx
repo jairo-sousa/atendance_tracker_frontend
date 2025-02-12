@@ -2,11 +2,11 @@ import { Flex } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { RouteGoBackButton } from "./RouteGoBackButton";
 
-interface RouteHeaderInterface {
+interface RouteNavigationInterface {
     children?: ReactNode;
 }
 
-export function RouteHeader({ children }: RouteHeaderInterface) {
+export function RouteNavigation({ children }: RouteNavigationInterface) {
     return (
         <Flex
             w={"100%"}
