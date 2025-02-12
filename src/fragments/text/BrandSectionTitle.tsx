@@ -3,18 +3,18 @@ import { BaseBrandTitle } from "./BaseBrandTitle";
 
 interface BrandSectionTitleProps {
     children?: ReactNode;
-    marginTop?: string;
+    firstChild?: boolean;
 }
 
 export function BrandSectionTitle({
     children,
-    marginTop,
+    firstChild,
 }: BrandSectionTitleProps) {
     return (
         <BaseBrandTitle
             fontSize="2rem"
             borderThickness="0.4rem"
-            marginTop={marginTop}
+            marginTop={!firstChild ? "5rem" : ""}
         >
             {children}
         </BaseBrandTitle>

@@ -1,4 +1,3 @@
-import { CheckInRedirectMessage } from "@/components/workDaySummary/CheckInRedirectMessage";
 import { BrandButton } from "@/fragments/form/BrandButton";
 import { BrandGratientPanel } from "@/fragments/layout/BrandGratientPanel";
 import { BrandPageTitle } from "@/fragments/text/BrandPageTitle";
@@ -14,6 +13,7 @@ import { ApiService } from "@/services/ApiService";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
+import { CheckInRedirectMessage } from "@/components/workDaySummary/CheckInRedirectMessage";
 
 export function Login() {
     const apiService = new ApiService();

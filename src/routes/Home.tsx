@@ -12,12 +12,13 @@ export function Home() {
     const handleRefreshWorkdaySummary = () => {
         setRefreshWorkdaySummary((prev) => (prev === 0 ? 1 : 0));
     };
+
     return (
         <PrivateRoute>
             <BaseSectionPanel>
                 <RouteHeader />
                 <HomeContainer justifyContent={"end"}>
-                    <WorkdaySummary />
+                    <WorkdaySummary renderKey={refreshWorkdaySummary} />
                     <CheckInDialog onRegister={handleRefreshWorkdaySummary} />
                 </HomeContainer>
             </BaseSectionPanel>

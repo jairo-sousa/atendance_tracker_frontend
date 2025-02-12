@@ -18,7 +18,7 @@ export function PunchInKioske() {
 
             <CheckInDialog onRegister={handleRefreshWorkdaySummary} />
 
-            <WorkdaySummary key={refreshWorkdaySummary} />
+            <WorkdaySummary renderKey={refreshWorkdaySummary} />
         </BrandGratientPanel>
     );
 }

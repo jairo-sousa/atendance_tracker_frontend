@@ -1,71 +1,69 @@
 import { BrandSectionTitle } from "../../fragments/text/BrandSectionTitle";
-import { SecondaryDivisor } from "../../fragments/layout/SecondaryDivisor";
-import { BaseStack } from "../../fragments/layout/BaseStack";
 import { SecondarySidePanel } from "../../fragments/layout/SecondarySidePanel";
-import { DayReport } from "./DayReport";
 
 import { WarningBoard } from "./WarningBoard";
 
-import { useEffect, useState } from "react";
-import { ReportTableHeader } from "./reportTableHeader";
+import { useCallback, useEffect, useState } from "react";
 import { ApiService } from "@/services/ApiService";
 import { SummmaryTableHeader } from "@/components/workDaySummary/SummmaryTableHeader";
 import {
     DaySummaryData,
     SummaryTableBody,
 } from "@/components/workDaySummary/SummaryTableBody";
+import { SummarySection } from "./SummarySection";
+import { DayReportSection } from "./DayReportSection";
 
-export function WorkdaySummary() {
+interface WorkdaySummaryInterface {
+    renderKey: number;
+}
+
+export function WorkdaySummary({ renderKey }: WorkdaySummaryInterface) {
     const apiService = new ApiService();
     const [daySummaryData, setDaySummaryData] = useState<DaySummaryData[]>([]);
 
+    const getTodaySummary = useCallback(async () => {
+        const daySummary: DaySummaryData[] = await apiService.getTodaySummary();
+        setDaySummaryData(daySummary);
+    }, [apiService]);
+
     useEffect(() => {
-        const getTodaySummary = async () => {
-            const daySummary: DaySummaryData[] =
-                await apiService.getTodaySummary();
-
-            setDaySummaryData(daySummary);
-        };
-
         getTodaySummary();
-    }, []);
+    }, [renderKey, getTodaySummary]);
 
-    if (!daySummaryData.length) return;
+    const checkedOutEmployees = daySummaryData.some(
+        (data) => data.nextRecord.split(" - ")[1] === "DIA ENCERRADO"
+    );
 
-    const checkedOutEmployees = daySummaryData.find((data) => {
-        return data.nextRecord.split(" - ")[1] === "DIA ENCERRADO";
-    });
+    if (!daySummaryData.length)
+        return (
+            <SecondarySidePanel>
+                <BrandSectionTitle>Ainda sem Registros</BrandSectionTitle>
+            </SecondarySidePanel>
+        );
 
     return (
         <SecondarySidePanel>
-            <BrandSectionTitle>REGISTROS DE HOJE</BrandSectionTitle>
-            <BaseStack>
-                <SecondaryDivisor />
-
+            {/* RECORDS */}
+            <BrandSectionTitle firstChild={true}>
+                REGISTROS DE HOJE
+            </BrandSectionTitle>
+            <SummarySection>
                 <SummmaryTableHeader />
 
-                <SummaryTableBody daySummaryData={daySummaryData} />
-            </BaseStack>
+                <SummaryTableBody
+                    key={renderKey}
+                    daySummaryData={daySummaryData}
+                />
+            </SummarySection>
 
-            <BrandSectionTitle marginTop="5rem">Avisos</BrandSectionTitle>
-            <BaseStack gap="1rem">
-                <SecondaryDivisor />
-
+            {/* WARNINGS */}
+            <BrandSectionTitle>Avisos</BrandSectionTitle>
+            <SummarySection gap="1rem">
                 <WarningBoard daySummaryData={daySummaryData} />
-            </BaseStack>
+            </SummarySection>
 
-            {checkedOutEmployees && (
-                <>
-                    <BrandSectionTitle marginTop="5rem">
-                        Relatório do dia
-                    </BrandSectionTitle>
-                    <BaseStack gap="1rem">
-                        <SecondaryDivisor />
-                        <ReportTableHeader />
-                        <DayReport />
-                    </BaseStack>
-                </>
-            )}
+            {/* REPORT */}
+            {checkedOutEmployees && <DayReportSection />}
         </SecondarySidePanel>
     );
 }
