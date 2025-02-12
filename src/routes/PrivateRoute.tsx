@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
 import { Navigate } from "react-router";
+import { Flex } from "@chakra-ui/react";
 
 interface PrivateRouteInterface {
     children?: ReactNode;
@@ -18,5 +19,11 @@ export function PrivateRoute({ children }: PrivateRouteInterface) {
 
     if (hasSessionToken == false) return <Navigate to="/check-in" />;
 
-    return <>{children}</>;
+    return (
+        <>
+            <Flex direction={"column"} w={"100%"} h={"100vh"}>
+                {children}
+            </Flex>
+        </>
+    );
 }

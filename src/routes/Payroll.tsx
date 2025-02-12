@@ -1,20 +1,17 @@
-import { Flex, Text } from "@chakra-ui/react";
-
-import Cookies from "js-cookie";
 import { BaseSectionPanel } from "@/fragments/layout/BaseSectionPanel";
 import { PrivateRoute } from "./PrivateRoute";
+import { RouteHeader } from "@/fragments/layout/RouteHeader";
+import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
+import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
 
 export function Payroll() {
     return (
         <PrivateRoute>
+            <RouteNavigation></RouteNavigation>
             <BaseSectionPanel>
-                <Text as={"h1"}>PAGAMENTO</Text>
-
-                <Text>Página em desenvolvimento</Text>
-
-                <Flex>
-                    <Text>Token Carregado: {Cookies.get("sessionToken")}</Text>
-                </Flex>
+                <RouteHeader>
+                    <PrimaryRouteTitle>Pagamento</PrimaryRouteTitle>
+                </RouteHeader>
             </BaseSectionPanel>
         </PrivateRoute>
     );

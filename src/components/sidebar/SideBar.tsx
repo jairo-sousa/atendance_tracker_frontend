@@ -9,14 +9,18 @@ import { SidebarLinkList } from "@/components/sidebar/SidebarLinkList";
 import { Toaster } from "../ui/toaster";
 import { useLocation } from "react-router";
 
+const checkHasSessionToken = () =>
+    Cookies.get("sessionToken")?.startsWith("Bearer ") == true;
+
 export function SideBar() {
-    const [hasSessionToken, setHasSessionToken] = useState<boolean>(false);
+    const [hasSessionToken, setHasSessionToken] = useState<boolean>(
+        checkHasSessionToken()
+    );
+
     const router = useLocation();
 
     useEffect(() => {
-        setHasSessionToken(
-            Cookies.get("sessionToken")?.startsWith("Bearer ") == true
-        );
+        setHasSessionToken(checkHasSessionToken());
     }, [router]);
 
     if (hasSessionToken == false) return;
@@ -24,7 +28,9 @@ export function SideBar() {
     return (
         <TertiarySidebarPanel>
             <Toaster />
-            <BrandSectionTitle>REGISTRO DE PONTO</BrandSectionTitle>
+            <BrandSectionTitle firstChild={true}>
+                REGISTRO DE PONTO
+            </BrandSectionTitle>
 
             <SidebarHeader />
 

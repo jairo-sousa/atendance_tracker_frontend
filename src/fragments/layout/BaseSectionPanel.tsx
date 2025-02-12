@@ -14,6 +14,7 @@ export function BaseSectionPanel({ children }: BaseSectionPanelInterface) {
             direction={"column"}
             w={"100%"}
             h={"100%"}
+            p={"0 3rem"}
             justifyContent={"start"}
             align={"start"}
             backgroundColor={backgroundSecondary}
