@@ -9,7 +9,12 @@ export function RouteGoBackButton() {
     };
 
     return (
-        <Button onClick={handleGoBack} backgroundColor={"transparent"} p={0}>
+        <Button
+            onClick={handleGoBack}
+            backgroundColor={"transparent"}
+            p={0}
+            h={"3.7rem"}
+        >
             <Image src={"back_arrow.svg"} objectFit={"contain"} h={"1.9rem"} />
         </Button>
     );

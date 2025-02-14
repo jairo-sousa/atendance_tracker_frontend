@@ -10,8 +10,7 @@ export function RouteNavigation({ children }: RouteNavigationInterface) {
     return (
         <Flex
             w={"100%"}
-            p={"1.2rem 3rem"}
-            h={"6rem"}
+            p={"1.8rem 3rem"}
             alignItems={"center"}
             justifyContent={"space-between"}
             backgroundColor={"white"}
