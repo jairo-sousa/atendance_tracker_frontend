@@ -1,9 +1,9 @@
 import { BaseCell } from "@/fragments/table/BaseCell";
-import { EmployeeData } from "./EmployeeRows";
 import { EmployeeRenderKey } from "@/routes/Employee";
+import { EntityData } from "@/hooks/useCrud";
 
 interface EmplloyeeCellsInterface {
-    data: EmployeeData;
+    data: EntityData;
     fields: EmployeeRenderKey[];
 }
 
