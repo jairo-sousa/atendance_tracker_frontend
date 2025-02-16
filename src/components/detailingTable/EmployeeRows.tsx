@@ -2,9 +2,9 @@ import { forwardRef, useImperativeHandle } from "react";
 import { PrimaryRow } from "@/fragments/table/PrimaryRow";
 import { EmployeeRenderKey } from "@/routes/Employee";
 import { EmplloyeeCells } from "./EmployeeCells";
-import { Flex } from "@chakra-ui/react";
 import { ActionButton } from "./ActionButton";
 import { EntityData, useCrud } from "@/hooks/useCrud";
+import { ActionsCell } from "./ActionsCell";
 
 export interface EmployeeData extends EntityData {
     id: string;
@@ -47,24 +47,25 @@ export const EmployeeRows = forwardRef(
             cancelCreateButton,
         } = actions;
 
+        const rowPadding = "1.7rem 1.3rem 1.7rem 2.3rem";
+
         return (
             <>
                 {filteredData.map((data, index) => (
                     <PrimaryRow
-                        p="1.7rem 1.3rem 1.7rem 2.3rem"
+                        p={rowPadding}
                         key={data.cpf}
                         transparent={index % 2 !== 0}
                     >
                         <EmplloyeeCells fields={fields} data={data} />
 
-                        <Flex gap={"2rem"} flex={1} justify={"end"}>
+                        <ActionsCell>
                             {!data.editing && (
                                 <>
                                     <ActionButton
                                         id={data.id}
                                         imagePath={editButton.imagePath}
                                         onClick={editButton.onClick}
-                                        aria-label={`Editar ${data.name}`}
                                     />
                                     <ActionButton
                                         id={data.id}
@@ -88,7 +89,7 @@ export const EmployeeRows = forwardRef(
                                     />
                                 </>
                             )}
-                        </Flex>
+                        </ActionsCell>
                     </PrimaryRow>
                 ))}
 
@@ -96,7 +97,7 @@ export const EmployeeRows = forwardRef(
                     <PrimaryRow transparent={filteredData.length % 2 != 0}>
                         <EmplloyeeCells fields={fields} data={addingData} />
 
-                        <Flex gap={"2rem"} flex={1} justify={"end"}>
+                        <ActionsCell>
                             {addingData.editing && (
                                 <>
                                     <ActionButton
@@ -111,7 +112,7 @@ export const EmployeeRows = forwardRef(
                                     />
                                 </>
                             )}
-                        </Flex>
+                        </ActionsCell>
                     </PrimaryRow>
                 )}
             </>

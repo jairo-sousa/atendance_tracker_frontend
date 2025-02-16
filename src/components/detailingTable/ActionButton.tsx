@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { SidebarLinkIcon } from "../sidebar/SidebarLinkIcon";
 
-interface ActionButtonInterface {
+export interface ActionButtonInterface {
     onClick: Function;
     id: string;
     imagePath: string;
