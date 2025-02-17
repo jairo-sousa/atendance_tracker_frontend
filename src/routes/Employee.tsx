@@ -22,7 +22,7 @@ interface EmployeeRenderKeys {
 
 export type EmployeeRenderKey = keyof EmployeeRenderKeys;
 
-const emplloyeeFields: EmplloyeeField[] = [
+export const emplloyeeFields: EmplloyeeField[] = [
     { field: "name", value: "Nome" },
     { field: "cpf", value: "Cpf" },
     { field: "phone", value: "Telefone" },
@@ -34,10 +34,6 @@ export function Emplloyee() {
     const rowRef = createRef<{
         handleAdd: () => void;
     }>();
-
-    const fields: EmployeeRenderKey[] = emplloyeeFields.map(
-        (fieldObj) => fieldObj.field as EmployeeRenderKey
-    );
 
     const handleSearchChange = (query: string) => setSearchQuery(query);
 
@@ -63,7 +59,7 @@ export function Emplloyee() {
                 <EmployeeRows
                     ref={rowRef}
                     searchQuery={searchQuery}
-                    fields={fields}
+                    employeefields={emplloyeeFields}
                 />
             </BaseSectionPanel>
         </PrivateRoute>

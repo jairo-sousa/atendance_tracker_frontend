@@ -1,6 +1,10 @@
 import { forwardRef, useImperativeHandle } from "react";
 import { PrimaryRow } from "@/fragments/table/PrimaryRow";
-import { EmployeeRenderKey } from "@/routes/Employee";
+import {
+    EmplloyeeField,
+    emplloyeeFields,
+    EmployeeRenderKey,
+} from "@/routes/Employee";
 import { EmplloyeeCells } from "./EmployeeCells";
 import { ActionButton } from "./ActionButton";
 import { EntityData, useCrud } from "@/hooks/useCrud";
@@ -15,14 +19,18 @@ export interface EmployeeData extends EntityData {
 }
 
 interface EmployeeRowsInterface {
-    fields: EmployeeRenderKey[];
+    employeefields: EmplloyeeField[];
     searchQuery?: string;
 }
 
 export const EmployeeRows = forwardRef(
-    ({ fields, searchQuery }: EmployeeRowsInterface, ref) => {
+    ({ employeefields, searchQuery }: EmployeeRowsInterface, ref) => {
+        const fieldValues: EmployeeRenderKey[] = emplloyeeFields.map(
+            (fieldObj) => fieldObj.field as EmployeeRenderKey
+        );
+
         const { actions, addingData, data, handleAdd } = useCrud({
-            fields,
+            fields: fieldValues,
             url: "/employee",
         });
 
@@ -57,7 +65,10 @@ export const EmployeeRows = forwardRef(
                         key={data.cpf}
                         transparent={index % 2 !== 0}
                     >
-                        <EmplloyeeCells fields={fields} data={data} />
+                        <EmplloyeeCells
+                            employeefields={employeefields}
+                            data={data}
+                        />
 
                         <ActionsCell>
                             {!data.editing && (
@@ -94,8 +105,14 @@ export const EmployeeRows = forwardRef(
                 ))}
 
                 {addingData && (
-                    <PrimaryRow transparent={filteredData.length % 2 != 0}>
-                        <EmplloyeeCells fields={fields} data={addingData} />
+                    <PrimaryRow
+                        transparent={filteredData.length % 2 != 0}
+                        p={rowPadding}
+                    >
+                        <EmplloyeeCells
+                            employeefields={employeefields}
+                            data={addingData}
+                        />
 
                         <ActionsCell>
                             {addingData.editing && (

@@ -85,6 +85,7 @@ export function useCrud<T extends EntityData>({
     };
 
     const handleCancelCreate = () => {
+        console.log(addingData?.name);
         console.log("Cancelando criação", addingData?.cpf);
         setAddingData(null);
     };
@@ -92,6 +93,7 @@ export function useCrud<T extends EntityData>({
     // CRUD
     const handleCreate = () => {
         // POST AT API + TOAST HANDLING
+        console.log(addingData?.name);
         console.log("Criando com cpf: ", addingData?.cpf);
         setAddingData(null);
     };
@@ -102,8 +104,9 @@ export function useCrud<T extends EntityData>({
         setData(sampleData);
     };
 
-    const handleUpdate = (id: string) => {
+    const handleUpdate = (id: string, editingData: T | null) => {
         // TODO GET DATA + PUT AT API + TOAST HANDLING
+        console.log(editingData);
         const updatedData = data?.map((item) => {
             if (item.id === id) {
                 console.log("Atualizando: ", item.name);

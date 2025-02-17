@@ -21,7 +21,21 @@ export function PrivateRoute({ children }: PrivateRouteInterface) {
 
     return (
         <>
-            <Flex direction={"column"} w={"100%"} h={"100vh"}>
+            <Flex
+                direction={"column"}
+                w={"100%"}
+                h={"100vh"}
+                overflowY={"scroll"}
+                scrollbarWidth={"none"}
+                css={{
+                    "&::-webkit-scrollbar": {
+                        display: "none",
+                    },
+                    "&": {
+                        msOverflowStyle: "none",
+                    },
+                }}
+            >
                 {children}
             </Flex>
         </>
