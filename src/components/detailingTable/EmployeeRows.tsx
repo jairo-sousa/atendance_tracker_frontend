@@ -29,10 +29,11 @@ export const EmployeeRows = forwardRef(
             (fieldObj) => fieldObj.field as EmployeeRenderKey
         );
 
-        const { actions, addingData, data, handleAdd } = useCrud({
-            fields: fieldValues,
-            url: "/employee",
-        });
+        const { actions, addingData, data, handleAdd, handleCellChange } =
+            useCrud({
+                fields: fieldValues,
+                url: "/employee",
+            });
 
         useImperativeHandle(ref, () => ({
             handleAdd,
@@ -68,6 +69,7 @@ export const EmployeeRows = forwardRef(
                         <EmplloyeeCells
                             employeefields={employeefields}
                             data={data}
+                            onCellChange={handleCellChange}
                         />
 
                         <ActionsCell>
@@ -112,6 +114,7 @@ export const EmployeeRows = forwardRef(
                         <EmplloyeeCells
                             employeefields={employeefields}
                             data={addingData}
+                            onCellChange={handleCellChange}
                         />
 
                         <ActionsCell>

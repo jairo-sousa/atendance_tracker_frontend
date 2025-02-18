@@ -18,6 +18,8 @@ export function useCrud<T extends EntityData>({
     const [data, setData] = useState<T[]>();
     const [addingData, setAddingData] = useState<T | null>(null);
 
+    const [editingData, setEditingData] = useState<EntityData>();
+
     const sampleData: T[] = [
         {
             id: "sajjdfn-saflks",
@@ -72,6 +74,10 @@ export function useCrud<T extends EntityData>({
         setAddingData(null);
     };
 
+    const handleCellChange = (editing: EntityData) => {
+        setEditingData(editing);
+    };
+
     const handleCancelEdit = (id: string) => {
         console.log("Cancelando edição de: ", id);
 
@@ -94,7 +100,7 @@ export function useCrud<T extends EntityData>({
     const handleCreate = () => {
         // POST AT API + TOAST HANDLING
         console.log(addingData?.name);
-        console.log("Criando com cpf: ", addingData?.cpf);
+        console.log("Criando com cpf: ", editingData?.cpf);
         setAddingData(null);
     };
 
@@ -104,12 +110,12 @@ export function useCrud<T extends EntityData>({
         setData(sampleData);
     };
 
-    const handleUpdate = (id: string, editingData: T | null) => {
+    const handleUpdate = (id: string) => {
         // TODO GET DATA + PUT AT API + TOAST HANDLING
         console.log(editingData);
         const updatedData = data?.map((item) => {
             if (item.id === id) {
-                console.log("Atualizando: ", item.name);
+                console.log("Atualizando: ", id);
                 return { ...item, editing: false };
             }
             return item;
@@ -142,6 +148,7 @@ export function useCrud<T extends EntityData>({
         actions,
         handleAdd,
         handleEdit,
+        handleCellChange,
         handleCancelEdit,
         handleCreate,
         handleCancelCreate,

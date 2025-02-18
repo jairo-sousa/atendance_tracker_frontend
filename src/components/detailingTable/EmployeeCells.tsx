@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 interface EmplloyeeCellsInterface {
     data: EntityData;
     employeefields: EmplloyeeField[];
+    onCellChange: Function;
 }
 
 export function EmplloyeeCells({
     employeefields,
     data,
+    onCellChange,
 }: EmplloyeeCellsInterface) {
     const [celslData, setCelslData] = useState(data);
 
@@ -19,11 +21,10 @@ export function EmplloyeeCells({
             ...prevData,
             [field]: value,
         }));
-    };
-
-    const handleUpdate = () => {
-        // TODO GET DATA
-        console.log(celslData);
+        onCellChange({
+            ...data,
+            [field]: value,
+        });
     };
 
     useEffect(() => {
