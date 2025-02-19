@@ -43,13 +43,14 @@ export function EmplloyeeCells({
 
     return (
         <>
-            {employeefields.map((field) => (
+            {employeefields.map((field, index) => (
                 <InputCell
                     key={field.field}
                     entityField={field}
                     onChange={handleChange}
                     enabled={celslData.editing}
                     inputvalue={celslData[field.field] || ""}
+                    autofocus={celslData.editing && index === 0}
                 />
             ))}
         </>
