@@ -213,4 +213,44 @@ export class ApiService {
             callBack && callBack();
         }
     }
+
+    async update(
+        sessionToken: string,
+        route: string,
+        data: EntityBase,
+        callBack?: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!sessionToken || !route) throw new Error("Erro inesperado!");
+            if (!data) throw new Error("Forneça os dados para a edição!");
+
+            showToast("Atualizando dados", "Por favor aguarde", "loading");
+            const result = await this.modelApi.update(
+                sessionToken,
+                route,
+                data
+            );
+
+            dismissToast();
+
+            if (result) {
+                showToast("Dados atualizados!", "Tudo certo", "success");
+            } else {
+                showToast(
+                    "Falha ao atualizar dados",
+                    "Erro no servidor",
+                    "error"
+                );
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha ao atualizar dados", `${err}`, "error");
+            return null;
+        } finally {
+            callBack && callBack();
+        }
+    }
 }

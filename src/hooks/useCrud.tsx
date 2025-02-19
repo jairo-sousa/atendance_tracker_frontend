@@ -26,7 +26,7 @@ export function useCrud<T extends EntityData>({
     const [data, setData] = useState<T[]>();
     const [addingData, setAddingData] = useState<T | null>(null);
 
-    const [editingData, setEditingData] = useState<EntityData>();
+    const [editingData, setEditingData] = useState<EntityData | null>(null);
 
     const voidEntity: Record<string, any> = {
         editing: true,
@@ -50,10 +50,9 @@ export function useCrud<T extends EntityData>({
     };
 
     const handleEdit = (id: string) => {
-        console.log("Editando: ", id);
-
         const updatedData = data?.map((item) => {
             if (item.id === id) {
+                setEditingData(item);
                 return { ...item, editing: true };
             } else {
                 return { ...item, editing: false };
@@ -77,8 +76,6 @@ export function useCrud<T extends EntityData>({
     };
 
     const handleCancelEdit = (id: string) => {
-        console.log("Cancelando edição de: ", id);
-
         const updatedData = data?.map((data) => {
             if (data.id === id) {
                 return { ...data, editing: false };
@@ -86,10 +83,12 @@ export function useCrud<T extends EntityData>({
             return data;
         });
         setData(updatedData);
+        setEditingData(null);
     };
 
     const handleCancelCreate = () => {
         setAddingData(null);
+        setEditingData(null);
     };
 
     // CRUD
@@ -110,17 +109,14 @@ export function useCrud<T extends EntityData>({
         setData(result?.data);
     };
 
-    const handleUpdate = (id: string) => {
-        // TODO GET DATA + PUT AT API + TOAST HANDLING
-        console.log(editingData);
-        const updatedData = data?.map((item) => {
-            if (item.id === id) {
-                console.log("Atualizando: ", id);
-                return { ...item, editing: false };
-            }
-            return item;
+    const handleUpdate = async () => {
+        if (!editingData) return;
+
+        const { editing, ...dataToSend } = editingData;
+
+        await apiService.update(session_token, route, dataToSend, () => {
+            handleGet();
         });
-        setData(updatedData);
     };
 
     const handleDelete = (id: string) => {

@@ -8,4 +8,9 @@ export interface ModelApiInterface {
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse>;
+    update(
+        session_token: string,
+        route: string,
+        data: EntityBase
+    ): Promise<AxiosResponse>;
 }

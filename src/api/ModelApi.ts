@@ -1,5 +1,5 @@
 import { globalEnv } from "@/globalEnv";
-import { EntityData } from "@/hooks/useCrud";
+import { EntityBase } from "@/hooks/useCrud";
 import { ModelApiInterface } from "@/interfaces/ModelInterface";
 
 import axios, { AxiosResponse } from "axios";
@@ -10,7 +10,7 @@ export class ModelApi implements ModelApiInterface {
     async create(
         session_token: string,
         route: string,
-        data: EntityData
+        data: EntityBase
     ): Promise<AxiosResponse> {
         const response = await axios.post(`${API_URL}/${route}`, data, {
             headers: {
@@ -26,6 +26,23 @@ export class ModelApi implements ModelApiInterface {
                 Authorization: session_token,
             },
         });
+        return response;
+    }
+
+    async update(
+        session_token: string,
+        route: string,
+        data: EntityBase
+    ): Promise<AxiosResponse> {
+        const response = await axios.put(
+            `${API_URL}/${route}/${data.id}`,
+            data,
+            {
+                headers: {
+                    authorization: session_token,
+                },
+            }
+        );
         return response;
     }
 }
