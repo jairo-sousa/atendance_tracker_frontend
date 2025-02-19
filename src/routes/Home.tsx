@@ -1,5 +1,4 @@
 import { WorkdaySummary } from "@/components/workDaySummary/WorkdaySummary";
-import { PrivateRoute } from "./PrivateRoute";
 import { HomeContainer } from "@/fragments/layout/HomeContainer";
 import { BaseSectionPanel } from "@/fragments/layout/BaseSectionPanel";
 import { CheckInDialog } from "@/components/CheckInDialog/CheckinDialog";
@@ -16,7 +15,7 @@ export function Home() {
     };
 
     return (
-        <PrivateRoute>
+        <>
             <RouteNavigation />
             <BaseSectionPanel>
                 <RouteHeader>
@@ -29,6 +28,6 @@ export function Home() {
                     <CheckInDialog onRegister={handleRefreshWorkdaySummary} />
                 </HomeContainer>
             </BaseSectionPanel>
-        </PrivateRoute>
+        </>
     );
 }

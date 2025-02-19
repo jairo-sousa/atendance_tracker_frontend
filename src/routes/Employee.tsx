@@ -4,7 +4,7 @@ import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
 import { EmployeeRows } from "@/components/detailingTable/EmployeeRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
-import { createRef, useEffect, useState } from "react";
+import { createRef, useState } from "react";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { BrandButton } from "@/fragments/form/BrandButton";
 import { PrivateChildRouteInterface } from "./PrivateRoute";
