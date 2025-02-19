@@ -7,12 +7,14 @@ interface EmplloyeeCellsInterface {
     data: EntityData;
     employeefields: EmplloyeeField[];
     onCellChange: Function;
+    isCreating?: boolean;
 }
 
 export function EmplloyeeCells({
     employeefields,
     data,
     onCellChange,
+    isCreating,
 }: EmplloyeeCellsInterface) {
     const [celslData, setCelslData] = useState(data);
 
@@ -21,10 +23,16 @@ export function EmplloyeeCells({
             ...prevData,
             [field]: value,
         }));
-        onCellChange({
-            ...data,
-            [field]: value,
-        });
+        if (isCreating) {
+            onCellChange({
+                [field]: value,
+            });
+        } else {
+            onCellChange({
+                ...data,
+                [field]: value,
+            });
+        }
     };
 
     useEffect(() => {

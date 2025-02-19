@@ -1,3 +1,4 @@
+import { ApiService } from "@/services/ApiService";
 import { useEffect, useState } from "react";
 
 export interface EntityData {
@@ -7,43 +8,31 @@ export interface EntityData {
 }
 
 export interface UseCrudInterface<T extends EntityData> {
-    url: string;
+    session_token: string;
+    route: string;
     fields: string[];
 }
 
 export function useCrud<T extends EntityData>({
     fields,
-    url,
+    session_token,
+    route,
 }: UseCrudInterface<T>) {
+    const apiService = new ApiService();
+
     const [data, setData] = useState<T[]>();
     const [addingData, setAddingData] = useState<T | null>(null);
 
     const [editingData, setEditingData] = useState<EntityData>();
 
-    const sampleData: T[] = [
-        {
-            id: "sajjdfn-saflks",
-            cpf: "123456789",
-            name: "João",
-            phone: "5599999999",
-            editing: false,
-        } as unknown as T,
-        {
-            id: "ew.mn-.mnsdiu",
-            cpf: "987654321",
-            name: "Maria",
-            editing: false,
-        } as unknown as T,
-    ];
+    const voidEntity: Record<string, any> = {
+        id: "",
+        editing: true,
+    };
 
     const handleAdd = () => {
         console.log("Criando novo ");
         if (!addingData) {
-            const voidEntity: Record<string, any> = {
-                id: "",
-                editing: true,
-            };
-
             fields.forEach((field) => {
                 voidEntity[field] = "";
             });
@@ -74,8 +63,16 @@ export function useCrud<T extends EntityData>({
         setAddingData(null);
     };
 
-    const handleCellChange = (editing: EntityData) => {
-        setEditingData(editing);
+    const handleCellChange = (editing: Partial<EntityData>) => {
+        setEditingData((prevData) => {
+            if (!prevData) {
+                return voidEntity as EntityData; // Se for undefined, retorna o novo objeto diretamente
+            }
+            return {
+                ...prevData, // mantém as propriedades anteriores
+                ...editing, // sobrescreve as propriedades com as mudanças
+            };
+        });
     };
 
     const handleCancelEdit = (id: string) => {
@@ -99,15 +96,13 @@ export function useCrud<T extends EntityData>({
     // CRUD
     const handleCreate = () => {
         // POST AT API + TOAST HANDLING
-        console.log(addingData?.name);
-        console.log("Criando com cpf: ", editingData?.cpf);
+        console.log(editingData);
         setAddingData(null);
+        setEditingData(voidEntity as EntityData);
     };
 
-    const handleGet = () => {
-        // TODO REPLACE WITH GET AT API
-        console.log("Buscando Dados em: ", url);
-        setData(sampleData);
+    const handleGet = async () => {
+        //
     };
 
     const handleUpdate = (id: string) => {
@@ -128,7 +123,9 @@ export function useCrud<T extends EntityData>({
         console.log("Removendo id: ", id);
     };
 
-    useEffect(handleGet, []);
+    useEffect(() => {
+        handleGet();
+    }, []);
 
     const actions = {
         editButton: { imagePath: "pen", onClick: handleEdit },

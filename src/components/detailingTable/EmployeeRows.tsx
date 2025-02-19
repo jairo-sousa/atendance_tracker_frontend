@@ -21,18 +21,23 @@ export interface EmployeeData extends EntityData {
 interface EmployeeRowsInterface {
     employeefields: EmplloyeeField[];
     searchQuery?: string;
+    session_token: string;
 }
 
 export const EmployeeRows = forwardRef(
-    ({ employeefields, searchQuery }: EmployeeRowsInterface, ref) => {
+    (
+        { employeefields, searchQuery, session_token }: EmployeeRowsInterface,
+        ref
+    ) => {
         const fieldValues: EmployeeRenderKey[] = emplloyeeFields.map(
             (fieldObj) => fieldObj.field as EmployeeRenderKey
         );
 
         const { actions, addingData, data, handleAdd, handleCellChange } =
             useCrud({
+                session_token: session_token,
                 fields: fieldValues,
-                url: "/employee",
+                route: "employee",
             });
 
         useImperativeHandle(ref, () => ({
@@ -70,6 +75,7 @@ export const EmployeeRows = forwardRef(
                             employeefields={employeefields}
                             data={data}
                             onCellChange={handleCellChange}
+                            isCreating={!!addingData}
                         />
 
                         <ActionsCell>
@@ -115,6 +121,7 @@ export const EmployeeRows = forwardRef(
                             employeefields={employeefields}
                             data={addingData}
                             onCellChange={handleCellChange}
+                            isCreating={!!addingData}
                         />
 
                         <ActionsCell>

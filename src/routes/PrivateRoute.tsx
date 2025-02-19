@@ -1,43 +1,38 @@
-import { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
 import { Navigate } from "react-router";
-import { Flex } from "@chakra-ui/react";
+import { PrivateRoutePainel } from "@/fragments/layout/PrivateRoutePanel";
+
+export interface PrivateChildRouteInterface {
+    session_token?: string;
+}
 
 interface PrivateRouteInterface {
-    children?: ReactNode;
+    children: ReactNode;
 }
 
 export function PrivateRoute({ children }: PrivateRouteInterface) {
     const [hasSessionToken, setHasSessionToken] = useState<boolean>();
 
     useEffect(() => {
-        setHasSessionToken(
-            Cookies.get("sessionToken")?.startsWith("Bearer ") == true
-        );
+        const sessionToken = Cookies.get("sessionToken");
+
+        if (sessionToken && sessionToken.startsWith("Bearer ")) {
+            setHasSessionToken(true);
+        } else {
+            setHasSessionToken(false);
+        }
     }, []);
 
     if (hasSessionToken == false) return <Navigate to="/check-in" />;
+    if (!React.isValidElement(children)) {
+        return <div>Invalid children</div>;
+    }
 
     return (
-        <>
-            <Flex
-                direction={"column"}
-                w={"100%"}
-                h={"100vh"}
-                overflowY={"scroll"}
-                scrollbarWidth={"none"}
-                css={{
-                    "&::-webkit-scrollbar": {
-                        display: "none",
-                    },
-                    "&": {
-                        msOverflowStyle: "none",
-                    },
-                }}
-            >
-                {children}
-            </Flex>
-        </>
+        <PrivateRoutePainel>
+            {React.cloneElement(children as React.ReactElement)}
+        </PrivateRoutePainel>
     );
 }

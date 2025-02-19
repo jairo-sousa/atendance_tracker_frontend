@@ -1,13 +1,15 @@
 import { RouteHeader } from "@/fragments/layout/RouteHeader";
-import { PrivateRoute } from "./PrivateRoute";
 import { BaseSectionPanel } from "@/fragments/layout/BaseSectionPanel";
 import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
 import { EmployeeRows } from "@/components/detailingTable/EmployeeRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { BrandButton } from "@/fragments/form/BrandButton";
+import { PrivateChildRouteInterface } from "./PrivateRoute";
+
+import Cookies from "js-cookie";
 
 export interface EmplloyeeField {
     field: string;
@@ -28,12 +30,10 @@ export const emplloyeeFields: EmplloyeeField[] = [
     { field: "phone", value: "Telefone" },
 ];
 
-export function Emplloyee() {
+export function Emplloyee({}: PrivateChildRouteInterface) {
     const [searchQuery, setSearchQuery] = useState("");
-
-    const rowRef = createRef<{
-        handleAdd: () => void;
-    }>();
+    const rowRef = createRef<{ handleAdd: () => void }>();
+    const session_token = Cookies.get("sessionToken");
 
     const handleSearchChange = (query: string) => setSearchQuery(query);
 
@@ -42,7 +42,7 @@ export function Emplloyee() {
     };
 
     return (
-        <PrivateRoute>
+        <>
             <RouteNavigation>
                 <SearchBar onchange={handleSearchChange} />
             </RouteNavigation>
@@ -56,12 +56,15 @@ export function Emplloyee() {
                 </RouteHeader>
 
                 <DetailingTableHeader fields={emplloyeeFields} />
-                <EmployeeRows
-                    ref={rowRef}
-                    searchQuery={searchQuery}
-                    employeefields={emplloyeeFields}
-                />
+                {session_token && (
+                    <EmployeeRows
+                        ref={rowRef}
+                        searchQuery={searchQuery}
+                        employeefields={emplloyeeFields}
+                        session_token={session_token}
+                    />
+                )}
             </BaseSectionPanel>
-        </PrivateRoute>
+        </>
     );
 }
