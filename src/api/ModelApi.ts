@@ -45,4 +45,17 @@ export class ModelApi implements ModelApiInterface {
         );
         return response;
     }
+
+    async delete(
+        session_token: string,
+        route: string,
+        id: string
+    ): Promise<AxiosResponse> {
+        const response = await axios.delete(`${API_URL}/${route}/${id}`, {
+            headers: {
+                Authorization: session_token,
+            },
+        });
+        return response;
+    }
 }

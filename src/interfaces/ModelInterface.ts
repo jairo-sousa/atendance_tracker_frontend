@@ -13,4 +13,9 @@ export interface ModelApiInterface {
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse>;
+    delete(
+        seession_token: string,
+        route: string,
+        id: string
+    ): Promise<AxiosResponse>;
 }

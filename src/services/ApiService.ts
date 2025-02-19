@@ -253,4 +253,36 @@ export class ApiService {
             callBack && callBack();
         }
     }
+
+    async delete(
+        sessionToken: string,
+        route: string,
+        id: string,
+        callBack?: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!sessionToken || !route || !id)
+                throw new Error("Erro inesperado!");
+
+            showToast("Removendo dado", "Por favor aguarde", "loading");
+            const result = await this.modelApi.delete(sessionToken, route, id);
+
+            dismissToast();
+
+            if (result) {
+                showToast("Dado removido!", "Tudo certo", "success");
+            } else {
+                showToast("Falha ao remover dado", "Erro no servidor", "error");
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha ao remover dado", `${err}`, "error");
+            return null;
+        } finally {
+            callBack && callBack();
+        }
+    }
 }

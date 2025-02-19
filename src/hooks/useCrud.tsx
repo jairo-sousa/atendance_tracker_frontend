@@ -96,9 +96,7 @@ export function useCrud<T extends EntityData>({
         if (!editingData) return;
 
         const { editing, ...dataToSend } = editingData;
-        await apiService.create(session_token, route, dataToSend, () => {
-            handleGet();
-        });
+        await apiService.create(session_token, route, dataToSend, handleGet);
 
         setAddingData(null);
         setEditingData(voidEntity as EntityData);
@@ -114,14 +112,11 @@ export function useCrud<T extends EntityData>({
 
         const { editing, ...dataToSend } = editingData;
 
-        await apiService.update(session_token, route, dataToSend, () => {
-            handleGet();
-        });
+        await apiService.update(session_token, route, dataToSend, handleGet);
     };
 
-    const handleDelete = (id: string) => {
-        // TODO GET DATA + DELETE AT API + TOAST HANDLING
-        console.log("Removendo id: ", id);
+    const handleDelete = async (id: string) => {
+        await apiService.delete(session_token, route, id, handleGet);
     };
 
     useEffect(() => {
