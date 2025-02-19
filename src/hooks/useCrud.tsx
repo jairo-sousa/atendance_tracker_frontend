@@ -66,11 +66,11 @@ export function useCrud<T extends EntityData>({
     const handleCellChange = (editing: Partial<EntityData>) => {
         setEditingData((prevData) => {
             if (!prevData) {
-                return voidEntity as EntityData; // Se for undefined, retorna o novo objeto diretamente
+                return voidEntity as EntityData;
             }
             return {
-                ...prevData, // mantém as propriedades anteriores
-                ...editing, // sobrescreve as propriedades com as mudanças
+                ...prevData,
+                ...editing,
             };
         });
     };
@@ -102,7 +102,8 @@ export function useCrud<T extends EntityData>({
     };
 
     const handleGet = async () => {
-        //
+        const result = await apiService.get(session_token, route);
+        setData(result?.data);
     };
 
     const handleUpdate = (id: string) => {

@@ -10,6 +10,8 @@ import { ReportApi } from "@/api/ReportApi";
 import { AdministratorApi } from "@/api/AdministratorApi";
 import { ReportApiInterface } from "@/interfaces/ReportInterface";
 import { AdministratorApiInterface } from "@/interfaces/AdministratorInterface";
+import { ModelApiInterface } from "@/interfaces/ModelInterface";
+import { ModelApi } from "@/api/ModelApi";
 
 const { showToast, dismissToast } = ToastService;
 
@@ -17,11 +19,13 @@ export class ApiService {
     private workdayApi: WorkdayApiInterface;
     private reportApi: ReportApiInterface;
     private administratorApi: AdministratorApiInterface;
+    private modelApi: ModelApiInterface;
 
     constructor() {
         this.workdayApi = new WorkdayApi();
         this.reportApi = new ReportApi();
         this.administratorApi = new AdministratorApi();
+        this.modelApi = new ModelApi();
     }
 
     async login(
@@ -144,6 +148,32 @@ export class ApiService {
             return result.data;
         } catch (err: any) {
             throw new Error(err);
+        }
+    }
+
+    // CRUD
+    async get(
+        sessionToken: string,
+        route: string,
+        callBack?: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!sessionToken || !route) throw new Error("Erro inesperado!");
+
+            const result = await this.modelApi.get(sessionToken, route);
+
+            if (!result) {
+                showToast("Falha durante busca", sessionToken, "error");
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha durante busca de dados", `${err}`, "error");
+            return null;
+        } finally {
+            callBack && callBack();
         }
     }
 }
