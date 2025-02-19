@@ -12,6 +12,7 @@ import { ReportApiInterface } from "@/interfaces/ReportInterface";
 import { AdministratorApiInterface } from "@/interfaces/AdministratorInterface";
 import { ModelApiInterface } from "@/interfaces/ModelInterface";
 import { ModelApi } from "@/api/ModelApi";
+import { EntityBase } from "@/hooks/useCrud";
 
 const { showToast, dismissToast } = ToastService;
 
@@ -152,6 +153,42 @@ export class ApiService {
     }
 
     // CRUD
+    async create(
+        sessionToken: string,
+        route: string,
+        data: EntityBase,
+        callBack?: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!sessionToken || !route) throw new Error("Erro inesperado!");
+            if (!data) throw new Error("Forneça os dados para a criação!");
+
+            showToast("Salvando dados", "Por favor aguarde", "loading");
+            const result = await this.modelApi.create(
+                sessionToken,
+                route,
+                data
+            );
+
+            dismissToast();
+
+            if (result) {
+                showToast("Dados salvos!", "Tudo certo", "success");
+            } else {
+                showToast("Falha ao salvar dados", "Erro no servidor", "error");
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha ao salvar dados", `${err}`, "error");
+            return null;
+        } finally {
+            callBack && callBack();
+        }
+    }
+
     async get(
         sessionToken: string,
         route: string,
@@ -163,7 +200,7 @@ export class ApiService {
             const result = await this.modelApi.get(sessionToken, route);
 
             if (!result) {
-                showToast("Falha durante busca", sessionToken, "error");
+                showToast("Falha durante busca", "Erro no servidor", "error");
             }
 
             return result || null;

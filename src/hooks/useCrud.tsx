@@ -1,10 +1,13 @@
 import { ApiService } from "@/services/ApiService";
 import { useEffect, useState } from "react";
 
-export interface EntityData {
+export interface EntityBase {
     id: string;
-    editing: boolean;
     [key: string]: any;
+}
+
+export interface EntityData extends EntityBase {
+    editing: boolean;
 }
 
 export interface UseCrudInterface<T extends EntityData> {
@@ -26,12 +29,10 @@ export function useCrud<T extends EntityData>({
     const [editingData, setEditingData] = useState<EntityData>();
 
     const voidEntity: Record<string, any> = {
-        id: "",
         editing: true,
     };
 
     const handleAdd = () => {
-        console.log("Criando novo ");
         if (!addingData) {
             fields.forEach((field) => {
                 voidEntity[field] = "";
@@ -88,15 +89,18 @@ export function useCrud<T extends EntityData>({
     };
 
     const handleCancelCreate = () => {
-        console.log(addingData?.name);
-        console.log("Cancelando criação", addingData?.cpf);
         setAddingData(null);
     };
 
     // CRUD
-    const handleCreate = () => {
-        // POST AT API + TOAST HANDLING
-        console.log(editingData);
+    const handleCreate = async () => {
+        if (!editingData) return;
+
+        const { editing, ...dataToSend } = editingData;
+        await apiService.create(session_token, route, dataToSend, () => {
+            handleGet();
+        });
+
         setAddingData(null);
         setEditingData(voidEntity as EntityData);
     };
