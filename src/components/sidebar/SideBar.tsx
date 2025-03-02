@@ -18,12 +18,11 @@ export function SideBar() {
     );
 
     const router = useLocation();
-
     useEffect(() => {
         setHasSessionToken(checkHasSessionToken());
     }, [router]);
 
-    if (hasSessionToken == false) return;
+    if (!hasSessionToken || router.pathname === "/check-in") return;
 
     return (
         <TertiarySidebarPanel>
