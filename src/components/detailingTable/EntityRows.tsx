@@ -1,41 +1,37 @@
 import { forwardRef, useImperativeHandle } from "react";
 import { PrimaryRow } from "@/fragments/table/PrimaryRow";
-import { emplloyeeFields } from "@/routes/Employee";
 import { ActionButton } from "./ActionButton";
 import { ActionsCell } from "./ActionsCell";
-import { EntityData, EntityField } from "@/interfaces/EntityInterface";
+import { EntityField, EntityRenderKey } from "@/interfaces/EntityInterface";
 import { useCrud } from "@/hooks/useCrud";
-import { EmployeeRenderKey } from "@/interfaces/EmployeeInterface";
 import { EntityCells } from "./EntityCells";
 
-export interface EmployeeData extends EntityData {
-    id: string;
-    name: string;
-    cpf: string;
-    editing: boolean;
-    phone?: string;
-}
-
-interface EmployeeRowsInterface {
-    employeefields: EntityField[];
+interface EntityRowsInterface {
+    entityfields: EntityField[];
     searchQuery?: string;
     session_token: string;
+    route: string;
 }
 
-export const EmployeeRows = forwardRef(
+export const EntityRows = forwardRef(
     (
-        { employeefields, searchQuery, session_token }: EmployeeRowsInterface,
+        {
+            entityfields,
+            searchQuery,
+            session_token,
+            route,
+        }: EntityRowsInterface,
         ref
     ) => {
-        const fieldValues: EmployeeRenderKey[] = emplloyeeFields.map(
-            (fieldObj) => fieldObj.field as EmployeeRenderKey
+        const fieldValues: EntityRenderKey[] = entityfields.map(
+            (fieldObj) => fieldObj.field as EntityRenderKey
         );
 
         const { actions, addingData, data, handleAdd, handleCellChange } =
             useCrud({
                 session_token: session_token,
                 fields: fieldValues,
-                route: "employee",
+                route: route,
             });
 
         useImperativeHandle(ref, () => ({
@@ -70,7 +66,7 @@ export const EmployeeRows = forwardRef(
                         transparent={index % 2 !== 0}
                     >
                         <EntityCells
-                            employeefields={employeefields}
+                            entityfields={entityfields}
                             data={data}
                             onCellChange={handleCellChange}
                             isCreating={!!addingData}
@@ -116,7 +112,7 @@ export const EmployeeRows = forwardRef(
                         p={rowPadding}
                     >
                         <EntityCells
-                            employeefields={employeefields}
+                            entityfields={entityfields}
                             data={addingData}
                             onCellChange={handleCellChange}
                             isCreating={!!addingData}

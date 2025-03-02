@@ -1,5 +1,5 @@
 import { globalEnv } from "@/globalEnv";
-import { EntityBase } from "@/hooks/useCrud";
+import { EntityBase } from "@/interfaces/EntityInterface";
 import { ModelApiInterface } from "@/interfaces/ModelInterface";
 
 import axios, { AxiosResponse } from "axios";

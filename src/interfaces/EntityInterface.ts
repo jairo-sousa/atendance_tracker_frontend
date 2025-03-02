@@ -8,8 +8,8 @@ export interface EntityBase {
     [key: string]: any;
 }
 
+export type EntityRenderKey = keyof EntityBase;
+
 export interface EntityData extends EntityBase {
     editing: boolean;
 }
-
-export type EntityRenderKey = keyof EntityBase;

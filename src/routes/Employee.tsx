@@ -2,7 +2,7 @@ import { RouteHeader } from "@/fragments/layout/RouteHeader";
 import { BaseSectionPanel } from "@/fragments/layout/BaseSectionPanel";
 import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
-import { EmployeeRows } from "@/components/detailingTable/EmployeeRows";
+import { EntityRows } from "@/components/detailingTable/EntityRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
 import { createRef, useState } from "react";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
@@ -45,11 +45,12 @@ export function Emplloyee({}: PrivateChildRouteInterface) {
 
                 <DetailingTableHeader fields={emplloyeeFields} />
                 {session_token && (
-                    <EmployeeRows
+                    <EntityRows
                         ref={rowRef}
                         searchQuery={searchQuery}
-                        employeefields={emplloyeeFields}
+                        entityfields={emplloyeeFields}
                         session_token={session_token}
+                        route="employee"
                     />
                 )}
             </BaseSectionPanel>

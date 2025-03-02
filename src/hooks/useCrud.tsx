@@ -1,4 +1,4 @@
-import { EntityData } from "@/interfaces/EntityInterface";
+import { EntityBase, EntityData } from "@/interfaces/EntityInterface";
 import { ApiService } from "@/services/ApiService";
 import { useEffect, useState } from "react";
 
@@ -14,7 +14,7 @@ export interface Actions {
 export interface UseCrudInterface<T extends EntityData> {
     session_token: string;
     route: string;
-    fields: string[];
+    fields: (keyof EntityBase)[];
 }
 
 export function useCrud<T extends EntityData>({

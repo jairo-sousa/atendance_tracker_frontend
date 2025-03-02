@@ -4,13 +4,13 @@ import { EntityData, EntityField } from "@/interfaces/EntityInterface";
 
 interface EntityCellsInterface {
     data: EntityData;
-    employeefields: EntityField[];
+    entityfields: EntityField[];
     onCellChange: Function;
     isCreating?: boolean;
 }
 
 export function EntityCells({
-    employeefields,
+    entityfields,
     data,
     onCellChange,
     isCreating,
@@ -42,7 +42,7 @@ export function EntityCells({
 
     return (
         <>
-            {employeefields.map((field, index) => (
+            {entityfields.map((field, index) => (
                 <InputCell
                     key={field.field}
                     entityField={field}
