@@ -1,11 +1,12 @@
 import { forwardRef, useImperativeHandle } from "react";
 import { PrimaryRow } from "@/fragments/table/PrimaryRow";
-import { emplloyeeFields, EmployeeRenderKey } from "@/routes/Employee";
-import { EmplloyeeCells } from "./EmployeeCells";
+import { emplloyeeFields } from "@/routes/Employee";
 import { ActionButton } from "./ActionButton";
 import { ActionsCell } from "./ActionsCell";
 import { EntityData, EntityField } from "@/interfaces/EntityInterface";
 import { useCrud } from "@/hooks/useCrud";
+import { EmployeeRenderKey } from "@/interfaces/EmployeeInterface";
+import { EntityCells } from "./EntityCells";
 
 export interface EmployeeData extends EntityData {
     id: string;
@@ -68,7 +69,7 @@ export const EmployeeRows = forwardRef(
                         key={data.cpf}
                         transparent={index % 2 !== 0}
                     >
-                        <EmplloyeeCells
+                        <EntityCells
                             employeefields={employeefields}
                             data={data}
                             onCellChange={handleCellChange}
@@ -114,7 +115,7 @@ export const EmployeeRows = forwardRef(
                         transparent={filteredData.length % 2 != 0}
                         p={rowPadding}
                     >
-                        <EmplloyeeCells
+                        <EntityCells
                             employeefields={employeefields}
                             data={addingData}
                             onCellChange={handleCellChange}

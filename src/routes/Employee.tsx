@@ -12,14 +12,6 @@ import { PrivateChildRouteInterface } from "./PrivateRoute";
 import Cookies from "js-cookie";
 import { EntityField } from "@/interfaces/EntityInterface";
 
-interface EmployeeRenderKeys {
-    name: string;
-    cpf: string;
-    phone: string;
-}
-
-export type EmployeeRenderKey = keyof EmployeeRenderKeys;
-
 export const emplloyeeFields: EntityField[] = [
     { field: "name", value: "Nome" },
     { field: "cpf", value: "Cpf" },

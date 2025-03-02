@@ -2,19 +2,19 @@ import { InputCell } from "@/fragments/table/InputCell";
 import { useEffect, useState } from "react";
 import { EntityData, EntityField } from "@/interfaces/EntityInterface";
 
-interface EmplloyeeCellsInterface {
+interface EntityCellsInterface {
     data: EntityData;
     employeefields: EntityField[];
     onCellChange: Function;
     isCreating?: boolean;
 }
 
-export function EmplloyeeCells({
+export function EntityCells({
     employeefields,
     data,
     onCellChange,
     isCreating,
-}: EmplloyeeCellsInterface) {
+}: EntityCellsInterface) {
     const [celslData, setCelslData] = useState(data);
 
     const handleChange = (field: string, value: string) => {
