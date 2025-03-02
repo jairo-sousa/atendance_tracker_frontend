@@ -1,5 +1,5 @@
-import { EntityBase } from "@/hooks/useCrud";
 import { AxiosResponse } from "axios";
+import { EntityBase } from "./EntityInterface";
 
 export interface ModelApiInterface {
     get(seession_token: string, route: string): Promise<AxiosResponse>;

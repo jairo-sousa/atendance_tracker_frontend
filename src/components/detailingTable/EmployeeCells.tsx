@@ -1,11 +1,10 @@
-import { EmplloyeeField } from "@/routes/Employee";
-import { EntityData } from "@/hooks/useCrud";
 import { InputCell } from "@/fragments/table/InputCell";
 import { useEffect, useState } from "react";
+import { EntityData, EntityField } from "@/interfaces/EntityInterface";
 
 interface EmplloyeeCellsInterface {
     data: EntityData;
-    employeefields: EmplloyeeField[];
+    employeefields: EntityField[];
     onCellChange: Function;
     isCreating?: boolean;
 }

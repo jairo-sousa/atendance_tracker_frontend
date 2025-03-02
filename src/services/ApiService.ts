@@ -12,7 +12,7 @@ import { ReportApiInterface } from "@/interfaces/ReportInterface";
 import { AdministratorApiInterface } from "@/interfaces/AdministratorInterface";
 import { ModelApiInterface } from "@/interfaces/ModelInterface";
 import { ModelApi } from "@/api/ModelApi";
-import { EntityBase } from "@/hooks/useCrud";
+import { EntityBase } from "@/interfaces/EntityInterface";
 
 const { showToast, dismissToast } = ToastService;
 

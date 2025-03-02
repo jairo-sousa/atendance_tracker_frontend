@@ -1,9 +1,9 @@
 import { PrimaryRow } from "@/fragments/table/PrimaryRow";
 import { QuaternaryHeaderCell } from "@/fragments/table/QuaternaryHeaderCell";
-import { EmplloyeeField } from "@/routes/Employee";
+import { EntityField } from "@/interfaces/EntityInterface";
 
 interface DetailingTableHeaderInterface {
-    fields: EmplloyeeField[];
+    fields: EntityField[];
 }
 
 export function DetailingTableHeader({

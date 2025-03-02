@@ -1,14 +1,6 @@
+import { EntityData } from "@/interfaces/EntityInterface";
 import { ApiService } from "@/services/ApiService";
 import { useEffect, useState } from "react";
-
-export interface EntityBase {
-    id: string;
-    [key: string]: any;
-}
-
-export interface EntityData extends EntityBase {
-    editing: boolean;
-}
 
 export interface UseCrudInterface<T extends EntityData> {
     session_token: string;

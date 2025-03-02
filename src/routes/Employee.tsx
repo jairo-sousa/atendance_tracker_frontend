@@ -10,11 +10,7 @@ import { BrandButton } from "@/fragments/form/BrandButton";
 import { PrivateChildRouteInterface } from "./PrivateRoute";
 
 import Cookies from "js-cookie";
-
-export interface EmplloyeeField {
-    field: string;
-    value: string;
-}
+import { EntityField } from "@/interfaces/EntityInterface";
 
 interface EmployeeRenderKeys {
     name: string;
@@ -24,7 +20,7 @@ interface EmployeeRenderKeys {
 
 export type EmployeeRenderKey = keyof EmployeeRenderKeys;
 
-export const emplloyeeFields: EmplloyeeField[] = [
+export const emplloyeeFields: EntityField[] = [
     { field: "name", value: "Nome" },
     { field: "cpf", value: "Cpf" },
     { field: "phone", value: "Telefone" },

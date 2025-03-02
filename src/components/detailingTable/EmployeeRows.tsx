@@ -1,14 +1,11 @@
 import { forwardRef, useImperativeHandle } from "react";
 import { PrimaryRow } from "@/fragments/table/PrimaryRow";
-import {
-    EmplloyeeField,
-    emplloyeeFields,
-    EmployeeRenderKey,
-} from "@/routes/Employee";
+import { emplloyeeFields, EmployeeRenderKey } from "@/routes/Employee";
 import { EmplloyeeCells } from "./EmployeeCells";
 import { ActionButton } from "./ActionButton";
-import { EntityData, useCrud } from "@/hooks/useCrud";
 import { ActionsCell } from "./ActionsCell";
+import { EntityData, EntityField } from "@/interfaces/EntityInterface";
+import { useCrud } from "@/hooks/useCrud";
 
 export interface EmployeeData extends EntityData {
     id: string;
@@ -19,7 +16,7 @@ export interface EmployeeData extends EntityData {
 }
 
 interface EmployeeRowsInterface {
-    employeefields: EmplloyeeField[];
+    employeefields: EntityField[];
     searchQuery?: string;
     session_token: string;
 }
