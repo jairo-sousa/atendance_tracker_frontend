@@ -8,6 +8,11 @@ interface EntityCellsInterface {
     onCellChange: Function;
     isCreating?: boolean;
 }
+export const getNestedValue = (obj: any, path: string): any => {
+    return path
+        .split(".")
+        .reduce((acc, key) => (acc ? acc[key] : undefined), obj);
+};
 
 export function EntityCells({
     entityfields,
@@ -16,12 +21,6 @@ export function EntityCells({
     isCreating,
 }: EntityCellsInterface) {
     const [celslData, setCelslData] = useState(data);
-
-    const getNestedValue = (obj: any, path: string): any => {
-        return path
-            .split(".")
-            .reduce((acc, key) => (acc ? acc[key] : undefined), obj);
-    };
 
     const handleChange = (field: string, value: string) => {
         setCelslData((prevData) => ({

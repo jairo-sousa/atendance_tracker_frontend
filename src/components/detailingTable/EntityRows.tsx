@@ -4,11 +4,12 @@ import { ActionButton } from "./ActionButton";
 import { ActionsCell } from "./ActionsCell";
 import { EntityField, EntityRenderKey } from "@/interfaces/EntityInterface";
 import { useCrud } from "@/hooks/useCrud";
-import { EntityCells } from "./EntityCells";
+import { EntityCells, getNestedValue } from "./EntityCells";
 
 interface EntityRowsInterface {
     entityfields: EntityField[];
     searchQuery?: string;
+    searchKey?: string;
     session_token: string;
     route: string;
 }
@@ -18,6 +19,7 @@ export const EntityRows = forwardRef(
         {
             entityfields,
             searchQuery,
+            searchKey,
             session_token,
             route,
         }: EntityRowsInterface,
@@ -40,11 +42,14 @@ export const EntityRows = forwardRef(
 
         if (!data) return null;
 
-        const filteredData = searchQuery
-            ? data.filter((data) =>
-                  data.name.toLowerCase().includes(searchQuery.toLowerCase())
-              )
-            : data;
+        const filteredData =
+            searchQuery && searchKey
+                ? data.filter((data) =>
+                      getNestedValue(data, searchKey)
+                          .toLowerCase()
+                          .includes(searchQuery.toLowerCase())
+                  )
+                : data;
 
         const {
             editButton,

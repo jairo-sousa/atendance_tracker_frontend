@@ -3,10 +3,11 @@ import { RouteHeader } from "@/fragments/layout/RouteHeader";
 import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
 import { EntityField } from "@/interfaces/EntityInterface";
-import { createRef } from "react";
+import { createRef, useState } from "react";
 import Cookies from "js-cookie";
 import { EntityRows } from "@/components/detailingTable/EntityRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
+import { SearchBar } from "@/components/detailingTable/SearchBar";
 
 export const workdayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
@@ -19,12 +20,17 @@ export const workdayFields: EntityField[] = [
 ];
 
 export function Workday() {
+    const [searchQuery, setSearchQuery] = useState("");
     const rowRef = createRef<{ handleAdd: () => void }>();
     const session_token = Cookies.get("sessionToken");
 
+    const handleSearchChange = (query: string) => setSearchQuery(query);
+
     return (
         <>
-            <RouteNavigation></RouteNavigation>
+            <RouteNavigation>
+                <SearchBar onchange={handleSearchChange} />
+            </RouteNavigation>
             <BaseSectionPanel>
                 <RouteHeader>
                     <PrimaryRouteTitle>Dias Úteis</PrimaryRouteTitle>
@@ -34,6 +40,8 @@ export function Workday() {
                 {session_token && (
                     <EntityRows
                         ref={rowRef}
+                        searchQuery={searchQuery}
+                        searchKey="employee.name"
                         entityfields={workdayFields}
                         session_token={session_token}
                         route="workday/2025-02-17"

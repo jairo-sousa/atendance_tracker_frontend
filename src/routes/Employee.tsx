@@ -48,6 +48,7 @@ export function Emplloyee({}: PrivateChildRouteInterface) {
                     <EntityRows
                         ref={rowRef}
                         searchQuery={searchQuery}
+                        searchKey="name"
                         entityfields={emplloyeeFields}
                         session_token={session_token}
                         route="employee"
