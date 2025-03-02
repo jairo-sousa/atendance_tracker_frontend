@@ -2,6 +2,15 @@ import { EntityData } from "@/interfaces/EntityInterface";
 import { ApiService } from "@/services/ApiService";
 import { useEffect, useState } from "react";
 
+export interface Action {
+    imagePath: string;
+    onClick: Function;
+}
+
+export interface Actions {
+    [key: string]: Action;
+}
+
 export interface UseCrudInterface<T extends EntityData> {
     session_token: string;
     route: string;
@@ -115,7 +124,7 @@ export function useCrud<T extends EntityData>({
         handleGet();
     }, []);
 
-    const actions = {
+    const actions: Actions = {
         editButton: { imagePath: "pen", onClick: handleEdit },
         deleteButton: { imagePath: "trash", onClick: handleDelete },
         cancelEditButton: { imagePath: "cross", onClick: handleCancelEdit },
