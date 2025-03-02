@@ -3,11 +3,13 @@ import { RouteHeader } from "@/fragments/layout/RouteHeader";
 import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
 import { EntityField } from "@/interfaces/EntityInterface";
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { EntityRows } from "@/components/detailingTable/EntityRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
+import { getDateNowParameters } from "@/modules/date/dateApi";
+import { DateParameters } from "@/interfaces/dateParameters.interface";
 
 export const workdayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
@@ -21,8 +23,21 @@ export const workdayFields: EntityField[] = [
 
 export function Workday() {
     const [searchQuery, setSearchQuery] = useState("");
+    const [dateToGet, setDateToGet] = useState("");
+
     const rowRef = createRef<{ handleAdd: () => void }>();
     const session_token = Cookies.get("sessionToken");
+
+    useEffect(() => {
+        const setInitalDate = async () => {
+            const { date } = await getDateNowParameters();
+
+            setDateToGet(date);
+        };
+        setInitalDate();
+    }, []);
+
+    const route = `workday/${dateToGet}`;
 
     const handleSearchChange = (query: string) => setSearchQuery(query);
 
@@ -37,14 +52,14 @@ export function Workday() {
                 </RouteHeader>
 
                 <DetailingTableHeader fields={workdayFields} />
-                {session_token && (
+                {session_token && dateToGet && (
                     <EntityRows
                         ref={rowRef}
                         searchQuery={searchQuery}
                         searchKey="employee.name"
                         entityfields={workdayFields}
                         session_token={session_token}
-                        route="workday/2025-02-17"
+                        route={route}
                     />
                 )}
             </BaseSectionPanel>
