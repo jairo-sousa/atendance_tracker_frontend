@@ -9,7 +9,6 @@ import { EntityRows } from "@/components/detailingTable/EntityRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { getDateNowParameters } from "@/modules/date/dateApi";
-import { DateParameters } from "@/interfaces/dateParameters.interface";
 
 export const workdayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
