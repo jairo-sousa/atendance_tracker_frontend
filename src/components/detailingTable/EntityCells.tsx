@@ -17,6 +17,12 @@ export function EntityCells({
 }: EntityCellsInterface) {
     const [celslData, setCelslData] = useState(data);
 
+    const getNestedValue = (obj: any, path: string): any => {
+        return path
+            .split(".")
+            .reduce((acc, key) => (acc ? acc[key] : undefined), obj);
+    };
+
     const handleChange = (field: string, value: string) => {
         setCelslData((prevData) => ({
             ...prevData,
@@ -48,7 +54,7 @@ export function EntityCells({
                     entityField={field}
                     onChange={handleChange}
                     enabled={celslData.editing}
-                    inputvalue={celslData[field.field] || ""}
+                    inputvalue={getNestedValue(celslData, field.field) || ""}
                     autofocus={celslData.editing && index === 0}
                 />
             ))}

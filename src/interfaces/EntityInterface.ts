@@ -1,6 +1,7 @@
 export interface EntityField {
     field: string;
     value: string;
+    type?: string;
 }
 
 export interface EntityBase {

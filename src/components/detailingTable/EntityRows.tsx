@@ -62,7 +62,7 @@ export const EntityRows = forwardRef(
                 {filteredData.map((data, index) => (
                     <PrimaryRow
                         p={rowPadding}
-                        key={data.cpf}
+                        key={data.id}
                         transparent={index % 2 !== 0}
                     >
                         <EntityCells
