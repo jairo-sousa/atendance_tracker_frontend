@@ -6,6 +6,7 @@ import { useState } from "react";
 import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { RouteHeader } from "@/fragments/layout/RouteHeader";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
+import { PrivateRoute } from "./PrivateRoute";
 
 export function Home() {
     const [refreshWorkdaySummary, setRefreshWorkdaySummary] = useState(0);
@@ -15,19 +16,23 @@ export function Home() {
     };
 
     return (
-        <>
-            <RouteNavigation />
-            <BaseSectionPanel>
-                <RouteHeader>
-                    <PrimaryRouteTitle>Início</PrimaryRouteTitle>
-                </RouteHeader>
+        <PrivateRoute>
+            <>
+                <RouteNavigation />
+                <BaseSectionPanel>
+                    <RouteHeader>
+                        <PrimaryRouteTitle>Início</PrimaryRouteTitle>
+                    </RouteHeader>
 
-                <HomeContainer justifyContent={"end"}>
-                    <WorkdaySummary renderKey={refreshWorkdaySummary} />
+                    <HomeContainer justifyContent={"end"}>
+                        <WorkdaySummary renderKey={refreshWorkdaySummary} />
 
-                    <CheckInDialog onRegister={handleRefreshWorkdaySummary} />
-                </HomeContainer>
-            </BaseSectionPanel>
-        </>
+                        <CheckInDialog
+                            onRegister={handleRefreshWorkdaySummary}
+                        />
+                    </HomeContainer>
+                </BaseSectionPanel>
+            </>
+        </PrivateRoute>
     );
 }

@@ -7,7 +7,7 @@ import { DetailingTableHeader } from "@/components/detailingTable/DetailingTable
 import { createRef, useState } from "react";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { BrandButton } from "@/fragments/form/BrandButton";
-import { PrivateChildRouteInterface } from "./PrivateRoute";
+import { PrivateChildRouteInterface, PrivateRoute } from "./PrivateRoute";
 
 import Cookies from "js-cookie";
 import { EntityField } from "@/interfaces/EntityInterface";
@@ -30,31 +30,33 @@ export function Emplloyee({}: PrivateChildRouteInterface) {
     };
 
     return (
-        <>
-            <RouteNavigation>
-                <SearchBar onchange={handleSearchChange} />
-            </RouteNavigation>
+        <PrivateRoute>
+            <>
+                <RouteNavigation>
+                    <SearchBar onchange={handleSearchChange} />
+                </RouteNavigation>
 
-            <BaseSectionPanel>
-                <RouteHeader>
-                    <PrimaryRouteTitle>Funcionários</PrimaryRouteTitle>
-                    <BrandButton disabled={false} onClick={handleAdd}>
-                        Adicionar Funcionário
-                    </BrandButton>
-                </RouteHeader>
+                <BaseSectionPanel>
+                    <RouteHeader>
+                        <PrimaryRouteTitle>Funcionários</PrimaryRouteTitle>
+                        <BrandButton disabled={false} onClick={handleAdd}>
+                            Adicionar Funcionário
+                        </BrandButton>
+                    </RouteHeader>
 
-                <DetailingTableHeader fields={emplloyeeFields} />
-                {session_token && (
-                    <EntityRows
-                        ref={rowRef}
-                        searchQuery={searchQuery}
-                        searchKey="name"
-                        entityfields={emplloyeeFields}
-                        session_token={session_token}
-                        route="employee"
-                    />
-                )}
-            </BaseSectionPanel>
-        </>
+                    <DetailingTableHeader fields={emplloyeeFields} />
+                    {session_token && (
+                        <EntityRows
+                            ref={rowRef}
+                            searchQuery={searchQuery}
+                            searchKey="name"
+                            entityfields={emplloyeeFields}
+                            session_token={session_token}
+                            route="employee"
+                        />
+                    )}
+                </BaseSectionPanel>
+            </>
+        </PrivateRoute>
     );
 }

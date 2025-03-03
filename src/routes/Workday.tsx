@@ -10,6 +10,7 @@ import { DetailingTableHeader } from "@/components/detailingTable/DetailingTable
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { getDateNowParameters } from "@/modules/date/dateApi";
 import { DatePicker } from "@/components/detailingTable/DatePicker";
+import { PrivateRoute } from "./PrivateRoute";
 
 export const workdayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
@@ -43,29 +44,34 @@ export function Workday() {
     const handleDateChange = (value: string) => setDateToGet(value);
 
     return (
-        <>
-            <RouteNavigation>
-                <SearchBar onchange={handleSearchChange} />
-            </RouteNavigation>
-            <BaseSectionPanel>
-                <RouteHeader>
-                    <PrimaryRouteTitle>Dias Úteis</PrimaryRouteTitle>
-                    <DatePicker onchange={handleDateChange} value={dateToGet} />
-                </RouteHeader>
+        <PrivateRoute>
+            <>
+                <RouteNavigation>
+                    <SearchBar onchange={handleSearchChange} />
+                </RouteNavigation>
+                <BaseSectionPanel>
+                    <RouteHeader>
+                        <PrimaryRouteTitle>Dias Úteis</PrimaryRouteTitle>
+                        <DatePicker
+                            onchange={handleDateChange}
+                            value={dateToGet}
+                        />
+                    </RouteHeader>
 
-                <DetailingTableHeader fields={workdayFields} />
-                {session_token && dateToGet && (
-                    <EntityRows
-                        ref={rowRef}
-                        searchQuery={searchQuery}
-                        searchKey="employee.name"
-                        entityfields={workdayFields}
-                        session_token={session_token}
-                        route={route}
-                        key={dateToGet}
-                    />
-                )}
-            </BaseSectionPanel>
-        </>
+                    <DetailingTableHeader fields={workdayFields} />
+                    {session_token && dateToGet && (
+                        <EntityRows
+                            ref={rowRef}
+                            searchQuery={searchQuery}
+                            searchKey="employee.name"
+                            entityfields={workdayFields}
+                            session_token={session_token}
+                            route={route}
+                            key={dateToGet}
+                        />
+                    )}
+                </BaseSectionPanel>
+            </>
+        </PrivateRoute>
     );
 }
