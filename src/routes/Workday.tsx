@@ -9,6 +9,7 @@ import { EntityRows } from "@/components/detailingTable/EntityRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { getDateNowParameters } from "@/modules/date/dateApi";
+import { DatePicker } from "@/components/detailingTable/DatePicker";
 
 export const workdayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
@@ -28,17 +29,18 @@ export function Workday() {
     const session_token = Cookies.get("sessionToken");
 
     useEffect(() => {
-        const setInitalDate = async () => {
+        const setInitialDate = async () => {
             const { date } = await getDateNowParameters();
 
             setDateToGet(date);
         };
-        setInitalDate();
+        setInitialDate();
     }, []);
 
     const route = `workday/${dateToGet}`;
 
     const handleSearchChange = (query: string) => setSearchQuery(query);
+    const handleDateChange = (value: string) => setDateToGet(value);
 
     return (
         <>
@@ -48,6 +50,7 @@ export function Workday() {
             <BaseSectionPanel>
                 <RouteHeader>
                     <PrimaryRouteTitle>Dias Úteis</PrimaryRouteTitle>
+                    <DatePicker onchange={handleDateChange} value={dateToGet} />
                 </RouteHeader>
 
                 <DetailingTableHeader fields={workdayFields} />
@@ -59,6 +62,7 @@ export function Workday() {
                         entityfields={workdayFields}
                         session_token={session_token}
                         route={route}
+                        key={dateToGet}
                     />
                 )}
             </BaseSectionPanel>
