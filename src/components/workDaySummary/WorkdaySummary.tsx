@@ -20,6 +20,9 @@ interface WorkdaySummaryInterface {
 export function WorkdaySummary({ renderKey }: WorkdaySummaryInterface) {
     const apiService = new ApiService();
     const [daySummaryData, setDaySummaryData] = useState<DaySummaryData[]>([]);
+    const [previousRenderKey, setPreviousRenderKey] = useState<number | null>(
+        null
+    );
 
     const getTodaySummary = useCallback(async () => {
         const daySummary: DaySummaryData[] = await apiService.getTodaySummary();
@@ -27,8 +30,11 @@ export function WorkdaySummary({ renderKey }: WorkdaySummaryInterface) {
     }, [apiService]);
 
     useEffect(() => {
-        getTodaySummary();
-    }, [renderKey, getTodaySummary]);
+        if (renderKey !== previousRenderKey) {
+            setPreviousRenderKey(renderKey);
+            getTodaySummary();
+        }
+    }, [renderKey, getTodaySummary, previousRenderKey]);
 
     const checkedOutEmployees = daySummaryData.some(
         (data) => data.nextRecord.split(" - ")[1] === "DIA ENCERRADO"
