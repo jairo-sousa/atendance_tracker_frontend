@@ -61,7 +61,7 @@ export function Login() {
                     Forneça os dados para efetuar login
                 </DialogSubtitle>
 
-                <FieldsetRoot>
+                <FieldsetRoot onEnter={handleLogin}>
                     <FieldsetContainer>
                         <LabeledField label="LOGIN">
                             <LoginInput
