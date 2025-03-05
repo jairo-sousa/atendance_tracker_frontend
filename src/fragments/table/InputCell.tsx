@@ -32,7 +32,10 @@ export function InputCell({
     let typeToUse = "text";
 
     if (type === "datetime") typeToUse = "time";
+    if (type === "date") typeToUse = "date";
 
+    const disabled = !enabled || field.includes(".");
+    const block = field.includes(".") && enabled;
     return (
         <Input
             ref={inputRef}
@@ -44,14 +47,14 @@ export function InputCell({
             fontWeight={500}
             style={customStyle}
             border={enabled ? "1px solid black" : "none"}
-            disabled={!enabled || false}
+            disabled={disabled}
             placeholder={enabled ? `Digite ${value}` : ""}
             value={inputvalue}
             type={typeToUse}
             autoFocus={autofocus}
             _disabled={{
                 opacity: 1,
-                cursor: "default",
+                cursor: block ? "disabled" : "default",
             }}
             onChange={(e) => {
                 onChange(field, e.target.value);

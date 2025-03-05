@@ -1,7 +1,7 @@
 import { InputCell } from "@/fragments/table/InputCell";
 import { useEffect, useState } from "react";
 import { EntityData, EntityField } from "@/interfaces/EntityInterface";
-import { extractTime, systemDateToUser } from "@/modules/date/dateOperations";
+import { extractTime } from "@/modules/date/dateOperations";
 
 interface EntityCellsInterface {
     data: EntityData;
@@ -17,7 +17,6 @@ export const getNestedValue = (obj: any, path: string): any => {
 };
 
 const formatCellValue = (value: string, type: string) => {
-    if (type === "date") return systemDateToUser(value);
     if (type === "datetime") return extractTime(value);
 
     return value;
