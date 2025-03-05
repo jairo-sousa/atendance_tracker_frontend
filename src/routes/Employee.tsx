@@ -28,6 +28,7 @@ export function Emplloyee({}: PrivateChildRouteInterface) {
     const handleAdd = () => {
         rowRef.current?.handleAdd();
     };
+    const rowPadding = "1.7rem 1.3rem 1.7rem 1.3rem";
 
     return (
         <PrivateRoute>
@@ -47,6 +48,7 @@ export function Emplloyee({}: PrivateChildRouteInterface) {
                     <DetailingTableHeader fields={emplloyeeFields} />
                     {session_token && (
                         <EntityRows
+                            rowPadding={rowPadding}
                             ref={rowRef}
                             searchQuery={searchQuery}
                             searchKey="name"

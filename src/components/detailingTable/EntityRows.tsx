@@ -12,6 +12,7 @@ interface EntityRowsInterface {
     searchKey?: string;
     session_token: string;
     route: string;
+    rowPadding: string;
 }
 
 export const EntityRows = forwardRef(
@@ -22,6 +23,7 @@ export const EntityRows = forwardRef(
             searchKey,
             session_token,
             route,
+            rowPadding,
         }: EntityRowsInterface,
         ref
     ) => {
@@ -60,13 +62,12 @@ export const EntityRows = forwardRef(
             cancelCreateButton,
         } = actions;
 
-        const rowPadding = "1.7rem 1.3rem 1.7rem 2.3rem";
-
         return (
             <>
                 {filteredData.map((data, index) => (
                     <PrimaryRow
                         p={rowPadding}
+                        gap={"1rem"}
                         key={data.id}
                         transparent={index % 2 !== 0}
                     >

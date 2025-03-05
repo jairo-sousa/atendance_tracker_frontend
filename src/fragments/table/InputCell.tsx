@@ -1,4 +1,4 @@
-import { EmplloyeeField } from "@/routes/Employee";
+import { EntityField } from "@/interfaces/EntityInterface";
 import { Input } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 
@@ -7,7 +7,7 @@ interface InputCellInterface {
     customStyle?: React.CSSProperties;
     enabled?: boolean;
     onChange: Function;
-    entityField: EmplloyeeField;
+    entityField: EntityField;
     autofocus?: boolean;
 }
 
@@ -19,7 +19,7 @@ export function InputCell({
     onChange,
     autofocus,
 }: InputCellInterface) {
-    const { field, value } = entityField;
+    const { field, value, type } = entityField;
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,20 +29,25 @@ export function InputCell({
         }
     }, [autofocus, enabled]);
 
+    let typeToUse = "text";
+
+    if (type === "datetime") typeToUse = "time";
+
     return (
         <Input
             ref={inputRef}
             flex={1}
-            p={0}
+            p={"0 0 0 1rem"}
             w={"100%"}
             fontSize={"1.4rem"}
             textAlign={"start"}
             fontWeight={500}
             style={customStyle}
-            border={"none"}
+            border={enabled ? "1px solid black" : "none"}
             disabled={!enabled || false}
             placeholder={enabled ? `Digite ${value}` : ""}
             value={inputvalue}
+            type={typeToUse}
             autoFocus={autofocus}
             _disabled={{
                 opacity: 1,

@@ -5,9 +5,15 @@ interface PrimaryRowInterface {
     children?: ReactNode;
     transparent?: boolean;
     p?: string;
+    gap?: string;
 }
 
-export function PrimaryRow({ children, transparent, p }: PrimaryRowInterface) {
+export function PrimaryRow({
+    children,
+    transparent,
+    p,
+    gap,
+}: PrimaryRowInterface) {
     const backgroundColor = !transparent
         ? "var(--background-primary)"
         : "transparent";
@@ -17,7 +23,7 @@ export function PrimaryRow({ children, transparent, p }: PrimaryRowInterface) {
             minH={"5.1rem"}
             p={p || "1.7rem 1.3rem"}
             backgroundColor={backgroundColor}
-            gap={"2rem"}
+            gap={gap || "2rem"}
         >
             {children}
         </Flex>

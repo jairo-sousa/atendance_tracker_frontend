@@ -43,6 +43,7 @@ export function Workday() {
     const handleSearchChange = (query: string) => setSearchQuery(query);
     const handleDateChange = (value: string) => setDateToGet(value);
 
+    const rowPadding = "1.7rem 1.3rem 1.7rem 1.3rem";
     return (
         <PrivateRoute>
             <>
@@ -58,10 +59,14 @@ export function Workday() {
                         />
                     </RouteHeader>
 
-                    <DetailingTableHeader fields={workdayFields} />
+                    <DetailingTableHeader
+                        fields={workdayFields}
+                        p={rowPadding}
+                    />
                     {session_token && dateToGet && (
                         <EntityRows
                             ref={rowRef}
+                            rowPadding={rowPadding}
                             searchQuery={searchQuery}
                             searchKey="employee.name"
                             entityfields={workdayFields}

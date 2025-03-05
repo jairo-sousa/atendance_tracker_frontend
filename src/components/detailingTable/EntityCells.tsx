@@ -9,6 +9,7 @@ interface EntityCellsInterface {
     onCellChange: Function;
     isCreating?: boolean;
 }
+
 export const getNestedValue = (obj: any, path: string): any => {
     return path
         .split(".")
@@ -22,6 +23,13 @@ const formatCellValue = (value: string, type: string) => {
     return value;
 };
 
+const isDateTime = (value: any) => {
+    return (
+        typeof value === "string" &&
+        value.match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/)
+    );
+};
+
 export function EntityCells({
     entityfields,
     data,
@@ -31,18 +39,28 @@ export function EntityCells({
     const [celslData, setCelslData] = useState(data);
 
     const handleChange = (field: string, value: string) => {
+        const currentValue = celslData[field];
+        let newValue = value;
+
+        if (isDateTime(currentValue)) {
+            const [date, time] = currentValue.split("T");
+            const [hour, minutes, seconds] = time.split(":");
+
+            newValue = `${date}T${value}:${seconds}`;
+        }
+
         setCelslData((prevData) => ({
             ...prevData,
-            [field]: value,
+            [field]: newValue,
         }));
         if (isCreating) {
             onCellChange({
-                [field]: value,
+                [field]: newValue,
             });
         } else {
             onCellChange({
                 ...data,
-                [field]: value,
+                [field]: newValue,
             });
         }
     };
