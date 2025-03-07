@@ -54,7 +54,8 @@ export function InputCell({
             w={"100%"}
             fontSize={"1.4rem"}
             textAlign={"start"}
-            fontWeight={500}
+            fontWeight={400}
+            fontFamily={"Montserrat"}
             style={customStyle}
             border={borderStyle}
             disabled={isDisabled}
