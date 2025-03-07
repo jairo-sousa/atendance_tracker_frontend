@@ -29,13 +29,23 @@ export function InputCell({
         }
     }, [autofocus, enabled]);
 
+    // TYPE
     let typeToUse = "text";
-
     if (type === "datetime") typeToUse = "time";
     if (type === "date") typeToUse = "date";
 
-    const disabled = !enabled || field.includes(".");
-    const block = field.includes(".") && enabled;
+    // BLOCK + CURSOR
+    const isNestedField = field.includes(".");
+    const isNullDatetime = type === "datetime" && !inputvalue;
+
+    const isBlock = (isNestedField || isNullDatetime) && enabled;
+    const isDisabled = !enabled || isNestedField || isNullDatetime;
+
+    // COMPUTED STYLES
+    const borderStyle = enabled ? "1px solid black" : "none";
+    const placeholderText = enabled ? `Digite ${value}` : "";
+    const disabledCursor = isBlock ? "disabled" : "default";
+
     return (
         <Input
             ref={inputRef}
@@ -46,15 +56,15 @@ export function InputCell({
             textAlign={"start"}
             fontWeight={500}
             style={customStyle}
-            border={enabled ? "1px solid black" : "none"}
-            disabled={disabled}
-            placeholder={enabled ? `Digite ${value}` : ""}
+            border={borderStyle}
+            disabled={isDisabled}
+            placeholder={placeholderText}
             value={inputvalue}
             type={typeToUse}
             autoFocus={autofocus}
             _disabled={{
                 opacity: 1,
-                cursor: block ? "disabled" : "default",
+                cursor: disabledCursor,
             }}
             onChange={(e) => {
                 onChange(field, e.target.value);
