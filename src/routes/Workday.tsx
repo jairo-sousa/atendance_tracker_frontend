@@ -38,7 +38,8 @@ export function Workday() {
         setInitialDate();
     }, []);
 
-    const route = `workday/${dateToGet}`;
+    const route = "workday";
+    const param = `/${dateToGet}`;
 
     const handleSearchChange = (query: string) => setSearchQuery(query);
     const handleDateChange = (value: string) => setDateToGet(value);
@@ -72,6 +73,7 @@ export function Workday() {
                             entityfields={workdayFields}
                             session_token={session_token}
                             route={route}
+                            param={param}
                             key={dateToGet}
                         />
                     )}

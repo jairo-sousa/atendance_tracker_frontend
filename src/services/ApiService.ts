@@ -192,12 +192,13 @@ export class ApiService {
     async get(
         sessionToken: string,
         route: string,
+        param?: string,
         callBack?: Function
     ): Promise<AxiosResponse | null> {
         try {
             if (!sessionToken || !route) throw new Error("Erro inesperado!");
 
-            const result = await this.modelApi.get(sessionToken, route);
+            const result = await this.modelApi.get(sessionToken, route, param);
 
             if (!result) {
                 showToast("Falha durante busca", "Erro no servidor", "error");

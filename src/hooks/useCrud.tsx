@@ -14,13 +14,15 @@ export interface Actions {
 export interface UseCrudInterface<T extends EntityData> {
     session_token: string;
     route: string;
+    getParam?: string;
     fields: (keyof EntityBase)[];
 }
 
 export function useCrud<T extends EntityData>({
-    fields,
     session_token,
     route,
+    getParam,
+    fields,
 }: UseCrudInterface<T>) {
     const apiService = new ApiService();
 
@@ -97,14 +99,16 @@ export function useCrud<T extends EntityData>({
         if (!editingData) return;
 
         const { editing, ...dataToSend } = editingData;
-        await apiService.create(session_token, route, dataToSend, handleGet);
+        await apiService.create(session_token, route, dataToSend, () => {
+            handleGet(getParam);
+        });
 
         setAddingData(null);
         setEditingData(voidEntity as EntityData);
     };
 
-    const handleGet = async () => {
-        const result = await apiService.get(session_token, route);
+    const handleGet = async (param?: string) => {
+        const result = await apiService.get(session_token, route, param);
         setData(result?.data);
     };
 
@@ -113,15 +117,19 @@ export function useCrud<T extends EntityData>({
 
         const { editing, ...dataToSend } = editingData;
 
-        await apiService.update(session_token, route, dataToSend, handleGet);
+        await apiService.update(session_token, route, dataToSend, () => {
+            handleGet(getParam);
+        });
     };
 
     const handleDelete = async (id: string) => {
-        await apiService.delete(session_token, route, id, handleGet);
+        await apiService.delete(session_token, route, id, () => {
+            handleGet(getParam);
+        });
     };
 
     useEffect(() => {
-        handleGet();
+        handleGet(getParam);
     }, []);
 
     const actions: Actions = {

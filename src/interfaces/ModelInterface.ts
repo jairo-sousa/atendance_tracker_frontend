@@ -2,7 +2,11 @@ import { AxiosResponse } from "axios";
 import { EntityBase } from "./EntityInterface";
 
 export interface ModelApiInterface {
-    get(seession_token: string, route: string): Promise<AxiosResponse>;
+    get(
+        seession_token: string,
+        route: string,
+        param?: string
+    ): Promise<AxiosResponse>;
     create(
         seession_token: string,
         route: string,

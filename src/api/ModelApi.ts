@@ -20,8 +20,12 @@ export class ModelApi implements ModelApiInterface {
         return response;
     }
 
-    async get(session_token: string, route: string): Promise<AxiosResponse> {
-        const response = await axios.get(`${API_URL}/${route}`, {
+    async get(
+        session_token: string,
+        route: string,
+        param?: string
+    ): Promise<AxiosResponse> {
+        const response = await axios.get(`${API_URL}/${route}${param || ""}`, {
             headers: {
                 Authorization: session_token,
             },
@@ -34,6 +38,7 @@ export class ModelApi implements ModelApiInterface {
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse> {
+        console.log(data);
         const response = await axios.put(
             `${API_URL}/${route}/${data.id}`,
             data,

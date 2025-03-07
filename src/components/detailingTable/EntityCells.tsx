@@ -74,7 +74,7 @@ export function EntityCells({
         <>
             {entityfields.map((field, index) => {
                 const dataValue = getNestedValue(celslData, field.field) || "";
-                let value;
+                let value = "";
                 if (dataValue) {
                     value = field.type
                         ? formatCellValue(dataValue, field.type)

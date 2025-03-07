@@ -12,6 +12,7 @@ interface EntityRowsInterface {
     searchKey?: string;
     session_token: string;
     route: string;
+    param?: string;
     rowPadding: string;
 }
 
@@ -23,6 +24,7 @@ export const EntityRows = forwardRef(
             searchKey,
             session_token,
             route,
+            param,
             rowPadding,
         }: EntityRowsInterface,
         ref
@@ -36,6 +38,7 @@ export const EntityRows = forwardRef(
                 session_token: session_token,
                 fields: fieldValues,
                 route: route,
+                getParam: param,
             });
 
         useImperativeHandle(ref, () => ({
