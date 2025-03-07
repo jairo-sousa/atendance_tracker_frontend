@@ -2,6 +2,10 @@ import { PrimaryRow } from "@/fragments/table/PrimaryRow";
 import { QuaternaryHeaderCell } from "@/fragments/table/QuaternaryHeaderCell";
 
 export function SummmaryTableHeader() {
+    const customStyleName = {
+        minWidth: "10.5rem",
+    };
+
     const customStyleLastRecord = {
         minWidth: "21rem",
     };
@@ -13,7 +17,9 @@ export function SummmaryTableHeader() {
     return (
         <>
             <PrimaryRow transparent>
-                <QuaternaryHeaderCell>Nome</QuaternaryHeaderCell>
+                <QuaternaryHeaderCell customStyle={customStyleName}>
+                    Nome
+                </QuaternaryHeaderCell>
 
                 <QuaternaryHeaderCell customStyle={customStyleLastRecord}>
                     Último registro

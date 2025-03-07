@@ -32,6 +32,7 @@ interface SummaryTableBodyinterface {
 export function SummaryTableBody({
     daySummaryData,
 }: SummaryTableBodyinterface) {
+    const customStyleName = { minWidth: "10.5rem" };
     const customStyleLastRecord = { minWidth: "21rem" };
     const customStyleNextRecord = { minWidth: "18rem" };
 
@@ -46,7 +47,7 @@ export function SummaryTableBody({
                     key={`${data.name ? data.name : data.cpf} - ${index}`}
                     transparent={index % 2 != 0}
                 >
-                    <BaseCell>
+                    <BaseCell customStyle={customStyleName}>
                         {data.name ? data.name.split(" ")[0] : data.cpf}
                     </BaseCell>
 
