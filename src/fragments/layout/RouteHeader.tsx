@@ -10,7 +10,7 @@ interface RouteHeaderInterface {
 export function RouteHeader({ children, gap }: RouteHeaderInterface) {
     return (
         <>
-            <Flex w={"100%"} p={"2rem 0"} gap={"2rem"}>
+            <Flex w={"100%"} p={"2rem 0"} gap={gap || "1rem"} align={"center"}>
                 {children}
             </Flex>
             <SecondaryDivisor />
