@@ -38,7 +38,6 @@ export class ModelApi implements ModelApiInterface {
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse> {
-        console.log(data);
         const response = await axios.put(
             `${API_URL}/${route}/${data.id}`,
             data,

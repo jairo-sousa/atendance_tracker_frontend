@@ -60,10 +60,7 @@ export function Workday() {
                         />
                     </RouteHeader>
 
-                    <DetailingTableHeader
-                        fields={workdayFields}
-                        p={rowPadding}
-                    />
+                    <DetailingTableHeader fields={workdayFields} />
                     {session_token && dateToGet && (
                         <EntityRows
                             ref={rowRef}
