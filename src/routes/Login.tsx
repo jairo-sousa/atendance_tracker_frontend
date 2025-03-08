@@ -49,7 +49,7 @@ export function Login() {
         );
     }, [blockLogin]);
 
-    if (hasSessionToken == true) return <Navigate to="/" />;
+    if (hasSessionToken == true) return <Navigate to="/home" />;
 
     return (
         <BrandGratientPanel>

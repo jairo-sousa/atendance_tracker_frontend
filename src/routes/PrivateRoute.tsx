@@ -14,25 +14,31 @@ interface PrivateRouteInterface {
 
 export function PrivateRoute({ children }: PrivateRouteInterface) {
     const [hasSessionToken, setHasSessionToken] = useState<boolean>();
+    const [sessionToken, setSessionToken] = useState<string | undefined>(
+        undefined
+    );
 
     useEffect(() => {
-        const sessionToken = Cookies.get("sessionToken");
+        const token = Cookies.get("sessionToken");
 
-        if (sessionToken && sessionToken.startsWith("Bearer ")) {
+        if (token && token.startsWith("Bearer ")) {
+            setSessionToken(token);
             setHasSessionToken(true);
         } else {
             setHasSessionToken(false);
         }
     }, []);
 
-    if (hasSessionToken == false) return <Navigate to="/check-in" />;
-    if (!React.isValidElement(children)) {
-        return <div>Invalid children</div>;
-    }
+    if (hasSessionToken == null) return;
+    if (hasSessionToken == false) return <Navigate to="/" />;
+
+    if (!React.isValidElement(children)) return <div>Invalid children</div>;
 
     return (
         <PrivateRoutePainel>
-            {React.cloneElement(children as React.ReactElement)}
+            {React.cloneElement(children as React.ReactElement, {
+                session_token: sessionToken,
+            })}
         </PrivateRoutePainel>
     );
 }

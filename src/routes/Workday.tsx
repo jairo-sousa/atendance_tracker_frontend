@@ -4,13 +4,12 @@ import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
 import { EntityField } from "@/interfaces/EntityInterface";
 import { createRef, useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { EntityRows } from "@/components/detailingTable/EntityRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { getDateNowParameters } from "@/modules/date/dateApi";
 import { DatePicker } from "@/components/detailingTable/DatePicker";
-import { PrivateRoute } from "./PrivateRoute";
+import { useOutletContext } from "react-router";
 
 export const workdayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
@@ -23,11 +22,11 @@ export const workdayFields: EntityField[] = [
 ];
 
 export function Workday() {
+    const { session_token } = useOutletContext<{ session_token?: string }>();
     const [searchQuery, setSearchQuery] = useState("");
     const [dateToGet, setDateToGet] = useState("");
 
     const rowRef = createRef<{ handleAdd: () => void }>();
-    const session_token = Cookies.get("sessionToken");
 
     useEffect(() => {
         const setInitialDate = async () => {
@@ -46,36 +45,31 @@ export function Workday() {
 
     const rowPadding = "1.7rem 1.3rem 1.7rem 1.3rem";
     return (
-        <PrivateRoute>
-            <>
-                <RouteNavigation>
-                    <SearchBar onchange={handleSearchChange} />
-                </RouteNavigation>
-                <BaseSectionPanel>
-                    <RouteHeader>
-                        <PrimaryRouteTitle>Dias Úteis</PrimaryRouteTitle>
-                        <DatePicker
-                            onchange={handleDateChange}
-                            value={dateToGet}
-                        />
-                    </RouteHeader>
+        <>
+            <RouteNavigation>
+                <SearchBar onchange={handleSearchChange} />
+            </RouteNavigation>
+            <BaseSectionPanel>
+                <RouteHeader>
+                    <PrimaryRouteTitle>Dias Úteis</PrimaryRouteTitle>
+                    <DatePicker onchange={handleDateChange} value={dateToGet} />
+                </RouteHeader>
 
-                    <DetailingTableHeader fields={workdayFields} />
-                    {session_token && dateToGet && (
-                        <EntityRows
-                            ref={rowRef}
-                            rowPadding={rowPadding}
-                            searchQuery={searchQuery}
-                            searchKey="employee.name"
-                            entityfields={workdayFields}
-                            session_token={session_token}
-                            route={route}
-                            param={param}
-                            key={dateToGet}
-                        />
-                    )}
-                </BaseSectionPanel>
-            </>
-        </PrivateRoute>
+                <DetailingTableHeader fields={workdayFields} />
+                {session_token && dateToGet && (
+                    <EntityRows
+                        ref={rowRef}
+                        rowPadding={rowPadding}
+                        searchQuery={searchQuery}
+                        searchKey="employee.name"
+                        entityfields={workdayFields}
+                        session_token={session_token}
+                        route={route}
+                        param={param}
+                        key={dateToGet}
+                    />
+                )}
+            </BaseSectionPanel>
+        </>
     );
 }

@@ -7,10 +7,10 @@ import { DetailingTableHeader } from "@/components/detailingTable/DetailingTable
 import { createRef, useState } from "react";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { BrandButton } from "@/fragments/form/BrandButton";
-import { PrivateChildRouteInterface, PrivateRoute } from "./PrivateRoute";
+import { PrivateChildRouteInterface } from "./PrivateRoute";
 
-import Cookies from "js-cookie";
 import { EntityField } from "@/interfaces/EntityInterface";
+import { useOutletContext } from "react-router";
 
 export const emplloyeeFields: EntityField[] = [
     { field: "name", value: "Nome" },
@@ -19,9 +19,9 @@ export const emplloyeeFields: EntityField[] = [
 ];
 
 export function Emplloyee({}: PrivateChildRouteInterface) {
+    const { session_token } = useOutletContext<{ session_token?: string }>();
     const [searchQuery, setSearchQuery] = useState("");
     const rowRef = createRef<{ handleAdd: () => void }>();
-    const session_token = Cookies.get("sessionToken");
 
     const handleSearchChange = (query: string) => setSearchQuery(query);
 
@@ -31,34 +31,32 @@ export function Emplloyee({}: PrivateChildRouteInterface) {
     const rowPadding = "1.7rem 1.3rem 1.7rem 1.3rem";
 
     return (
-        <PrivateRoute>
-            <>
-                <RouteNavigation>
-                    <SearchBar onchange={handleSearchChange} />
-                </RouteNavigation>
+        <>
+            <RouteNavigation>
+                <SearchBar onchange={handleSearchChange} />
+            </RouteNavigation>
 
-                <BaseSectionPanel>
-                    <RouteHeader>
-                        <PrimaryRouteTitle>Funcionários</PrimaryRouteTitle>
-                        <BrandButton disabled={false} onClick={handleAdd}>
-                            Adicionar Funcionário
-                        </BrandButton>
-                    </RouteHeader>
+            <BaseSectionPanel>
+                <RouteHeader>
+                    <PrimaryRouteTitle>Funcionários</PrimaryRouteTitle>
+                    <BrandButton disabled={false} onClick={handleAdd}>
+                        Adicionar Funcionário
+                    </BrandButton>
+                </RouteHeader>
 
-                    <DetailingTableHeader fields={emplloyeeFields} />
-                    {session_token && (
-                        <EntityRows
-                            rowPadding={rowPadding}
-                            ref={rowRef}
-                            searchQuery={searchQuery}
-                            searchKey="name"
-                            entityfields={emplloyeeFields}
-                            session_token={session_token}
-                            route="employee"
-                        />
-                    )}
-                </BaseSectionPanel>
-            </>
-        </PrivateRoute>
+                <DetailingTableHeader fields={emplloyeeFields} />
+                {session_token && (
+                    <EntityRows
+                        rowPadding={rowPadding}
+                        ref={rowRef}
+                        searchQuery={searchQuery}
+                        searchKey="name"
+                        entityfields={emplloyeeFields}
+                        session_token={session_token}
+                        route="employee"
+                    />
+                )}
+            </BaseSectionPanel>
+        </>
     );
 }

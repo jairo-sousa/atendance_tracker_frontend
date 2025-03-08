@@ -7,6 +7,7 @@ import { Backup } from "./routes/Backup";
 import { Payroll } from "./routes/Payroll";
 import { Workday } from "./routes/Workday";
 import Layout from "./routes/Layout";
+import PrivateRouteLayout from "./routes/PrivateRouteLayout";
 
 export const router = createBrowserRouter([
     {
@@ -14,12 +15,22 @@ export const router = createBrowserRouter([
         element: <Layout />,
         children: [
             {
-                path: "/",
-                element: <Home />,
-            },
-            {
                 path: "/login",
                 element: <Login />,
+            },
+            {
+                path: "/",
+                element: <PunchInKioske />,
+            },
+        ],
+    },
+    {
+        path: "/",
+        element: <PrivateRouteLayout />,
+        children: [
+            {
+                path: "/home",
+                element: <Home />,
             },
             {
                 path: "/backup",
@@ -37,10 +48,6 @@ export const router = createBrowserRouter([
                 path: "/workday",
                 element: <Workday />,
             },
-            {
-                path: "/check-in",
-                element: <PunchInKioske />,
-            },
         ],
     },
 ]);
@@ -48,7 +55,7 @@ export const router = createBrowserRouter([
 export const links = [
     {
         name: "Início",
-        path: "/",
+        path: "/home",
     },
     {
         name: "Login",
