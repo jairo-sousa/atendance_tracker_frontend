@@ -37,4 +37,30 @@ export class ReportApi implements ReportApiInterface {
             throw new Error(`${error}`);
         }
     }
+
+    async getPeriodReport(
+        employee_id: string,
+        periodValue: string,
+        startDate: string,
+        endDate: string,
+        session_token: string
+    ): Promise<AxiosResponse> {
+        try {
+            const ROUTE = "report/period-report";
+            const QUERYSTRING = `periodValue=${periodValue}&startDate=${startDate}&endDate=${endDate}`;
+
+            const result = await axios.get(
+                `${API_URL}/${ROUTE}/${employee_id}?${QUERYSTRING}`,
+                {
+                    headers: {
+                        Authorization: session_token,
+                    },
+                }
+            );
+
+            return result;
+        } catch (error) {
+            throw new Error(`${error}`);
+        }
+    }
 }

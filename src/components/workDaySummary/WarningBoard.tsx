@@ -1,8 +1,8 @@
 import { Span } from "@chakra-ui/react";
 import { PrimaryRow } from "../../fragments/table/PrimaryRow";
-import { DaySummaryData } from "@/components/workDaySummary/SummaryTableBody";
 import { SecondaryText } from "../../fragments/text/SecondaryText";
 import { globalColors } from "@/theme/theme";
+import { DaySummaryData } from "@/interfaces/ReportInterface";
 
 interface WarningBoardInterface {
     daySummaryData: DaySummaryData[];

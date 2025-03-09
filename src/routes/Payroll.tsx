@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { DatePicker } from "@/components/detailingTable/DatePicker";
 import { getDateNowParameters } from "@/modules/date/dateApi";
 import { useOutletContext } from "react-router";
+import { ApiService } from "@/services/ApiService";
 
 export function Payroll() {
     const { session_token } = useOutletContext<{ session_token?: string }>();
@@ -14,6 +15,8 @@ export function Payroll() {
 
     const handleStartDateChange = (value: string) => setStartDate(value);
     const handleEndDateChange = (value: string) => setEndDate(value);
+
+    const apiService = new ApiService();
 
     useEffect(() => {
         const setInitialPeriod = async () => {
@@ -27,9 +30,26 @@ export function Payroll() {
             setEndDate(date);
             setStartDate(startDate);
         };
+
         setInitialPeriod();
-        console.log(session_token);
     }, []);
+
+    useEffect(() => {
+        const getPayroll = async () => {
+            if (session_token) {
+                const result = await apiService.getPeriodReport(
+                    "2a95d053-50e3-4838-ba68-1e3953aa5e18",
+                    "200",
+                    startDate,
+                    endDate,
+                    session_token
+                );
+                console.log(result);
+            }
+        };
+
+        getPayroll();
+    }, [endDate, startDate]);
 
     return (
         <>

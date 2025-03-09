@@ -6,12 +6,10 @@ import { WarningBoard } from "./WarningBoard";
 import { useCallback, useEffect, useState } from "react";
 import { ApiService } from "@/services/ApiService";
 import { SummmaryTableHeader } from "@/components/workDaySummary/SummmaryTableHeader";
-import {
-    DaySummaryData,
-    SummaryTableBody,
-} from "@/components/workDaySummary/SummaryTableBody";
+import { SummaryTableBody } from "@/components/workDaySummary/SummaryTableBody";
 import { SummarySection } from "./SummarySection";
 import { DayReportSection } from "./DayReportSection";
+import { DaySummaryData } from "@/interfaces/ReportInterface";
 
 interface WorkdaySummaryInterface {
     renderKey: number;

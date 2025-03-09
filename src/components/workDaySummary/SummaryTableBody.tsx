@@ -2,28 +2,7 @@ import { Span } from "@chakra-ui/react";
 import { globalColors } from "@/theme/theme";
 import { PrimaryRow } from "@/fragments/table/PrimaryRow";
 import { BaseCell } from "@/fragments/table/BaseCell";
-
-export interface DaySummaryData {
-    name?: string;
-    cpf?: string;
-    lastRecord: string;
-    status: string;
-    nextRecord: string;
-    presence: boolean;
-    minutesLate: number;
-    absentByLate?: boolean;
-}
-export interface DayReportData {
-    name?: string;
-    cpf?: string;
-    date: string;
-    status: string;
-    lateMinutes: number;
-    overtimeMinutes: number;
-    timeWorked: string;
-    dayValue: string;
-    overtimePrice: number;
-}
+import { DaySummaryData } from "@/interfaces/ReportInterface";
 
 interface SummaryTableBodyinterface {
     daySummaryData: DaySummaryData[];

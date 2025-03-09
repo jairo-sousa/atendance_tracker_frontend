@@ -1,14 +1,15 @@
-import {
-    DayReportData,
-    DaySummaryData,
-} from "@/components/workDaySummary/SummaryTableBody";
 import { AxiosResponse } from "axios";
 import { ToastService } from "./ToastService";
 import { WorkdayApiInterface } from "@/interfaces/WorkdayInterface";
 import { WorkdayApi } from "@/api/WorkdayApi";
 import { ReportApi } from "@/api/ReportApi";
 import { AdministratorApi } from "@/api/AdministratorApi";
-import { ReportApiInterface } from "@/interfaces/ReportInterface";
+import {
+    DayReportData,
+    DaySummaryData,
+    PeriodReportData,
+    ReportApiInterface,
+} from "@/interfaces/ReportInterface";
 import { AdministratorApiInterface } from "@/interfaces/AdministratorInterface";
 import { ModelApiInterface } from "@/interfaces/ModelInterface";
 import { ModelApi } from "@/api/ModelApi";
@@ -145,6 +146,28 @@ export class ApiService {
     async getTodayReport(): Promise<DayReportData[]> {
         try {
             const result = await this.reportApi.getTodayReport();
+
+            return result.data;
+        } catch (err: any) {
+            throw new Error(err);
+        }
+    }
+
+    async getPeriodReport(
+        employee_id: string,
+        periodValue: string,
+        startDate: string,
+        endDate: string,
+        session_token: string
+    ): Promise<PeriodReportData> {
+        try {
+            const result = await this.reportApi.getPeriodReport(
+                employee_id,
+                periodValue,
+                startDate,
+                endDate,
+                session_token
+            );
 
             return result.data;
         } catch (err: any) {
