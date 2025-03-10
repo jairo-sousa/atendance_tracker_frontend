@@ -8,8 +8,8 @@ import { EntityRows } from "@/components/detailingTable/EntityRows";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
 import { SearchBar } from "@/components/detailingTable/SearchBar";
 import { getDateNowParameters } from "@/modules/date/dateApi";
-import { DatePicker } from "@/components/detailingTable/DatePicker";
 import { useOutletContext } from "react-router";
+import { InputPrimary } from "@/components/detailingTable/InputPrimary";
 
 export const workdayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
@@ -52,7 +52,11 @@ export function Workday() {
             <BaseSectionPanel>
                 <RouteHeader>
                     <PrimaryRouteTitle>Dias Úteis</PrimaryRouteTitle>
-                    <DatePicker onchange={handleDateChange} value={dateToGet} />
+                    <InputPrimary
+                        type="date"
+                        onchange={handleDateChange}
+                        value={dateToGet}
+                    />
                 </RouteHeader>
 
                 <DetailingTableHeader fields={workdayFields} />

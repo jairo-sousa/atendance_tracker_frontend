@@ -3,7 +3,7 @@ import { Input } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 
 interface InputCellInterface {
-    inputvalue: string;
+    inputvalue: string | number;
     customStyle?: React.CSSProperties;
     enabled?: boolean;
     onChange: Function;
@@ -33,6 +33,7 @@ export function InputCell({
     let typeToUse = "text";
     if (type === "datetime") typeToUse = "time";
     if (type === "date") typeToUse = "date";
+    if (type === "number") typeToUse = "number";
 
     // BLOCK + CURSOR
     const isNestedField = field.includes(".");
