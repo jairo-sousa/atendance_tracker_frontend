@@ -108,6 +108,11 @@ const newStyles = {
         textDecoration: "inherit",
     },
 
+    option: {
+        fontFamily: "Montserrat",
+        fontWeight: 400,
+    },
+
     "::placeholder": {
         color: contentTertiary,
         opacity: 1,

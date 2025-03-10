@@ -1,27 +1,39 @@
-import { Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { globalColors } from "@/theme/theme";
-import { ReactNode } from "react";
+import { ElementType, forwardRef, ReactNode } from "react";
 
 interface InputPrimaryPanelInterface {
+    children?: ReactNode;
     w?: string;
-    children: ReactNode;
+    as?: ElementType | undefined;
+    ref?: React.ForwardedRef<unknown>;
+    onChange?: Function;
 }
 
-export function InputPrimaryPanel({ w, children }: InputPrimaryPanelInterface) {
-    const { backgroundPrimary, borderSecondary } = globalColors;
+export const InputPrimaryPanel = forwardRef(
+    ({ w, children, as, onChange }: InputPrimaryPanelInterface, ref) => {
+        const { backgroundPrimary, borderSecondary } = globalColors;
 
-    return (
-        <Flex
-            p={"1.1rem 1.3rem"}
-            alignItems={"center"}
-            gap={"1rem"}
-            w={w || "25rem"}
-            border={`1px solid ${borderSecondary}`}
-            borderRadius={"0.8rem"}
-            backgroundColor={backgroundPrimary}
-            h={"3.7rem"}
-        >
-            {children}
-        </Flex>
-    );
-}
+        return (
+            <Box
+                as={as}
+                ref={ref}
+                display={"flex"}
+                p={"1.1rem 1.3rem"}
+                alignItems={"center"}
+                gap={"1rem"}
+                borderRadius={"0.8rem"}
+                h={"4.2rem"}
+                fontWeight={400}
+                fontFamily={"Montserrat"}
+                fontSize={"1.4rem"}
+                w={w || "25rem"}
+                border={`1px solid ${borderSecondary}`}
+                backgroundColor={backgroundPrimary}
+                onChange={() => onChange && onChange()}
+            >
+                {children}
+            </Box>
+        );
+    }
+);
