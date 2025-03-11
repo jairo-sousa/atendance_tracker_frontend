@@ -5,11 +5,13 @@ import { EntityField } from "@/interfaces/EntityInterface";
 interface DetailingTableHeaderInterface {
     fields: EntityField[];
     p?: string;
+    noAction?: boolean;
 }
 
 export function DetailingTableHeader({
     fields,
     p,
+    noAction,
 }: DetailingTableHeaderInterface) {
     return (
         <>
@@ -19,7 +21,7 @@ export function DetailingTableHeader({
                         {value}
                     </QuaternaryHeaderCell>
                 ))}
-                <QuaternaryHeaderCell> </QuaternaryHeaderCell>
+                {!noAction && <QuaternaryHeaderCell> </QuaternaryHeaderCell>}
             </PrimaryRow>
         </>
     );

@@ -13,7 +13,7 @@ interface EntityRowsInterface {
     session_token: string;
     route: string;
     param?: string;
-    rowPadding: string;
+    rowPadding?: string;
 }
 
 export const EntityRows = forwardRef(
@@ -27,7 +27,7 @@ export const EntityRows = forwardRef(
             param,
             rowPadding,
         }: EntityRowsInterface,
-        ref
+        ref?
     ) => {
         const fieldValues: EntityRenderKey[] = entityfields.map(
             (fieldObj) => fieldObj.field as EntityRenderKey

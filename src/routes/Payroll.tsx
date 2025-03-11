@@ -13,9 +13,22 @@ import {
     OptionInterface,
     SelectPrimary,
 } from "@/components/Select/SelectPrimary";
-import { EntityBase } from "@/interfaces/EntityInterface";
+import { EntityBase, EntityField } from "@/interfaces/EntityInterface";
 import { ToastService } from "@/services/ToastService";
 import { Toaster } from "@/components/ui/toaster";
+import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
+import { PayrollReportList } from "@/fragments/table/PayrollReportList";
+import { PeriodReportData } from "@/interfaces/ReportInterface";
+
+export const payrollFields: EntityField[] = [
+    { field: "date", value: "Data" },
+    { field: "timeWorked", value: "Horas trabalhadas" },
+    { field: "lateMinutes", value: "Atraso (minutos)" },
+    { field: "overtimeMinutes", value: "Hora extra (minutos)" },
+    { field: "overtimePrice", value: "Valor hora extra" },
+    { field: "status", value: "Status" },
+    { field: "dayValue", value: "Valor do dia" },
+];
 
 export function Payroll() {
     const { session_token } = useOutletContext<{ session_token?: string }>();
@@ -23,8 +36,9 @@ export function Payroll() {
     const [endDate, setEndDate] = useState("");
     const [periodValue, setPeriodValue] = useState(200);
     const [employeeId, setEmployeeId] = useState("");
-
     const [employeeList, setEmployeeList] = useState<OptionInterface[]>([]);
+
+    const [payroll, setPayroll] = useState<PeriodReportData>();
 
     const apiService = new ApiService();
     const { showToast } = ToastService;
@@ -67,7 +81,7 @@ export function Payroll() {
             endDate,
             session_token
         );
-        console.log(result);
+        setPayroll(result);
     };
 
     useEffect(() => {
@@ -142,6 +156,11 @@ export function Payroll() {
                         value={endDate}
                     />
                 </RouteHeader>
+
+                <DetailingTableHeader fields={payrollFields} noAction />
+                {session_token && (
+                    <PayrollReportList dayReports={payroll?.dayReports} />
+                )}
             </BaseSectionPanel>
         </>
     );

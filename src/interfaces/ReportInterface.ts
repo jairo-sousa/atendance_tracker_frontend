@@ -38,7 +38,7 @@ export interface PeriodReportData {
     daysWorkedValue: number | null;
     absenceFine: number | null;
     periodValueToPay: number | null;
-    dayReports: DayReportBase[];
+    dayReports: (DayReportBase | null)[];
 }
 
 export interface ReportApiInterface {

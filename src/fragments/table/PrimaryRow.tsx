@@ -20,10 +20,11 @@ export function PrimaryRow({
     return (
         <Flex
             w={"100%"}
-            minH={"5.1rem"}
+            minH={"fit-content"}
             p={p || "1.7rem 1.3rem"}
             backgroundColor={backgroundColor}
             gap={gap || "2rem"}
+            alignItems={"center"}
         >
             {children}
         </Flex>
