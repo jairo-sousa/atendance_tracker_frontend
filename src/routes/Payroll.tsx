@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { getDateNowParameters } from "@/modules/date/dateApi";
 import { useOutletContext } from "react-router";
 import { ApiService } from "@/services/ApiService";
-import { Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { InputPrimary } from "@/components/detailingTable/InputPrimary";
 import { BrandButton } from "@/fragments/form/BrandButton";
 import {
@@ -20,6 +20,9 @@ import { DetailingTableHeader } from "@/components/detailingTable/DetailingTable
 import { PayrollReportList } from "@/fragments/table/PayrollReportList";
 import { PeriodReportData } from "@/interfaces/ReportInterface";
 import { PayrollDetails } from "@/fragments/table/PayrollDetails";
+import { GeneratePDFButton } from "@/fragments/Payroll/GeneratePDFButton";
+import { globalColors } from "@/theme/theme";
+import { PayrollDetail } from "@/fragments/table/PayrollDetail";
 
 export const payrollFields: EntityField[] = [
     { field: "date", value: "Data" },
@@ -45,6 +48,7 @@ export function Payroll() {
     const { showToast } = ToastService;
 
     const employeeRef = useRef<HTMLSelectElement>();
+    const printRef = useRef(null);
 
     const handleStartDateChange = (value: string) => setStartDate(value);
     const handleEndDateChange = (value: string) => setEndDate(value);
@@ -111,6 +115,7 @@ export function Payroll() {
         getEmployeeList();
         setInitialPeriod();
     }, []);
+    const { backgroundSecondary } = globalColors;
 
     return (
         <>
@@ -120,6 +125,10 @@ export function Payroll() {
                 <RouteHeader>
                     <PrimaryRouteTitle>Pagamento</PrimaryRouteTitle>
 
+                    {payroll && printRef.current && (
+                        <GeneratePDFButton printHtml={printRef.current} />
+                    )}
+
                     <BrandButton
                         disabled={false}
                         onClick={handleGeneratePayroll}
@@ -127,46 +136,54 @@ export function Payroll() {
                         Gerar Pagamento
                     </BrandButton>
                 </RouteHeader>
-                <RouteHeader justify="flex-end" noDivisor={true}>
-                    <Text>Funcionário:</Text>
+                <Box
+                    ref={printRef}
+                    w={"100%"}
+                    h={"100%"}
+                    pb={"5rem"}
+                    bgColor={backgroundSecondary}
+                >
+                    <RouteHeader justify="flex-end" noDivisor={true}>
+                        <Text>Funcionário:</Text>
 
-                    <SelectPrimary
-                        ref={employeeRef}
-                        onChange={handleEmployeeIdChange}
-                        items={employeeList}
-                    />
-                    <Text>Valor:</Text>
-                    <InputPrimary
-                        w="20rem"
-                        value={periodValue}
-                        type="number"
-                        onchange={handlePeriodValueChange}
-                    />
-                    <Text>de:</Text>
-                    <InputPrimary
-                        w="20rem"
-                        type="date"
-                        onchange={handleStartDateChange}
-                        value={startDate}
-                    />
-                    <Text>até:</Text>
-                    <InputPrimary
-                        w="20rem"
-                        type="date"
-                        onchange={handleEndDateChange}
-                        value={endDate}
-                    />
-                </RouteHeader>
+                        <SelectPrimary
+                            ref={employeeRef}
+                            onChange={handleEmployeeIdChange}
+                            items={employeeList}
+                        />
+                        <Text>Valor:</Text>
+                        <InputPrimary
+                            w="20rem"
+                            value={periodValue}
+                            type="number"
+                            onchange={handlePeriodValueChange}
+                        />
+                        <Text>de:</Text>
+                        <InputPrimary
+                            w="20rem"
+                            type="date"
+                            onchange={handleStartDateChange}
+                            value={startDate}
+                        />
+                        <Text>até:</Text>
+                        <InputPrimary
+                            w="20rem"
+                            type="date"
+                            onchange={handleEndDateChange}
+                            value={endDate}
+                        />
+                    </RouteHeader>
 
-                {payroll && (
-                    <DetailingTableHeader fields={payrollFields} noAction />
-                )}
+                    {payroll && (
+                        <DetailingTableHeader fields={payrollFields} noAction />
+                    )}
 
-                {session_token && payroll && (
-                    <PayrollReportList dayReports={payroll.dayReports} />
-                )}
+                    {session_token && payroll && (
+                        <PayrollReportList dayReports={payroll.dayReports} />
+                    )}
 
-                {payroll && <PayrollDetails data={payroll} />}
+                    {payroll && <PayrollDetails data={payroll} />}
+                </Box>
             </BaseSectionPanel>
         </>
     );

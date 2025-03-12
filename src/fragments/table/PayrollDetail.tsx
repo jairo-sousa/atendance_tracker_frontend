@@ -20,7 +20,7 @@ export function PayrollDetail({
     };
 
     return (
-        <Flex width={"40rem"} justify={"space-between"}>
+        <Flex width={"40rem"} h={"4rem"} justify={"space-between"}>
             <Text fontSize={fontSize}>{label}</Text>
             <Text fontSize={fontSize}>{formatValue(value, type)}</Text>
         </Flex>

@@ -3,6 +3,7 @@ import { PrimaryRow } from "./PrimaryRow";
 import { PayrollCell } from "./PayrollCell";
 import { SecondaryDivisor } from "../layout/SecondaryDivisor";
 import { Box, Flex } from "@chakra-ui/react";
+import { globalColors } from "@/theme/theme";
 
 interface PayrollReportListInterface {
     dayReports: (DayReportBase | null)[] | undefined;

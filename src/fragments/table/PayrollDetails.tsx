@@ -1,6 +1,7 @@
 import { PeriodReportData } from "@/interfaces/ReportInterface";
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { PayrollDetail } from "./PayrollDetail";
+import { globalColors } from "@/theme/theme";
 
 interface PayrollDetailsInterface {
     data: PeriodReportData;
@@ -18,7 +19,13 @@ export function PayrollDetails({ data }: PayrollDetailsInterface) {
     } = data;
 
     return (
-        <Flex direction={"column"} w={"100%"} alignItems={"flex-end"}>
+        <Flex
+            direction={"column"}
+            w={"100%"}
+            alignItems={"flex-end"}
+            pt={"2rem"}
+            pl={"2rem"}
+        >
             <PayrollDetail
                 type="amount"
                 label="Dias Úteis"
