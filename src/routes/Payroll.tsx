@@ -19,6 +19,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { DetailingTableHeader } from "@/components/detailingTable/DetailingTableHeader";
 import { PayrollReportList } from "@/fragments/table/PayrollReportList";
 import { PeriodReportData } from "@/interfaces/ReportInterface";
+import { PayrollDetails } from "@/fragments/table/PayrollDetails";
 
 export const payrollFields: EntityField[] = [
     { field: "date", value: "Data" },
@@ -110,6 +111,7 @@ export function Payroll() {
         getEmployeeList();
         setInitialPeriod();
     }, []);
+
     return (
         <>
             <Toaster />
@@ -125,7 +127,6 @@ export function Payroll() {
                         Gerar Pagamento
                     </BrandButton>
                 </RouteHeader>
-
                 <RouteHeader justify="flex-end" noDivisor={true}>
                     <Text>Funcionário:</Text>
 
@@ -157,10 +158,15 @@ export function Payroll() {
                     />
                 </RouteHeader>
 
-                <DetailingTableHeader fields={payrollFields} noAction />
-                {session_token && (
-                    <PayrollReportList dayReports={payroll?.dayReports} />
+                {payroll && (
+                    <DetailingTableHeader fields={payrollFields} noAction />
                 )}
+
+                {session_token && payroll && (
+                    <PayrollReportList dayReports={payroll.dayReports} />
+                )}
+
+                {payroll && <PayrollDetails data={payroll} />}
             </BaseSectionPanel>
         </>
     );

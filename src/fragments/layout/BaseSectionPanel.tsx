@@ -13,7 +13,7 @@ export function BaseSectionPanel({ children }: BaseSectionPanelInterface) {
         <Flex
             direction={"column"}
             w={"100%"}
-            h={"100%"}
+            minH={"100%"}
             p={"0 3rem"}
             justifyContent={"start"}
             align={"start"}
