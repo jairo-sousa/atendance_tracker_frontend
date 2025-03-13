@@ -4,9 +4,10 @@ import { globalColors } from "@/theme/theme";
 
 interface BaseSectionPanelInterface {
     children?: ReactNode;
+    gap?: string;
 }
 
-export function BaseSectionPanel({ children }: BaseSectionPanelInterface) {
+export function BaseSectionPanel({ children, gap }: BaseSectionPanelInterface) {
     const { backgroundSecondary } = globalColors;
 
     return (
@@ -18,6 +19,7 @@ export function BaseSectionPanel({ children }: BaseSectionPanelInterface) {
             justifyContent={"start"}
             align={"start"}
             backgroundColor={backgroundSecondary}
+            gap={gap || ""}
         >
             {children}
         </Flex>

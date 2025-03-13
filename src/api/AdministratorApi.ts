@@ -35,4 +35,17 @@ export class AdministratorApi implements AdministratorApiInterface {
 
         return response || null;
     }
+
+    async backup(session_token: string): Promise<AxiosResponse<Blob> | null> {
+        const ROUTE = "administrator/backup";
+
+        const response = await axios.get<Blob>(`${API_URL}/${ROUTE}`, {
+            headers: {
+                authorization: session_token,
+            },
+            responseType: "blob",
+        });
+
+        return response || null;
+    }
 }

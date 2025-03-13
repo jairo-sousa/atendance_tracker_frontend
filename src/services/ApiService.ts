@@ -309,4 +309,33 @@ export class ApiService {
             callBack && callBack();
         }
     }
+
+    async backup(
+        sessionToken: string,
+        callBack?: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!sessionToken) throw new Error("Erro inesperado!");
+
+            showToast("Fazendo backup", "Por favor aguarde", "loading");
+            const result = await this.administratorApi.backup(sessionToken);
+
+            dismissToast();
+
+            if (result) {
+                showToast("Backup realizado!", "Tudo certo", "success");
+            } else {
+                showToast("Falha ao fazer backup", "Erro no servidor", "error");
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha ao fazer backup", `${err}`, "error");
+            return null;
+        } finally {
+            callBack && callBack();
+        }
+    }
 }
