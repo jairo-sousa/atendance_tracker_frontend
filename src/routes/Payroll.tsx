@@ -118,7 +118,18 @@ export function Payroll() {
     const { backgroundSecondary } = globalColors;
 
     return (
-        <>
+        <Box
+            css={{
+                "&::-webkit-scrollbar": {
+                    display: "none",
+                },
+                "&": {
+                    msOverflowStyle: "none",
+                },
+            }}
+            w={"100%"}
+            h={"100%"}
+        >
             <Toaster />
             <RouteNavigation></RouteNavigation>
             <BaseSectionPanel>
@@ -185,6 +196,6 @@ export function Payroll() {
                     {payroll && <PayrollDetails data={payroll} />}
                 </Box>
             </BaseSectionPanel>
-        </>
+        </Box>
     );
 }
