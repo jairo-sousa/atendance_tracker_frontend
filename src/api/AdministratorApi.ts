@@ -48,4 +48,22 @@ export class AdministratorApi implements AdministratorApiInterface {
 
         return response || null;
     }
+
+    async restore(
+        session_token: string,
+        file: File
+    ): Promise<AxiosResponse | null> {
+        const ROUTE = "administrator/restore";
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await axios.post(`${API_URL}/${ROUTE}`, formData, {
+            headers: {
+                authorization: session_token,
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        return response || null;
+    }
 }

@@ -338,4 +338,41 @@ export class ApiService {
             callBack && callBack();
         }
     }
+
+    async restore(
+        sessionToken: string,
+        file: File,
+        callBack?: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!sessionToken) throw new Error("Erro inesperado!");
+
+            showToast("Restaurando backup", "Por favor aguarde", "loading");
+            const result = await this.administratorApi.restore(
+                sessionToken,
+                file
+            );
+
+            dismissToast();
+
+            if (result) {
+                showToast("Backup Restaurado!", "Tudo certo", "success");
+            } else {
+                showToast(
+                    "Falha ao Restaurar backup",
+                    "Erro no servidor",
+                    "error"
+                );
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha ao Restaurar backup", `${err}`, "error");
+            return null;
+        } finally {
+            callBack && callBack();
+        }
+    }
 }
