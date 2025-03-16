@@ -78,7 +78,6 @@ export const EntityRows = forwardRef(
                             entityfields={entityfields}
                             data={data}
                             onCellChange={handleCellChange}
-                            isCreating={!!addingData}
                         />
 
                         <ActionsCell>
@@ -124,7 +123,6 @@ export const EntityRows = forwardRef(
                             entityfields={entityfields}
                             data={addingData}
                             onCellChange={handleCellChange}
-                            isCreating={!!addingData}
                         />
 
                         <ActionsCell>

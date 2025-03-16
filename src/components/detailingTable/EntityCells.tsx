@@ -7,7 +7,6 @@ interface EntityCellsInterface {
     data: EntityData;
     entityfields: EntityField[];
     onCellChange: Function;
-    isCreating?: boolean;
 }
 
 export const getNestedValue = (obj: any, path: string): any => {
@@ -33,7 +32,6 @@ export function EntityCells({
     entityfields,
     data,
     onCellChange,
-    isCreating,
 }: EntityCellsInterface) {
     const [celslData, setCelslData] = useState(data);
 
@@ -44,7 +42,6 @@ export function EntityCells({
         if (isDateTime(currentValue)) {
             const [date, time] = currentValue.split("T");
             const [hour, minutes, seconds] = time.split(":");
-
             newValue = `${date}T${value}:${seconds}`;
         }
 
@@ -52,16 +49,10 @@ export function EntityCells({
             ...prevData,
             [field]: newValue,
         }));
-        if (isCreating) {
-            onCellChange({
-                [field]: newValue,
-            });
-        } else {
-            onCellChange({
-                ...data,
-                [field]: newValue,
-            });
-        }
+
+        onCellChange({
+            [field]: newValue,
+        });
     };
 
     useEffect(() => {

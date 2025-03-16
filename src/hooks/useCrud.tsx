@@ -66,10 +66,10 @@ export function useCrud<T extends EntityData>({
         setAddingData(null);
     };
 
-    const handleCellChange = (editing: Partial<EntityData>) => {
+    const handleCellChange = (editing: EntityData) => {
         setEditingData((prevData) => {
             if (!prevData) {
-                return voidEntity as EntityData;
+                return editing;
             }
             return {
                 ...prevData,
@@ -116,10 +116,11 @@ export function useCrud<T extends EntityData>({
         if (!editingData) return;
 
         const { editing, ...dataToSend } = editingData;
-
         await apiService.update(session_token, route, dataToSend, () => {
             handleGet(getParam);
         });
+
+        setEditingData(null);
     };
 
     const handleDelete = async (id: string) => {
