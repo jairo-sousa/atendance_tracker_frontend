@@ -32,8 +32,7 @@ export function Backup() {
 
     const handleRestore = async () => {
         if (session_token && file) {
-            const result = await apiService.restore(session_token, file);
-            console.log(result);
+            await apiService.restore(session_token, file);
         }
     };
 

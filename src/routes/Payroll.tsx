@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { getDateNowParameters } from "@/modules/date/dateApi";
 import { useOutletContext } from "react-router";
 import { ApiService } from "@/services/ApiService";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { InputPrimary } from "@/components/detailingTable/InputPrimary";
 import { BrandButton } from "@/fragments/form/BrandButton";
 import {
@@ -22,7 +22,6 @@ import { PeriodReportData } from "@/interfaces/ReportInterface";
 import { PayrollDetails } from "@/fragments/table/PayrollDetails";
 import { GeneratePDFButton } from "@/fragments/Payroll/GeneratePDFButton";
 import { globalColors } from "@/theme/theme";
-import { PayrollDetail } from "@/fragments/table/PayrollDetail";
 
 export const payrollFields: EntityField[] = [
     { field: "date", value: "Data" },

@@ -41,7 +41,7 @@ export function EntityCells({
 
         if (isDateTime(currentValue)) {
             const [date, time] = currentValue.split("T");
-            const [hour, minutes, seconds] = time.split(":");
+            const [, , seconds] = time.split(":");
             newValue = `${date}T${value}:${seconds}`;
         }
 

@@ -11,7 +11,7 @@ export interface Actions {
     [key: string]: Action;
 }
 
-export interface UseCrudInterface<T extends EntityData> {
+export interface UseCrudInterface {
     session_token: string;
     route: string;
     getParam?: string;
@@ -23,7 +23,7 @@ export function useCrud<T extends EntityData>({
     route,
     getParam,
     fields,
-}: UseCrudInterface<T>) {
+}: UseCrudInterface) {
     const apiService = new ApiService();
 
     const [data, setData] = useState<T[]>();

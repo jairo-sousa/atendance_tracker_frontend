@@ -1,7 +1,6 @@
 import { PeriodReportData } from "@/interfaces/ReportInterface";
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { PayrollDetail } from "./PayrollDetail";
-import { globalColors } from "@/theme/theme";
 
 interface PayrollDetailsInterface {
     data: PeriodReportData;
