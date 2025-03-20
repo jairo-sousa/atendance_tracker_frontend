@@ -13,9 +13,6 @@ interface RouteLinkProps {
 export function RouteLink({ link }: RouteLinkProps) {
     const { name, path } = link;
 
-    let imagePath = path;
-    if (path === "/") imagePath += "home";
-
     const location = useLocation();
     const active = location.pathname === path;
 
@@ -23,7 +20,7 @@ export function RouteLink({ link }: RouteLinkProps) {
         <Box as={"li"} w={"100%"}>
             <SidebarLink path={path} active={active}>
                 <Flex flex={0.3} justifyContent={"end"}>
-                    <SidebarLinkIcon imagePath={imagePath} />
+                    <SidebarLinkIcon imagePath={path} />
                 </Flex>
                 <Text flex={0.6}>{name}</Text>
             </SidebarLink>

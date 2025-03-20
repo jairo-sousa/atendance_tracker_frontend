@@ -79,6 +79,6 @@ export const links = [
     },
     {
         name: "Registro",
-        path: "/check-in",
+        path: "/",
     },
 ];

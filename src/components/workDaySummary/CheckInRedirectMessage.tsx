@@ -8,11 +8,7 @@ export function CheckInRedirectMessage() {
     return (
         <DialogSubtitle>
             Registro de ponto?{" "}
-            <Link
-                href="/check-in"
-                color={contentBrand}
-                textDecoration={"underline"}
-            >
+            <Link href="/" color={contentBrand} textDecoration={"underline"}>
                 Clique aqui
             </Link>
         </DialogSubtitle>

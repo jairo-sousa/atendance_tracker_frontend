@@ -16,7 +16,7 @@ export function LogoutButton() {
 
         await apiService.logout(sessionToken, () => {
             Cookies.remove("sessionToken");
-            navigate("/check-in");
+            navigate("/");
         });
     };
 
