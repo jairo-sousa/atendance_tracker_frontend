@@ -22,7 +22,7 @@ export function SideBar() {
         setHasSessionToken(checkHasSessionToken());
     }, [router]);
 
-    if (!hasSessionToken || router.pathname === "/check-in") return;
+    if (!hasSessionToken || router.pathname === "/") return;
 
     return (
         <TertiarySidebarPanel>
