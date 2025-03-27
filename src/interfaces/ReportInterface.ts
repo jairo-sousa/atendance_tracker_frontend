@@ -9,6 +9,7 @@ export interface DaySummaryData {
     presence: boolean;
     minutesLate: number;
     absentByLate?: boolean;
+    absentByLessWork?: boolean;
 }
 
 export interface DayReportBase {

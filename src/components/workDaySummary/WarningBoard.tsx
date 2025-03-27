@@ -23,15 +23,14 @@ const absenceMessage = () => {
 
 export function WarningBoard({ daySummaryData }: WarningBoardInterface) {
     const absentByLateData = daySummaryData.filter(
-        ({ presence, absentByLate, minutesLate }) =>
-            !presence && absentByLate && minutesLate > 30
+        ({ presence, absentByLate }) => !presence && absentByLate
     );
     const absentByLessWorkData = daySummaryData.filter(
-        ({ presence, absentByLate, minutesLate }) =>
-            !presence && absentByLate && minutesLate < 30
+        ({ presence, absentByLessWork }) => !presence && absentByLessWork
     );
     const absentSummaryData = daySummaryData.filter(
-        ({ presence, absentByLate }) => !presence && !absentByLate
+        ({ presence, absentByLate, absentByLessWork }) =>
+            !presence && !absentByLate && !absentByLessWork
     );
 
     if (
