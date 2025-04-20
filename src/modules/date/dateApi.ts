@@ -26,7 +26,7 @@ export const getDateOnlyNow = async () => {
     const dateNow = await getDateNow();
 
     if (!dateNow) {
-        throw new Error("[ workday ]: could't get date at getDateNow");
+        throw new Error("[ day ]: could't get date at getDateNow");
     }
 
     const dateOnly = extractFullDate(dateNow);

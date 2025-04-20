@@ -11,7 +11,7 @@ import { getDateNowParameters } from "@/modules/date/dateApi";
 import { useOutletContext } from "react-router";
 import { InputPrimary } from "@/components/detailingTable/InputPrimary";
 
-export const workdayFields: EntityField[] = [
+export const dayFields: EntityField[] = [
     { field: "employee.name", value: "Nome" },
     { field: "date", value: "Data", type: "date" },
     { field: "check_in", value: "Entrada", type: "datetime" },
@@ -21,8 +21,8 @@ export const workdayFields: EntityField[] = [
     { field: "status", value: "Status" },
 ];
 
-export function Workday() {
-    const { session_token } = useOutletContext<{ session_token?: string }>();
+export function Day() {
+    const { sessionToken } = useOutletContext<{ sessionToken?: string }>();
     const [searchQuery, setSearchQuery] = useState("");
     const [dateToGet, setDateToGet] = useState("");
 
@@ -37,7 +37,7 @@ export function Workday() {
         setInitialDate();
     }, []);
 
-    const route = "workday";
+    const route = "day";
     const param = `/${dateToGet}`;
 
     const handleSearchChange = (query: string) => setSearchQuery(query);
@@ -59,15 +59,15 @@ export function Workday() {
                     />
                 </RouteHeader>
 
-                <DetailingTableHeader fields={workdayFields} />
-                {session_token && dateToGet && (
+                <DetailingTableHeader fields={dayFields} />
+                {sessionToken && dateToGet && (
                     <EntityRows
                         ref={rowRef}
                         rowPadding={rowPadding}
                         searchQuery={searchQuery}
                         searchKey="employee.name"
-                        entityfields={workdayFields}
-                        session_token={session_token}
+                        entityfields={dayFields}
+                        sessionToken={sessionToken}
                         route={route}
                         param={param}
                         key={dateToGet}

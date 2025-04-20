@@ -6,14 +6,6 @@ import axios, { AxiosResponse } from "axios";
 const { API_URL } = globalEnv;
 
 export class ReportApi implements ReportApiInterface {
-    async getDateNowParameters(): Promise<AxiosResponse | null> {
-        const ROUTE = "report/date-now-parameters";
-
-        const result = await axios.get(`${API_URL}/${ROUTE}`);
-
-        return result || null;
-    }
-
     async getTodaySummary(): Promise<AxiosResponse> {
         try {
             const ROUTE = "report/today-summary";
@@ -39,21 +31,21 @@ export class ReportApi implements ReportApiInterface {
     }
 
     async getPeriodReport(
-        employee_id: string,
+        employeeId: string,
         periodValue: string,
         startDate: string,
         endDate: string,
-        session_token: string
+        sessionToken: string
     ): Promise<AxiosResponse> {
         try {
             const ROUTE = "report/period-report";
             const QUERYSTRING = `periodValue=${periodValue}&startDate=${startDate}&endDate=${endDate}`;
 
             const result = await axios.get(
-                `${API_URL}/${ROUTE}/${employee_id}?${QUERYSTRING}`,
+                `${API_URL}/${ROUTE}/${employeeId}?${QUERYSTRING}`,
                 {
                     headers: {
-                        Authorization: session_token,
+                        Authorization: sessionToken,
                     },
                 }
             );

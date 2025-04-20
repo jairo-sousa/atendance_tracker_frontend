@@ -13,7 +13,7 @@ import { ApiService } from "@/services/ApiService";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
-import { CheckInRedirectMessage } from "@/components/workDaySummary/CheckInRedirectMessage";
+import { CheckInRedirectMessage } from "@/components/daySummary/CheckInRedirectMessage";
 
 export function Login() {
     const apiService = new ApiService();
@@ -38,8 +38,8 @@ export function Login() {
             setBlockLogin(false);
         });
 
-        if (result?.data.session_token != null) {
-            Cookies.set("sessionToken", result.data.session_token);
+        if (result?.data.sessionToken != null) {
+            Cookies.set("sessionToken", result.data.sessionToken);
         }
     };
 

@@ -1,8 +1,8 @@
 import { AxiosResponse } from "axios";
 
-export interface WorkdayApiInterface {
+export interface DayApiInterface {
     findByDateAndEmployeeId(
-        employee_id: string,
+        employeeId: string,
         date: string
     ): Promise<AxiosResponse | null>;
     checkpoint(cpf: string): Promise<AxiosResponse | null>;

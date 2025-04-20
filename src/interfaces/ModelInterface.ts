@@ -3,22 +3,22 @@ import { EntityBase } from "./EntityInterface";
 
 export interface ModelApiInterface {
     get(
-        seession_token: string,
+        seessionToken: string,
         route: string,
         param?: string
     ): Promise<AxiosResponse>;
     create(
-        seession_token: string,
+        seessionToken: string,
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse>;
     update(
-        session_token: string,
+        sessionToken: string,
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse>;
     delete(
-        seession_token: string,
+        seessionToken: string,
         route: string,
         id: string
     ): Promise<AxiosResponse>;

@@ -1,17 +1,17 @@
-import { WorkdaySummary } from "@/components/workDaySummary/WorkdaySummary";
 import { HomeContainer } from "@/fragments/layout/HomeContainer";
 import { BaseSectionPanel } from "@/fragments/layout/BaseSectionPanel";
-import { CheckInDialog } from "@/components/CheckInDialog/CheckinDialog";
-import { useState } from "react";
+import { CheckInDialog } from "@/components/checkInDialog/CheckinDialog";
+// import { useState } from "react";
 import { RouteNavigation } from "@/fragments/layout/RouteNavigation";
 import { RouteHeader } from "@/fragments/layout/RouteHeader";
 import { PrimaryRouteTitle } from "@/fragments/text/PrimaryRouteTitle";
+// import { DaySummary } from "@/components/daySummary/DaySummary";
 
 export function Home() {
-    const [refreshWorkdaySummary, setRefreshWorkdaySummary] = useState(0);
+    // const [refreshDaySummary, setRefreshDaySummary] = useState(0);
 
-    const handleRefreshWorkdaySummary = () => {
-        setRefreshWorkdaySummary((prev) => (prev === 0 ? 1 : 0));
+    const handleRefreshDaySummary = () => {
+        // setRefreshDaySummary((prev) => (prev === 0 ? 1 : 0));
     };
 
     return (
@@ -23,9 +23,9 @@ export function Home() {
                 </RouteHeader>
 
                 <HomeContainer justifyContent={"end"}>
-                    <WorkdaySummary renderKey={refreshWorkdaySummary} />
+                    {/* <DaySummary renderKey={refreshDaySummary} /> */}
 
-                    <CheckInDialog onRegister={handleRefreshWorkdaySummary} />
+                    <CheckInDialog onRegister={handleRefreshDaySummary} />
                 </HomeContainer>
             </BaseSectionPanel>
         </>

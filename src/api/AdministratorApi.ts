@@ -14,13 +14,13 @@ export class AdministratorApi implements AdministratorApiInterface {
 
         const response = await axios.post(`${API_URL}/${ROUTE}`, {
             login,
-            password_hash: password,
+            passwordHash: password,
         });
 
         return response || null;
     }
 
-    async logout(session_token: string): Promise<AxiosResponse | null> {
+    async logout(sessionToken: string): Promise<AxiosResponse | null> {
         const ROUTE = "administrator/logout";
 
         const response = await axios.post(
@@ -28,7 +28,7 @@ export class AdministratorApi implements AdministratorApiInterface {
             {},
             {
                 headers: {
-                    authorization: session_token,
+                    authorization: sessionToken,
                 },
             }
         );
@@ -36,12 +36,12 @@ export class AdministratorApi implements AdministratorApiInterface {
         return response || null;
     }
 
-    async backup(session_token: string): Promise<AxiosResponse<Blob> | null> {
+    async backup(sessionToken: string): Promise<AxiosResponse<Blob> | null> {
         const ROUTE = "administrator/backup";
 
         const response = await axios.get<Blob>(`${API_URL}/${ROUTE}`, {
             headers: {
-                authorization: session_token,
+                authorization: sessionToken,
             },
             responseType: "blob",
         });
@@ -50,7 +50,7 @@ export class AdministratorApi implements AdministratorApiInterface {
     }
 
     async restore(
-        session_token: string,
+        sessionToken: string,
         file: File
     ): Promise<AxiosResponse | null> {
         const ROUTE = "administrator/restore";
@@ -59,7 +59,7 @@ export class AdministratorApi implements AdministratorApiInterface {
 
         const response = await axios.post(`${API_URL}/${ROUTE}`, formData, {
             headers: {
-                authorization: session_token,
+                authorization: sessionToken,
                 "Content-Type": "multipart/form-data",
             },
         });

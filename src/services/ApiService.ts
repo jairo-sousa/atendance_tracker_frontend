@@ -1,7 +1,5 @@
 import { AxiosResponse } from "axios";
 import { ToastService } from "./ToastService";
-import { WorkdayApiInterface } from "@/interfaces/WorkdayInterface";
-import { WorkdayApi } from "@/api/WorkdayApi";
 import { ReportApi } from "@/api/ReportApi";
 import { AdministratorApi } from "@/api/AdministratorApi";
 import {
@@ -14,17 +12,19 @@ import { AdministratorApiInterface } from "@/interfaces/AdministratorInterface";
 import { ModelApiInterface } from "@/interfaces/ModelInterface";
 import { ModelApi } from "@/api/ModelApi";
 import { EntityBase } from "@/interfaces/EntityInterface";
+import { DayApiInterface } from "@/interfaces/DayInterface";
+import { DayApi } from "@/api/DayApi";
 
 const { showToast, dismissToast } = ToastService;
 
 export class ApiService {
-    private workdayApi: WorkdayApiInterface;
+    private DayApi: DayApiInterface;
     private reportApi: ReportApiInterface;
     private administratorApi: AdministratorApiInterface;
     private modelApi: ModelApiInterface;
 
     constructor() {
-        this.workdayApi = new WorkdayApi();
+        this.DayApi = new DayApi();
         this.reportApi = new ReportApi();
         this.administratorApi = new AdministratorApi();
         this.modelApi = new ModelApi();
@@ -46,10 +46,10 @@ export class ApiService {
 
             dismissToast();
 
-            const session_token = result?.data.session_token;
+            const sessionToken = result?.data.sessionToken;
 
-            if (result && session_token != null) {
-                result.data.session_token = `Bearer ${session_token}`;
+            if (result && sessionToken != null) {
+                result.data.sessionToken = `Bearer ${sessionToken}`;
                 showToast("Login bem sucedido!", "Tudo certo", "success");
             } else {
                 showToast("Falha durante login", "Tente novamente!", "error");
@@ -80,12 +80,12 @@ export class ApiService {
 
             dismissToast();
 
-            const session_token = result?.data.session_token;
+            const resultToken = result?.data.sessionToken;
 
-            if (result && session_token == null) {
+            if (result && resultToken == null) {
                 showToast("Logout bem sucedido!", "Tudo certo", "success");
             } else {
-                showToast("Falha durante Logout", sessionToken, "error");
+                showToast("Falha durante Logout", resultToken, "error");
             }
 
             return result || null;
@@ -111,7 +111,7 @@ export class ApiService {
 
             showToast("Efetuando Registro", "Por favor aguarde", "loading");
 
-            const result = await this.workdayApi.checkpoint(cpf);
+            const result = await this.DayApi.checkpoint(cpf);
 
             dismissToast();
 
@@ -154,19 +154,19 @@ export class ApiService {
     }
 
     async getPeriodReport(
-        employee_id: string,
+        employeeId: string,
         periodValue: string,
         startDate: string,
         endDate: string,
-        session_token: string
+        sessionToken: string
     ): Promise<PeriodReportData> {
         try {
             const result = await this.reportApi.getPeriodReport(
-                employee_id,
+                employeeId,
                 periodValue,
                 startDate,
                 endDate,
-                session_token
+                sessionToken
             );
 
             return result.data;

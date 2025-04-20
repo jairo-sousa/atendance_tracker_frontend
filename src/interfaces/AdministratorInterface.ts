@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 export interface AdministratorApiInterface {
     login(login: string, password: string): Promise<AxiosResponse | null>;
-    logout(session_token: string): Promise<AxiosResponse | null>;
-    backup(session_token: string): Promise<AxiosResponse | null>;
-    restore(session_token: string, file: File): Promise<AxiosResponse | null>;
+    logout(sessionToken: string): Promise<AxiosResponse | null>;
+    backup(sessionToken: string): Promise<AxiosResponse | null>;
+    restore(sessionToken: string, file: File): Promise<AxiosResponse | null>;
 }

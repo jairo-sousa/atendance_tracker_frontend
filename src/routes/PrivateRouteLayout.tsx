@@ -1,7 +1,7 @@
-import { SideBar } from "@/components/sidebar/SideBar";
 import { Flex } from "@chakra-ui/react";
 import { PrivateRoute } from "./PrivateRoute";
 import PrivateOutletWrapper from "./PrivateOutletWrapper";
+import { SideBar } from "@/components/sidebar/SideBar";
 
 const PrivateRouteLayout = () => {
     return (

@@ -5,9 +5,9 @@ import { Home } from "./routes/Home";
 import { Emplloyee } from "./routes/Employee";
 import { Backup } from "./routes/Backup";
 import { Payroll } from "./routes/Payroll";
-import { Workday } from "./routes/Workday";
 import Layout from "./routes/Layout";
 import PrivateRouteLayout from "./routes/PrivateRouteLayout";
+import { Day } from "./routes/Day";
 
 export const router = createBrowserRouter([
     {
@@ -45,8 +45,8 @@ export const router = createBrowserRouter([
                 element: <Payroll />,
             },
             {
-                path: "/workday",
-                element: <Workday />,
+                path: "/day",
+                element: <Day />,
             },
         ],
     },
@@ -67,7 +67,7 @@ export const links = [
     },
     {
         name: "Dias úteis",
-        path: "/workday",
+        path: "/day",
     },
     {
         name: "Pagamento",

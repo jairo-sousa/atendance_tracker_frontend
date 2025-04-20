@@ -3,9 +3,9 @@ import { Outlet } from "react-router";
 import { PrivateChildRouteInterface } from "./PrivateRoute";
 
 const PrivateOutletWrapper: React.FC<PrivateChildRouteInterface> = ({
-    session_token,
+    sessionToken,
 }) => {
-    return <Outlet context={{ session_token }} />;
+    return <Outlet context={{ sessionToken }} />;
 };
 
 export default PrivateOutletWrapper;

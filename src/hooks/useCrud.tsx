@@ -12,14 +12,14 @@ export interface Actions {
 }
 
 export interface UseCrudInterface {
-    session_token: string;
+    sessionToken: string;
     route: string;
     getParam?: string;
     fields: (keyof EntityBase)[];
 }
 
 export function useCrud<T extends EntityData>({
-    session_token,
+    sessionToken,
     route,
     getParam,
     fields,
@@ -99,7 +99,7 @@ export function useCrud<T extends EntityData>({
         if (!editingData) return;
 
         const { editing, ...dataToSend } = editingData;
-        await apiService.create(session_token, route, dataToSend, () => {
+        await apiService.create(sessionToken, route, dataToSend, () => {
             handleGet(getParam);
         });
 
@@ -108,7 +108,7 @@ export function useCrud<T extends EntityData>({
     };
 
     const handleGet = async (param?: string) => {
-        const result = await apiService.get(session_token, route, param);
+        const result = await apiService.get(sessionToken, route, param);
         setData(result?.data);
     };
 
@@ -116,7 +116,7 @@ export function useCrud<T extends EntityData>({
         if (!editingData) return;
 
         const { editing, ...dataToSend } = editingData;
-        await apiService.update(session_token, route, dataToSend, () => {
+        await apiService.update(sessionToken, route, dataToSend, () => {
             handleGet(getParam);
         });
 
@@ -124,7 +124,7 @@ export function useCrud<T extends EntityData>({
     };
 
     const handleDelete = async (id: string) => {
-        await apiService.delete(session_token, route, id, () => {
+        await apiService.delete(sessionToken, route, id, () => {
             handleGet(getParam);
         });
     };

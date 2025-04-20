@@ -1,6 +1,6 @@
 import { Flex, Input } from "@chakra-ui/react";
-import { SidebarLinkIcon } from "../sidebar/SidebarLinkIcon";
 import { globalColors } from "@/theme/theme";
+import { SidebarLinkIcon } from "../sidebar/SidebarLinkIcon";
 
 interface SearchBarInterface {
     onchange: Function;

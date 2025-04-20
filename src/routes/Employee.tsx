@@ -19,7 +19,7 @@ export const emplloyeeFields: EntityField[] = [
 ];
 
 export function Emplloyee({}: PrivateChildRouteInterface) {
-    const { session_token } = useOutletContext<{ session_token?: string }>();
+    const { sessionToken } = useOutletContext<{ sessionToken?: string }>();
     const [searchQuery, setSearchQuery] = useState("");
     const rowRef = createRef<{ handleAdd: () => void }>();
 
@@ -45,14 +45,14 @@ export function Emplloyee({}: PrivateChildRouteInterface) {
                 </RouteHeader>
 
                 <DetailingTableHeader fields={emplloyeeFields} />
-                {session_token && (
+                {sessionToken && (
                     <EntityRows
                         rowPadding={rowPadding}
                         ref={rowRef}
                         searchQuery={searchQuery}
                         searchKey="name"
                         entityfields={emplloyeeFields}
-                        session_token={session_token}
+                        sessionToken={sessionToken}
                         route="employee"
                     />
                 )}

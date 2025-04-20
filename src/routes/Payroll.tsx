@@ -12,7 +12,7 @@ import { BrandButton } from "@/fragments/form/BrandButton";
 import {
     OptionInterface,
     SelectPrimary,
-} from "@/components/Select/SelectPrimary";
+} from "@/components/select/SelectPrimary";
 import { EntityBase, EntityField } from "@/interfaces/EntityInterface";
 import { ToastService } from "@/services/ToastService";
 import { Toaster } from "@/components/ui/toaster";
@@ -20,7 +20,7 @@ import { DetailingTableHeader } from "@/components/detailingTable/DetailingTable
 import { PayrollReportList } from "@/fragments/table/PayrollReportList";
 import { PeriodReportData } from "@/interfaces/ReportInterface";
 import { PayrollDetails } from "@/fragments/table/PayrollDetails";
-import { GeneratePDFButton } from "@/fragments/Payroll/GeneratePDFButton";
+import { GeneratePDFButton } from "@/fragments/payroll/GeneratePDFButton";
 import { globalColors } from "@/theme/theme";
 
 export const payrollFields: EntityField[] = [
@@ -34,7 +34,7 @@ export const payrollFields: EntityField[] = [
 ];
 
 export function Payroll() {
-    const { session_token } = useOutletContext<{ session_token?: string }>();
+    const { sessionToken } = useOutletContext<{ sessionToken?: string }>();
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [periodValue, setPeriodValue] = useState(200);
@@ -63,7 +63,7 @@ export function Payroll() {
 
     const getPayroll = async () => {
         if (
-            !session_token ||
+            !sessionToken ||
             !startDate ||
             !endDate ||
             !periodValue ||
@@ -83,7 +83,7 @@ export function Payroll() {
             String(periodValue),
             startDate,
             endDate,
-            session_token
+            sessionToken
         );
         setPayroll(result);
     };
@@ -102,7 +102,7 @@ export function Payroll() {
         };
 
         const getEmployeeList = async () => {
-            const result = await apiService.get(session_token!, "employee");
+            const result = await apiService.get(sessionToken!, "employee");
             const EmployeeListData =
                 result?.data.map((data: EntityBase) => ({
                     id: data.id,
@@ -188,7 +188,7 @@ export function Payroll() {
                         <DetailingTableHeader fields={payrollFields} noAction />
                     )}
 
-                    {session_token && payroll && (
+                    {sessionToken && payroll && (
                         <PayrollReportList dayReports={payroll.dayReports} />
                     )}
 

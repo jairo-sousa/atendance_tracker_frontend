@@ -5,7 +5,7 @@ import { Navigate } from "react-router";
 import { PrivateRoutePainel } from "@/fragments/layout/PrivateRoutePanel";
 
 export interface PrivateChildRouteInterface {
-    session_token?: string;
+    sessionToken?: string;
 }
 
 interface PrivateRouteInterface {
@@ -37,7 +37,7 @@ export function PrivateRoute({ children }: PrivateRouteInterface) {
     return (
         <PrivateRoutePainel>
             {React.cloneElement(children as React.ReactElement, {
-                session_token: sessionToken,
+                sessionToken: sessionToken,
             })}
         </PrivateRoutePainel>
     );

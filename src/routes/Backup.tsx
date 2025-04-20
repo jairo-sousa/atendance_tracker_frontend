@@ -10,7 +10,7 @@ import { useOutletContext } from "react-router";
 import { UploadFileInput } from "@/fragments/backup/UploadFileInput";
 
 export function Backup() {
-    const { session_token } = useOutletContext<{ session_token?: string }>();
+    const { sessionToken } = useOutletContext<{ sessionToken?: string }>();
 
     const [backup, setBackup] = useState<Blob>();
     const [file, setFile] = useState<File | null>(null);
@@ -18,8 +18,8 @@ export function Backup() {
     const apiService = new ApiService();
 
     const handleBackup = async () => {
-        if (session_token) {
-            const result = await apiService.backup(session_token);
+        if (sessionToken) {
+            const result = await apiService.backup(sessionToken);
             setBackup(result?.data);
         }
     };
@@ -31,8 +31,8 @@ export function Backup() {
     };
 
     const handleRestore = async () => {
-        if (session_token && file) {
-            await apiService.restore(session_token, file);
+        if (sessionToken && file) {
+            await apiService.restore(sessionToken, file);
         }
     };
 

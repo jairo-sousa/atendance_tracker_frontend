@@ -8,33 +8,33 @@ const { API_URL } = globalEnv;
 
 export class ModelApi implements ModelApiInterface {
     async create(
-        session_token: string,
+        sessionToken: string,
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse> {
         const response = await axios.post(`${API_URL}/${route}`, data, {
             headers: {
-                authorization: session_token,
+                authorization: sessionToken,
             },
         });
         return response;
     }
 
     async get(
-        session_token: string,
+        sessionToken: string,
         route: string,
         param?: string
     ): Promise<AxiosResponse> {
         const response = await axios.get(`${API_URL}/${route}${param || ""}`, {
             headers: {
-                Authorization: session_token,
+                Authorization: sessionToken,
             },
         });
         return response;
     }
 
     async update(
-        session_token: string,
+        sessionToken: string,
         route: string,
         data: EntityBase
     ): Promise<AxiosResponse> {
@@ -43,7 +43,7 @@ export class ModelApi implements ModelApiInterface {
             data,
             {
                 headers: {
-                    authorization: session_token,
+                    authorization: sessionToken,
                 },
             }
         );
@@ -51,13 +51,13 @@ export class ModelApi implements ModelApiInterface {
     }
 
     async delete(
-        session_token: string,
+        sessionToken: string,
         route: string,
         id: string
     ): Promise<AxiosResponse> {
         const response = await axios.delete(`${API_URL}/${route}/${id}`, {
             headers: {
-                Authorization: session_token,
+                Authorization: sessionToken,
             },
         });
         return response;

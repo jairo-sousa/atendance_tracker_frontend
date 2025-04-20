@@ -5,17 +5,17 @@ import { WarningBoard } from "./WarningBoard";
 
 import { useCallback, useEffect, useState } from "react";
 import { ApiService } from "@/services/ApiService";
-import { SummmaryTableHeader } from "@/components/workDaySummary/SummmaryTableHeader";
-import { SummaryTableBody } from "@/components/workDaySummary/SummaryTableBody";
+import { SummmaryTableHeader } from "@/components/daySummary/SummmaryTableHeader";
+import { SummaryTableBody } from "@/components/daySummary/SummaryTableBody";
 import { SummarySection } from "./SummarySection";
 import { DayReportSection } from "./DayReportSection";
 import { DaySummaryData } from "@/interfaces/ReportInterface";
 
-interface WorkdaySummaryInterface {
+interface DaySummaryInterface {
     renderKey: number;
 }
 
-export function WorkdaySummary({ renderKey }: WorkdaySummaryInterface) {
+export function DaySummary({ renderKey }: DaySummaryInterface) {
     const apiService = new ApiService();
     const [daySummaryData, setDaySummaryData] = useState<DaySummaryData[]>([]);
     const [previousRenderKey, setPreviousRenderKey] = useState<number | null>(

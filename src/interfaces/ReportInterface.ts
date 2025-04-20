@@ -43,7 +43,6 @@ export interface PeriodReportData {
 }
 
 export interface ReportApiInterface {
-    getDateNowParameters(): Promise<AxiosResponse | null>;
     getTodaySummary(): Promise<AxiosResponse>;
     getTodayReport(): Promise<AxiosResponse>;
     getPeriodReport(
@@ -51,6 +50,6 @@ export interface ReportApiInterface {
         periodValue: string,
         startDate: string,
         endDate: string,
-        session_token: string
+        sessionToken: string
     ): Promise<AxiosResponse>;
 }

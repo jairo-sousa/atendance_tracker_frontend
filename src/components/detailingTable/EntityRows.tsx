@@ -10,7 +10,7 @@ interface EntityRowsInterface {
     entityfields: EntityField[];
     searchQuery?: string;
     searchKey?: string;
-    session_token: string;
+    sessionToken: string;
     route: string;
     param?: string;
     rowPadding?: string;
@@ -22,7 +22,7 @@ export const EntityRows = forwardRef(
             entityfields,
             searchQuery,
             searchKey,
-            session_token,
+            sessionToken,
             route,
             param,
             rowPadding,
@@ -35,7 +35,7 @@ export const EntityRows = forwardRef(
 
         const { actions, addingData, data, handleAdd, handleCellChange } =
             useCrud({
-                session_token: session_token,
+                sessionToken: sessionToken,
                 fields: fieldValues,
                 route: route,
                 getParam: param,
