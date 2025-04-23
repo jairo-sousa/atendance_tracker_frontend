@@ -4,11 +4,16 @@ import { globalColors } from "@/theme/theme";
 
 const { contentBrand } = globalColors;
 
-export function CheckInRedirectMessage() {
+interface RedirectMessageInterface {
+    message: string;
+    path: string;
+}
+
+export function RedirectMessage({ message, path }: RedirectMessageInterface) {
     return (
         <DialogSubtitle>
-            Registro de ponto?{" "}
-            <Link href="/" color={contentBrand} textDecoration={"underline"}>
+            {message}{" "}
+            <Link href={path} color={contentBrand} textDecoration={"underline"}>
                 Clique aqui
             </Link>
         </DialogSubtitle>

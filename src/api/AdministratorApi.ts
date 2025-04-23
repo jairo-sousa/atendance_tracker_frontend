@@ -6,6 +6,20 @@ import axios, { AxiosResponse } from "axios";
 const { API_URL } = globalEnv;
 
 export class AdministratorApi implements AdministratorApiInterface {
+    async signUp(
+        login: string,
+        passwordHash: string
+    ): Promise<AxiosResponse | null> {
+        const ROUTE = "administrator/firstAcess";
+
+        const response = await axios.post(`${API_URL}/${ROUTE}`, {
+            login,
+            passwordHash,
+        });
+
+        return response || null;
+    }
+
     async login(
         login: string,
         password: string

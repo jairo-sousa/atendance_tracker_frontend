@@ -30,6 +30,41 @@ export class ApiService {
         this.modelApi = new ModelApi();
     }
 
+    async signUp(
+        login: string,
+        password: string,
+        callBack: Function
+    ): Promise<AxiosResponse | null> {
+        try {
+            if (!login || !password) {
+                throw new Error("Preencha todos os campos!");
+            }
+
+            showToast("Criando usuário", "Por favor aguarde", "loading");
+
+            const result = await this.administratorApi.signUp(login, password);
+
+            dismissToast();
+
+            const user = result?.data;
+
+            if (user) {
+                showToast("Usuário criado!", "Faça o login!", "success");
+            } else {
+                showToast("Falha na criação", "Tente novamente!", "error");
+            }
+
+            return result || null;
+        } catch (err: any) {
+            dismissToast();
+
+            showToast("Falha na criação", `${err}`, "error");
+            return null;
+        } finally {
+            callBack();
+        }
+    }
+
     async login(
         login: string,
         password: string,

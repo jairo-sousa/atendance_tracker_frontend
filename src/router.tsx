@@ -8,12 +8,17 @@ import { Payroll } from "./routes/Payroll";
 import Layout from "./routes/Layout";
 import PrivateRouteLayout from "./routes/PrivateRouteLayout";
 import { Day } from "./routes/Day";
+import { SignUp } from "./routes/SignUp";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
         children: [
+            {
+                path: "/signup",
+                element: <SignUp />,
+            },
             {
                 path: "/login",
                 element: <Login />,
@@ -56,6 +61,10 @@ export const links = [
     {
         name: "Início",
         path: "/home",
+    },
+    {
+        name: "Sign Up",
+        path: "/signup",
     },
     {
         name: "Login",

@@ -12,15 +12,16 @@ import { ApiService } from "@/services/ApiService";
 
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { RedirectMessage } from "@/components/daySummary/RedirectMessage";
 
-export function Login() {
+export function SignUp() {
     const apiService = new ApiService();
+    const navigate = useNavigate();
 
     const [hasSessionToken, setHasSessionToken] = useState<boolean>();
 
-    const [blockLogin, setBlockLogin] = useState(false);
+    const [blockSignUp, setBlockSignUp] = useState(false);
     const [login, setLogin] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -31,15 +32,15 @@ export function Login() {
         setPassword(e.target.value);
     };
 
-    const handleLogin = async () => {
-        setBlockLogin(true);
+    const handleSignUp = async () => {
+        setBlockSignUp(true);
 
-        const result = await apiService.login(login, password, () => {
-            setBlockLogin(false);
+        const result = await apiService.signUp(login, password, () => {
+            setBlockSignUp(false);
         });
 
-        if (result?.data.sessionToken != null) {
-            Cookies.set("sessionToken", result.data.sessionToken);
+        if (result != null) {
+            navigate("/login");
         }
     };
 
@@ -47,7 +48,7 @@ export function Login() {
         setHasSessionToken(
             Cookies.get("sessionToken")?.startsWith("Bearer ") == true
         );
-    }, [blockLogin]);
+    }, []);
 
     if (hasSessionToken == true) return <Navigate to="/home" />;
 
@@ -55,24 +56,24 @@ export function Login() {
         <BrandGratientPanel>
             <Toaster />
             <PrimaryDialogPanel>
-                <BrandPageTitle>LOGIN</BrandPageTitle>
+                <BrandPageTitle>PRIMEIRO ACESSO</BrandPageTitle>
 
                 <DialogSubtitle>
-                    Forneça os dados para efetuar login
+                    Defina as credenciais do usuário administrador
                 </DialogSubtitle>
 
-                <FieldsetRoot onEnter={handleLogin}>
+                <FieldsetRoot onEnter={handleSignUp}>
                     <FieldsetContainer>
                         <LabeledField label="LOGIN">
                             <LoginInput
-                                placeholder="Digite seu login"
+                                placeholder="Defina seu login"
                                 value={login}
                                 onChange={handleLoginChange}
                             />
                         </LabeledField>
                         <LabeledField label="SENHA">
                             <LoginInput
-                                placeholder="Digite sua senha"
+                                placeholder="Defina sua senha"
                                 value={password}
                                 customType="password"
                                 onChange={handlePasswordChange}
@@ -80,12 +81,12 @@ export function Login() {
                         </LabeledField>
                     </FieldsetContainer>
 
-                    <BrandButton disabled={blockLogin} onClick={handleLogin}>
-                        FAZER LOGIN
+                    <BrandButton disabled={blockSignUp} onClick={handleSignUp}>
+                        CRIAR USUÁRIO
                     </BrandButton>
                 </FieldsetRoot>
 
-                <RedirectMessage message="Primeiro acesso?" path="/signup" />
+                <RedirectMessage message="Voltar para login?" path="/login" />
             </PrimaryDialogPanel>
         </BrandGratientPanel>
     );
