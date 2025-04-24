@@ -29,8 +29,8 @@ export function Day() {
     const rowRef = createRef<{ handleAdd: () => void }>();
 
     useEffect(() => {
-        const setInitialDate = async () => {
-            const { date } = await getDateNowParameters();
+        const setInitialDate = () => {
+            const { date } = getDateNowParameters();
 
             setDateToGet(date);
         };

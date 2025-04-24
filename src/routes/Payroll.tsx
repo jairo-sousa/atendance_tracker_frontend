@@ -89,8 +89,8 @@ export function Payroll() {
     };
 
     useEffect(() => {
-        const setInitialPeriod = async () => {
-            const { date } = await getDateNowParameters();
+        const setInitialPeriod = () => {
+            const { date } = getDateNowParameters();
 
             const startPeriod = new Date(date);
             startPeriod.setDate(startPeriod.getDate() - 6);

@@ -1,62 +1,31 @@
-import axios from "axios";
-import {
-    convertToFortalezaTimezone,
-    extractFullDate,
-    isoToUtcMilseconds,
-    userDateToSystem,
-} from "./dateOperations";
-import { DateParameters } from "@/interfaces/dateParameters.interface";
+import { DateParameters } from "@/interfaces/dateParameters.";
 
-export const getDateNow = async () => {
-    try {
-        const response = await axios.get(
-            "https://timeapi.io/api/Time/current/zone?timeZone=America/Fortaleza"
-        );
+export const getDateNowParameters = () => {
+    const targetOffsetMinutes = -180; // UTC-3
+    const nowUtc = new Date(); // UTC
+    const dateNow = new Date(
+        nowUtc.getTime() + targetOffsetMinutes * 60 * 1000
+    );
 
-        const dateNowUTC = isoToUtcMilseconds(response.data.dateTime);
+    const dateParameters: DateParameters = {
+        year: dateNow.getUTCFullYear(),
+        month: dateNow.getUTCMonth() + 1,
+        day: dateNow.getUTCDate(),
+        hour: dateNow.getUTCHours(),
+        minute: dateNow.getUTCMinutes(),
+        seconds: dateNow.getUTCSeconds(),
+        milliSeconds: dateNow.getUTCMilliseconds(),
+        dateTime: dateNow.toISOString(),
+        date: dateNow.toISOString().split("T")[0],
+        time: `${String(dateNow.getUTCHours()).padStart(2, "0")}:${String(
+            dateNow.getUTCMinutes()
+        ).padStart(2, "0")}`,
+        timeZone: "America/Fortaleza",
+        dayOfWeek: new Date(dateNow).toLocaleString("en-US", {
+            weekday: "long",
+            timeZone: "Etc/GMT-3",
+        }),
+    };
 
-        const dateNow = convertToFortalezaTimezone(dateNowUTC);
-        return dateNow;
-    } catch (err) {
-        throw new Error("[ getDateNow ] - couldn't get date");
-    }
-};
-
-export const getDateOnlyNow = async () => {
-    const dateNow = await getDateNow();
-
-    if (!dateNow) {
-        throw new Error("[ day ]: could't get date at getDateNow");
-    }
-
-    const dateOnly = extractFullDate(dateNow);
-
-    return dateOnly;
-};
-
-export const getDateNowParameters = async () => {
-    try {
-        const response = await axios.get(
-            "https://timeapi.io/api/Time/current/zone?timeZone=America/Fortaleza"
-        );
-
-        const dateParameters: DateParameters = response.data;
-
-        const dateNowUTC = isoToUtcMilseconds(dateParameters.dateTime);
-
-        dateParameters.dateTime = convertToFortalezaTimezone(dateNowUTC);
-
-        dateParameters.date = userDateToSystem(dateParameters.date);
-
-        for (const property in dateParameters) {
-            if (!property)
-                throw new Error(
-                    "[ getDateParameters ] - invalid received parameter"
-                );
-        }
-
-        return dateParameters;
-    } catch (err) {
-        throw new Error("[ getDateParameters ] - couldn't get date");
-    }
+    return dateParameters;
 };
