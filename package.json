@@ -18,7 +18,7 @@
         "jspdf": "^3.0.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-router": "^7.1.5",
+        "react-router": ">=7.5.2",
         "zod": "^3.24.3"
     },
     "devDependencies": {
@@ -33,7 +33,7 @@
         "globals": "^15.14.0",
         "typescript": "~5.6.2",
         "typescript-eslint": "^8.18.2",
-        "vite": "^6.0.5",
+        "vite": ">=6.0.15",
         "vite-tsconfig-paths": "^5.1.4"
     }
 }
